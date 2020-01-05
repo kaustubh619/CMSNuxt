@@ -1,71 +1,77 @@
+if (process.env.NODE_ENV == "development") {
+  var url = "http://127.0.0.1:8000";
+} else {
+  var url = "/backend";
+}
+
 export const state = () => ({
-  logInUser: "http://127.0.0.1:8000/signin",
+  logInUser: url + "/signin",
 
-  registerUser: "http://127.0.0.1:8000/register",
+  registerUser: url + "/register",
 
-  getCategories: "http://127.0.0.1:8000/category",
+  getCategories: url + "/category",
 
-  getUser: "http://127.0.0.1:8000/user/",
+  getUser: url + "/user/",
 
-  getAdditionalDetails: "http://127.0.0.1:8000/user_details/",
+  getAdditionalDetails: url + "/user_details/",
 
-  userInfoPost: "http://127.0.0.1:8000/user_ext_post",
+  userInfoPost: url + "/user_ext_post",
 
-  getListing: "http://127.0.0.1:8000/startup/",
+  getListing: url + "/startup/",
 
-  submitStartup: "http://127.0.0.1:8000/startup_post",
+  submitStartup: url + "/startup_post",
 
-  getStartUp: "http://127.0.0.1:8000/startupbyid/",
+  getStartUp: url + "/startupbyid/",
 
-  changePassword: "http://127.0.0.1:8000/change_password",
+  changePassword: url + "/change_password",
 
-  postProduct: "http://127.0.0.1:8000/product_post",
+  postProduct: url + "/product_post",
 
-  getProducts: "http://127.0.0.1:8000/productbystartup/",
+  getProducts: url + "/productbystartup/",
 
-  productById: "http://127.0.0.1:8000/productbyid/",
+  productById: url + "/productbyid/",
 
-  deleteStartup: "http://127.0.0.1:8000/deletestartupbyid/",
+  deleteStartup: url + "/deletestartupbyid/",
 
-  logOutUser: "http://127.0.0.1:8000/user_logout/",
+  logOutUser: url + "/user_logout/",
 
-  updateProduct: "http://127.0.0.1:8000/editproduct/",
+  updateProduct: url + "/editproduct/",
 
-  deleteProduct: "http://127.0.0.1:8000/deleteproduct/",
+  deleteProduct: url + "/deleteproduct/",
 
-  getStartups: "http://127.0.0.1:8000/all_startups",
+  getStartups: url + "/all_startups",
 
-  getStartupByCategory: "http://127.0.0.1:8000/startupbycat/",
+  getStartupByCategory: url + "/startupbycat/",
 
-  getStartupDetails: "http://127.0.0.1:8000/suwd/",
+  getStartupDetails: url + "/suwd/",
 
-  getStProducts: "http://127.0.0.1:8000/startup-products/",
+  getStProducts: url + "/startup-products/",
 
-  getCategoryById: "http://127.0.0.1:8000/catbyid/",
+  getCategoryById: url + "/catbyid/",
 
-  postUpdate: "http://127.0.0.1:8000/update_post",
+  postUpdate: url + "/update_post",
 
-  getUpdates: "http://127.0.0.1:8000/updatebyproduct/",
+  getUpdates: url + "/updatebyproduct/",
 
-  UpdateById: "http://127.0.0.1:8000/updatebyid/",
+  UpdateById: url + "/updatebyid/",
 
-  deleteUpdate: "http://127.0.0.1:8000/deleteproductupdate/",
+  deleteUpdate: url + "/deleteproductupdate/",
 
-  editProductUpdate: "http://127.0.0.1:8000/editProductUpdate/",
+  editProductUpdate: url + "/editProductUpdate/",
 
-  getHomeCMS: "http://127.0.0.1:8000/activated_home_cms",
+  getHomeCMS: url + "/activated_home_cms",
 
-  getCategoryCMS: "http://127.0.0.1:8000/activated_category_cms",
+  getCategoryCMS: url + "/activated_category_cms",
 
-  getActiveContactCMS: "http://127.0.0.1:8000/activated_contact_cms",
+  getActiveContactCMS: url + "/activated_contact_cms",
 
-  activatedAboutCMS: "http://127.0.0.1:8000/activated_about_cms",
+  activatedAboutCMS: url + "/activated_about_cms",
 
-  activatedFooterCMS: "http://127.0.0.1:8000/activated_footer_cms",
+  activatedFooterCMS: url + "/activated_footer_cms",
 
-  googleLogIn: "http://127.0.0.1:8000/oauth/login/",
+  googleLogIn: url + "/oauth/login/",
 
-  getBearerToken: "http://127.0.0.1:8000/auth/convert-token",
+  getBearerToken: url + "/auth/convert-token",
 
-  getContactForm: "http://127.0.0.1:8000/get_contact_form/"
+  getContactForm: url + "/get_contact_form/"
 });

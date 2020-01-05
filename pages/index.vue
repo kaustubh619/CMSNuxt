@@ -765,11 +765,11 @@ export default {
         new_payload.append("backend", "google-oauth2");
         new_payload.append(
           "client_id",
-          "mZ5MYeAa7wtH1reODyaxwX1LusJdQF27Px6Mglv2"
+          "tB9YEH7X4RnQPYHkG7HsBDSdpbpJmf3JVlPFAxSs"
         );
         new_payload.append(
           "client_secret",
-          "aAVp3HkZevsFwhHKpS6421fEUtqIe4qJgymYSFxDIE4CdfROfK91s37pn7H03V1chB7lvkUSsTRnNIhIiU0zyLCq6JlSElaU64j4WB0Qf6499cBFrOWn8C8t9QorzGFC"
+          "JyNuN19eofO7bRCTaDNYVzMDjlq6NpyxizaTmV2LA2dXd8CjIgHJN5FsqlZqyKlHR0hpi5Ydsxf2Mk3b9ckXYuOGWvQsfPXJVcJyE9VoAJrlzElvBKwbcH7hcIZ0ZG9T"
         );
         payload.append("oauth", true);
         this.$store.dispatch("getBearerToken", new_payload).then(res => {
