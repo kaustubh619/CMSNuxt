@@ -10,8 +10,8 @@ export const state = () => {
     authenticated: false,
     category: 0,
     header_img: "",
-    token: "token " + localStorage.getItem("token"),
-    bearer: "Bearer " + localStorage.getItem("bearer")
+    // token: "token " + localStorage.getItem("token"),
+    bearer: localStorage.getItem("bearer")
   };
 };
 
@@ -27,6 +27,12 @@ export const mutations = {
   },
   category(state, selectedCat) {
     state.category = selectedCat;
+  },
+  bearer(state) {
+    state.bearer = localStorage.getItem("bearer");
+  },
+  token(state) {
+    state.bearer = localStorage.getItem("bearer");
   }
 };
 
@@ -77,14 +83,13 @@ export const actions = {
   },
 
   getUser({ commit, state }, payload) {
-    console.log(state);
     return new Promise((resolve, reject) => {
       axios({
         method: "GET",
         url: state.api.getUser + payload,
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -103,7 +108,7 @@ export const actions = {
         url: state.api.getAdditionalDetails + payload,
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -140,7 +145,7 @@ export const actions = {
         url: state.api.getUser + localStorage.getItem("user_id"),
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -160,7 +165,7 @@ export const actions = {
         url: state.api.getAdditionalDetails + localStorage.getItem("user_id"),
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -179,7 +184,7 @@ export const actions = {
         url: state.api.getListing + payload,
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -199,7 +204,7 @@ export const actions = {
         url: state.api.submitStartup,
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -218,7 +223,7 @@ export const actions = {
         url: state.api.getStartUp + payload,
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -238,7 +243,7 @@ export const actions = {
         url: state.api.getStartUp + localStorage.getItem("startupId"),
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -258,7 +263,7 @@ export const actions = {
         url: state.api.deleteStartup + payload.get("id"),
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -278,7 +283,7 @@ export const actions = {
         url: state.api.changePassword,
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -298,7 +303,7 @@ export const actions = {
         url: state.api.postProduct,
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -317,7 +322,7 @@ export const actions = {
         url: state.api.getProducts + payload,
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -353,7 +358,7 @@ export const actions = {
         url: state.api.logOutUser + localStorage.getItem("user_id"),
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -373,7 +378,7 @@ export const actions = {
         url: state.api.updateProduct + payload.get("id"),
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -393,7 +398,7 @@ export const actions = {
         url: state.api.deleteProduct + payload.get("id"),
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -493,7 +498,7 @@ export const actions = {
         url: state.api.postUpdate,
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -545,7 +550,7 @@ export const actions = {
         url: state.api.deleteUpdate + payload.get("id"),
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {
@@ -565,7 +570,7 @@ export const actions = {
         url: state.api.editProductUpdate + payload.get("id"),
         contentType: "application/json",
         headers: {
-          Authorization: state.bearer || state.token
+          Authorization: state.bearer
         }
       })
         .then(res => {

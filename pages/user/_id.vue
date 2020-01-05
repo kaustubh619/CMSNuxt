@@ -10,7 +10,7 @@
                 <nuxt-link to="/">Home</nuxt-link>
               </span>
               <i class="fa fa-circle"></i>
-              <nuxt-link to="">
+              <nuxt-link to>
                 <span>User Profile</span>
               </nuxt-link>
             </div>
@@ -230,7 +230,13 @@
                 <div class="submit_listing_box">
                   <h3>Change Profile Photo</h3>
                   <div class="fileupload_block">
-                    <input type="file" name="fileupload" id="fileupload" />
+                    <input
+                      type="file"
+                      name="fileupload"
+                      id="file"
+                      ref="file"
+                      v-on:change="handleFileUpload()"
+                    />
                     <div class="fileupload_img">
                       <img :src="dp_url" alt="add image" />
                     </div>
@@ -271,7 +277,8 @@ export default {
       street: "",
       house_no: "",
       zip: "",
-      dp_url: ""
+      dp_url: "",
+      file: ""
     };
   },
 
@@ -285,6 +292,10 @@ export default {
   },
 
   methods: {
+    handleFileUpload: function() {
+      this.file = this.$refs.file.files[0];
+    },
+
     getUser: function() {
       const id = localStorage.getItem("user_id");
       this.$store.dispatch("getUser", id).then(res => {
@@ -318,7 +329,7 @@ export default {
       payload.append("first_name", this.first_name);
       payload.append("last_name", this.last_name);
       payload.append("email", this.email);
-      this.$store.dispatch("updateUser", payload);
+      // this.$store.dispatch("updateUser", payload);
 
       var payload2 = new FormData();
       payload2.append("user", localStorage.getItem("user_id"));
@@ -328,7 +339,7 @@ export default {
       if (this.fb_link !== null) {
         payload2.append("fb_link", this.fb_link);
       }
-      if (this.twitter_link !==null) {
+      if (this.twitter_link !== null) {
         payload2.append("twitter_link", this.twitter_link);
       }
       if (this.l_link !== null) {
@@ -352,22 +363,26 @@ export default {
       if (this.zip !== null) {
         payload2.append("zip", this.zip);
       }
+      if (this.file) {
+        payload2.append("display_pic", this.file);
+      }
       this.$store.dispatch("updateUserExt", payload2).then(res => {
+        this.dp_url = res.data.display_pic;
         alert("User details updated!");
       });
     },
 
     logOutUser: function() {
-      var payload = new FormData()
-      payload.append('login_status', 'false')
-      this.$store.dispatch('logOutUser', payload).then(res => {
-        console.log(res)
-      })
+      var payload = new FormData();
+      payload.append("login_status", "false");
+      this.$store.dispatch("logOutUser", payload).then(res => {
+        console.log(res);
+      });
       localStorage.clear();
-      Cookies.remove('x-access-token')
+      Cookies.remove("x-access-token");
       this.$store.commit("authentication", false);
       this.$router.push("/");
-    },
+    }
   }
 };
 </script>

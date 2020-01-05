@@ -8,12 +8,8 @@
         <div class="row">
           <div class="col-sm-12 text-center">
             <div id="home-slider-item">
-              <span class="helpyou_item">
-                {{line1}}
-              </span>
-              <h1>
-                {{line2}}
-              </h1>
+              <span class="helpyou_item">{{line1}}</span>
+              <h1>{{line2}}</h1>
               <!-- <p>Discover innovative startups and the people behind them</p> -->
             </div>
             <div id="search-categorie-item-block">
@@ -638,8 +634,8 @@ export default {
       password1: "",
       password2: "",
       header_img: "",
-      line1: '',
-      line2: '',
+      line1: "",
+      line2: ""
     };
   },
 
@@ -675,14 +671,14 @@ export default {
 
           const user_id = res.data.id;
 
-          localStorage.setItem("token", token);
+          localStorage.setItem("bearer", "token " + token);
 
           localStorage.setItem("user_id", user_id);
 
           axios.defaults.headers.common["Authorization"] = token;
 
           this.$store.commit("authentication", true);
-          this.$store.commit("token");
+          this.$store.commit("token", token);
 
           $("#closeLogin").click();
           alert("User logged in successfully");
@@ -737,8 +733,8 @@ export default {
           .splice(0, 1)
           .map(item => {
             this.header_img = item.header_img;
-            this.line1 = item.header_text_1
-            this.line2 = item.header_text_2
+            this.line1 = item.header_text_1;
+            this.line2 = item.header_text_2;
           });
       });
     },
@@ -747,7 +743,7 @@ export default {
       $("#closeLogin").click();
       await this.$auth.loginWith("google").catch(e => {
         // this.$toast.show("Error", { icon: "fingerprint" });
-        console.log(e)
+        console.log(e);
       });
     },
 
@@ -777,9 +773,10 @@ export default {
         );
         payload.append("oauth", true);
         this.$store.dispatch("getBearerToken", new_payload).then(res => {
-          
-          localStorage.setItem("bearer", res.data.access_token);
+          localStorage.setItem("bearer", "Bearer " + res.data.access_token);
+          this.$store.commit("bearer", res.data.access_token);
           this.$store.commit("authentication", true);
+          this.$router.push("/startup/listing");
         });
       });
     }

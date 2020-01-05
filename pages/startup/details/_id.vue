@@ -8,7 +8,7 @@
               <h1>{{ name }}</h1>
               <nuxt-link to="/">Home</nuxt-link>
               <i class="fa fa-circle"></i>
-              <nuxt-link to="">
+              <nuxt-link to>
                 <span>Startup Details</span>
               </nuxt-link>
             </div>
@@ -25,38 +25,52 @@
               <h2>Startup Description</h2>
               <hr class="row" />
               <div style="display:block">
-                <span>Category</span> - {{ category }}
+                <span>Category</span>
+                - {{ category }}
               </div>
-              <div><span>Established</span> - {{ estd }}</div>
-              <div style="display:block">
-                <span>Location</span> - {{ city }}, {{ country }}
-              </div>
-              <div style="display:block">
-                <span>Team Size</span> - {{ team_size }}
+              <div>
+                <span>Established</span>
+                - {{ estd }}
               </div>
               <div style="display:block">
-                <span>Key Team Members</span> - {{ key_team_members }}
+                <span>Location</span>
+                - {{ city }}, {{ country }}
               </div>
               <div style="display:block">
-                <span>Founders</span> - {{ founders }}
+                <span>Team Size</span>
+                - {{ team_size }}
               </div>
               <div style="display:block">
-                <span>Incubators</span> - {{ incubators }}
+                <span>Key Team Members</span>
+                - {{ key_team_members }}
               </div>
               <div style="display:block">
-                <span>Investors</span> - {{ investors }}
+                <span>Founders</span>
+                - {{ founders }}
               </div>
               <div style="display:block">
-                <span>Accelerators</span> - {{ accelerators }}
+                <span>Incubators</span>
+                - {{ incubators }}
               </div>
               <div style="display:block">
-                <span>Partnership Associations</span> - {{ partners }}
+                <span>Investors</span>
+                - {{ investors }}
               </div>
               <div style="display:block">
-                <span>Funding Round</span> - {{ round }}
+                <span>Accelerators</span>
+                - {{ accelerators }}
               </div>
               <div style="display:block">
-                <span>Added On</span> - {{ added }}
+                <span>Partnership Associations</span>
+                - {{ partners }}
+              </div>
+              <div style="display:block">
+                <span>Funding Round</span>
+                - {{ round }}
+              </div>
+              <div style="display:block">
+                <span>Added On</span>
+                - {{ added }}
               </div>
               <p>{{ description }}</p>
             </div>
@@ -66,10 +80,10 @@
               <ul v-if="product_bool">
                 <li v-for="(x, y) in product_list" :key="y">
                   <nuxt-link
+                    style="font-size: 20px"
                     :to="{ name: 'products-id', params: { id: x.id } }"
                     class="product_link"
-                    >{{ x.product_name }}</nuxt-link
-                  >
+                  >{{ x.product_name }}</nuxt-link>
                 </li>
               </ul>
               <h4 v-else>No products added for this startup</h4>
@@ -81,10 +95,7 @@
                 <li class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img
-                        alt="image"
-                        src="~static/images/comment-thumb-1.jpg"
-                      />
+                      <img alt="image" src="~static/images/comment-thumb-1.jpg" />
                     </a>
                   </div>
                   <div class="media-body">
@@ -98,12 +109,16 @@
                       lacinia, malesuada tortor ut, lobortis leo.
                     </p>
                     <div class="comment-meta clearfix">
-                      <a href="#"><span class="author-name">John doe</span></a>
+                      <a href="#">
+                        <span class="author-name">John doe</span>
+                      </a>
                       <span class="comment-lt-time">22 April - 2016</span>
                       <span class="rating-box">
                         <span class="rating">
-                          <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
                           <i class="fa fa-star-o"></i>
                         </span>
                       </span>
@@ -113,10 +128,7 @@
                 <li class="media">
                   <div class="media-left">
                     <a href="#">
-                      <img
-                        alt="image"
-                        src="~static/images/comment-thumb-1.jpg"
-                      />
+                      <img alt="image" src="~static/images/comment-thumb-1.jpg" />
                     </a>
                   </div>
                   <div class="media-body">
@@ -130,12 +142,16 @@
                       lacinia, malesuada tortor ut, lobortis leo.
                     </p>
                     <div class="comment-meta clearfix">
-                      <a href="#"><span class="author-name">John doe</span></a>
+                      <a href="#">
+                        <span class="author-name">John doe</span>
+                      </a>
                       <span class="comment-lt-time">22 April - 2016</span>
                       <span class="rating-box">
                         <span class="rating">
-                          <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
                           <i class="fa fa-star-o"></i>
                         </span>
                       </span>
@@ -162,12 +178,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input
-                          placeholder="Full Name"
-                          required
-                          class="form-control"
-                          type="text"
-                        />
+                        <input placeholder="Full Name" required class="form-control" type="text" />
                       </div>
                     </div>
                     <div class="col-md-4">
@@ -182,12 +193,7 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <input
-                          placeholder="Your Website"
-                          required
-                          class="form-control"
-                          type="text"
-                        />
+                        <input placeholder="Your Website" required class="form-control" type="text" />
                       </div>
                     </div>
                   </div>
@@ -230,7 +236,7 @@
             </div>
           </form>
         </div>
-      </div> -->
+          </div>-->
         </div>
         <div id="recent-product-item-listing">
           <div class="container">
@@ -460,71 +466,71 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        name: "",
-        city: "",
-        country: "",
-        category: "",
-        estd: "",
-        description: "",
-        team_size: "",
-        key_team_members: "",
-        founders: "",
-        incubators: "",
-        investors: "",
-        accelerators: "",
-        partners: "",
-        round: "",
-        added: "",
-        product_list: [],
-        product_bool: false
-      };
+export default {
+  data() {
+    return {
+      name: "",
+      city: "",
+      country: "",
+      category: "",
+      estd: "",
+      description: "",
+      team_size: "",
+      key_team_members: "",
+      founders: "",
+      incubators: "",
+      investors: "",
+      accelerators: "",
+      partners: "",
+      round: "",
+      added: "",
+      product_list: [],
+      product_bool: false
+    };
+  },
+  mounted() {
+    $("#user_profile")
+      .addClass("active")
+      .siblings()
+      .removeClass("active");
+    this.getStartupDetails();
+    this.getStProducts();
+  },
+  methods: {
+    getStartupDetails: function() {
+      var payload = new FormData();
+      payload.append("id", this.$route.params.id);
+      this.$store.dispatch("getStartupDetails", payload).then(res => {
+        this.name = res.data.name;
+        this.city = res.data.city;
+        this.country = res.data.country;
+        this.category = res.data.category.category;
+        this.estd = res.data.date_of_launch;
+        this.description = res.data.description;
+        this.team_size = res.data.team_size;
+        this.key_team_members = res.data.key_team_members;
+        this.founders = res.data.name_of_founders;
+        this.incubators = res.data.incubators;
+        this.investors = res.data.investors;
+        this.accelerators = res.data.accelerators;
+        this.partners = res.data.partnerships_associations;
+        this.round = res.data.funding_round;
+        this.added = res.data.added_date;
+      });
     },
-    mounted() {
-      $("#user_profile")
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
-      this.getStartupDetails();
-      this.getStProducts();
-    },
-    methods: {
-      getStartupDetails: function() {
-        var payload = new FormData();
-        payload.append("id", this.$route.params.id);
-        this.$store.dispatch("getStartupDetails", payload).then(res => {
-          this.name = res.data.name;
-          this.city = res.data.city;
-          this.country = res.data.country;
-          this.category = res.data.category.category;
-          this.estd = res.data.date_of_launch;
-          this.description = res.data.description;
-          this.team_size = res.data.team_size;
-          this.key_team_members = res.data.key_team_members;
-          this.founders = res.data.name_of_founders;
-          this.incubators = res.data.incubators;
-          this.investors = res.data.investors;
-          this.accelerators = res.data.accelerators;
-          this.partners = res.data.partnerships_associations;
-          this.round = res.data.funding_round;
-          this.added = res.data.added_date;
-        });
-      },
 
-      getStProducts: function() {
-        var payload = new FormData();
-        payload.append("id", this.$route.params.id);
-        this.$store.dispatch("getStProducts", payload).then(res => {
-          this.product_list = res.data;
-          if (res.data.length !== 0) {
-            this.product_bool = true;
-          }
-        });
-      }
+    getStProducts: function() {
+      var payload = new FormData();
+      payload.append("id", this.$route.params.id);
+      this.$store.dispatch("getStProducts", payload).then(res => {
+        this.product_list = res.data;
+        if (res.data.length !== 0) {
+          this.product_bool = true;
+        }
+      });
     }
-  };
+  }
+};
 </script>
 
 <style>
