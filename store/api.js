@@ -73,5 +73,7 @@ export const state = () => ({
 
   getBearerToken: url + "/auth/convert-token",
 
-  getContactForm: url + "/get_contact_form/"
+  getContactForm: url + "/get_contact_form/",
+
+  getUserCount: url + "/user_count"
 });
