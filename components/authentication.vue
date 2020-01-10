@@ -57,6 +57,7 @@
                 </div>
                 <div class="listing-form-field">
                   <input
+                    type="submit"
                     class="submit"
                     value="login"
                     @click="logInUser"
@@ -104,60 +105,59 @@
           </div>
           <div class="modal-body">
             <div class="listing-register-form">
-              <form action="#">
-                <div class="listing-form-field">
-                  <i class="fa fa-user blue-1"></i>
-                  <input
-                    class="form-field bgwhite"
-                    type="text"
-                    name="user_name"
-                    placeholder="Userame"
-                    v-model="username"
-                  />
-                </div>
-                <div class="listing-form-field">
-                  <i class="fa fa-envelope blue-1"></i>
-                  <input
-                    class="form-field bgwhite"
-                    type="email"
-                    name="user_email"
-                    placeholder="Email"
-                    v-model="email"
-                  />
-                </div>
-                <div class="listing-form-field">
-                  <i class="fa fa-lock blue-1"></i>
-                  <input
-                    class="form-field bgwhite"
-                    type="password"
-                    name="user_password"
-                    placeholder="Password"
-                    v-model="password1"
-                  />
-                </div>
-                <div class="listing-form-field">
-                  <i class="fa fa-lock blue-1"></i>
-                  <input
-                    class="form-field bgwhite"
-                    type="password"
-                    name="user_confirm_password"
-                    placeholder="Confirm Password"
-                    v-model="password2"
-                  />
-                </div>
-                <!-- <div class="listing-form-field clearfix margin-top-20 margin-bottom-20 login_form_text_center">
+              <div class="listing-form-field">
+                <i class="fa fa-user blue-1"></i>
+                <input
+                  class="form-field bgwhite"
+                  type="text"
+                  name="user_name"
+                  placeholder="Userame"
+                  v-model="username"
+                />
+              </div>
+              <div class="listing-form-field">
+                <i class="fa fa-envelope blue-1"></i>
+                <input
+                  class="form-field bgwhite"
+                  type="email"
+                  name="user_email"
+                  placeholder="Email"
+                  v-model="email"
+                />
+              </div>
+              <div class="listing-form-field">
+                <i class="fa fa-lock blue-1"></i>
+                <input
+                  class="form-field bgwhite"
+                  type="password"
+                  name="user_password"
+                  placeholder="Password"
+                  v-model="password1"
+                />
+              </div>
+              <div class="listing-form-field">
+                <i class="fa fa-lock blue-1"></i>
+                <input
+                  class="form-field bgwhite"
+                  type="password"
+                  name="user_confirm_password"
+                  placeholder="Confirm Password"
+                  v-model="password2"
+                />
+              </div>
+              <!-- <div class="listing-form-field clearfix margin-top-20 margin-bottom-20 login_form_text_center">
               <input type="checkbox" id="checkbox-1-2" class="regular-checkbox" />
               <label for="checkbox-1-2"></label>
                 <label class="checkbox-lable">i agree with</label> &nbsp; <a href="#">Terms & Conditions</a> </div>-->
-                <div class="listing-form-field">
-                  <input
-                    class="submit"
-                    value="create account"
-                    @click="registerUser"
-                    style="cursor: pointer"
-                  />
-                </div>
-              </form>
+              <div class="listing-form-field">
+                <input
+                  type="submit"
+                  class="submit"
+                  value="create account"
+                  @click="registerUser"
+                  style="cursor: pointer"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -217,7 +217,7 @@
             this.$router.push("/startup/listing");
           })
           .catch(err => {
-            console.log(err);
+            alert("Invalid user credentials!");
           });
       },
 
@@ -225,17 +225,25 @@
         var payload = new FormData();
         payload.append("username", this.username);
         payload.append("email", this.email);
-        if (this.password1 === this.password2) {
+        if (
+          this.password1 === this.password2 &&
+          this.username !== "" &&
+          this.email !== "" &&
+          this.password1 !== "" &&
+          this.password2 !== ""
+        ) {
           payload.append("password", this.password1);
           this.$store.dispatch("registerUser", payload).then(res => {
             $("#closeSignUp").click();
-            // payload.append('user', res.data.id)
-            // this.$store.dispatch('userInfoPost', payload).then(res => {
-            // })
+            alert(
+              "User with username " +
+                payload.get("username") +
+                " created successfully"
+            );
             this.$router.push("/");
           });
         } else {
-          alert("Password mismatch!");
+          alert("Invalid form!");
         }
       },
 
@@ -299,7 +307,7 @@
 
 .mybtn1:hover,
 .mybtn2:hover {
-  color: darkblue;
+  color: #999900;
 }
 
 .divider {

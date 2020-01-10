@@ -734,5 +734,21 @@ export const actions = {
           console.log("Error In HTTP Request - ", err);
         });
     });
+  },
+
+  getUserCount({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.getUserCount,
+        contentType: "application/json"
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
 };
