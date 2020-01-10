@@ -57,6 +57,7 @@
                 </div>
                 <div class="listing-form-field">
                   <input
+                    type="submit"
                     class="submit"
                     value="login"
                     @click="logInUser"
@@ -151,6 +152,7 @@
                 <label class="checkbox-lable">i agree with</label> &nbsp; <a href="#">Terms & Conditions</a> </div>-->
                 <div class="listing-form-field">
                   <input
+                    type="submit"
                     class="submit"
                     value="create account"
                     @click="registerUser"

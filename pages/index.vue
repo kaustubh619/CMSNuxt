@@ -511,7 +511,7 @@
                   <a href="#" style="display: block; text-align: left">Forgot Password?</a>
                 </div>
                 <div class="listing-form-field">
-                  <input class="submit" value="login" @click="logInUser" style="cursor: pointer" />
+                  <input type="submit" class="submit" value="login" @click="logInUser" style="cursor: pointer" />
                 </div>
                 <div class="divider">
                   <span>OR</span>
@@ -598,7 +598,7 @@
               <label for="checkbox-1-2"></label>
                 <label class="checkbox-lable">i agree with</label> &nbsp; <a href="#">Terms & Conditions</a> </div>-->
                 <div class="listing-form-field">
-                  <input
+                  <input type="submit"
                     class="submit"
                     value="create account"
                     @click="registerUser"
