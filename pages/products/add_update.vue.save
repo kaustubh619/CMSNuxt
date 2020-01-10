@@ -1,15 +1,15 @@
-<template>
+clear<template>
   <div>
     <div id="breadcrum-inner-block">
       <div class="container">
         <div class="row">
           <div class="col-sm-12 text-center">
             <div class="breadcrum-inner-header">
-              <h1>Edit Product</h1>
+              <h1>{{ product_name }}</h1>
               <nuxt-link to="/">Home</nuxt-link>
               <i class="fa fa-circle"></i>
-              <nuxt-link to>
-                <span>Edit Product</span>
+              <nuxt-link to="">
+                <span>Add Update</span>
               </nuxt-link>
             </div>
           </div>
@@ -22,8 +22,8 @@
           <div class="col-md-12 text-center">
             <div class="col-md-12 all-categorie-list-title bt_heading_3">
               <h1>
-                Edit
-                <span>Product</span>
+                Add
+                <span>Update</span>
               </h1>
               <div class="blind line_1"></div>
               <div class="flipInX-1 blind icon">
@@ -71,62 +71,15 @@
                 <div class="submit_listing_box">
                   <form class="form-alt">
                     <div class="row">
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Startup Name :-</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          v-model="startupname"
-                        />
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Stage :-</label>
-                        <input
-                          class="form-control"
-                          type="number"
-                          v-model="stage"
-                        />
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Product Name :-</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          v-model="product_name"
-                        />
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Application Link :-</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          v-model="app_link"
-                        />
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Number of active users :-</label>
-                        <input
-                          class="form-control"
-                          type="number"
-                          v-model="active_users"
-                        />
-                      </div>
                       <div class="form-group col-xs-12">
-                        <label>Description :-</label>
+                        <label>Update :-</label>
                         <div
                           id="editorjs"
                           style="border: 1px solid #e9e6e0; border-radius: 4px; background-color: #fff; padding: 20px"
                         ></div>
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Product Video :-</label>
-                        <p style="display: inline; float: left">Currently -</p>
-                        <a
-                          :href="video_url"
-                          target="_blank"
-                          style="cursor: pointer; float: left; margin-left: 6px"
-                          >{{ video_name }}</a
-                        >
+                        <label>Update Video :-</label>
                         <input
                           class="form-control"
                           type="file"
@@ -140,8 +93,8 @@
                 </div>
                 <div class="from-list-lt">
                   <div class="form-group">
-                    <button class="btn" type="submit" @click="updateProduct">
-                      Update
+                    <button class="btn" type="submit" @click="save">
+                      Submit Update
                     </button>
                   </div>
                 </div>
@@ -155,7 +108,6 @@
 </template>
 
 <script>
-  import Cookies from "js-cookie";
   let EditorJS, Header, List, Image;
 
   if (process.browser) {
@@ -164,37 +116,33 @@
     List = require("@editorjs/list");
     Image = require("@editorjs/image");
   }
-
   export default {
     middleware: "token-auth",
     data() {
       return {
-        post: [],
-        id: "",
         product_name: "",
-        city: "",
-        country: "",
-        startup: "",
-        stage: "",
-        users: "",
-        app_link: "",
-        startupname: "",
-        active_users: "",
-        startup_id: "",
-        file: "",
-        video_url: "",
-        video_name: ""
+        file: ""
       };
     },
-
     mounted() {
-      this.productById();
-      $("#user_profile")
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
+      console.log(this.$route.params.id, this.$route.params.product);
+      this.product_name = this.$route.params.product;
+      this.editor = new EditorJS({
+        holder: "editorjs",
+        tools: {
+          header: Header,
+          list: List,
+          image: {
+            class: Image,
+            config: {
+              endpoints: {
+                byFile: "http://103.228.113.9/backend/product_image"
+              }
+            }
+          }
+        }
+      });
     },
-
     methods: {
       logOutUser: function() {
         var payload = new FormData();
@@ -206,43 +154,11 @@
         this.$router.push("/");
       },
 
-      productById: function() {
-        this.$store.dispatch("productById", this.$route.params.id).then(res => {
-          this.video_url = res.data.product_video;
-          if (res.data.product_video !== null) {
-            this.video_name = res.data.product_video.slice(43);
-          }
-          this.startup_id = res.data.startup_name.id;
-          this.startupname = res.data.startup_name.name;
-          this.stage = res.data.stage;
-          this.product_name = res.data.product_name;
-          this.app_link = res.data.product_app_link;
-          this.active_users = res.data.active_users;
-          this.post = JSON.parse(res.data.description);
-          this.editor = new EditorJS({
-            holder: "editorjs",
-            tools: {
-              header: Header,
-              list: List,
-              image: {
-                class: Image,
-                config: {
-                  endpoints: {
-                    byFile: "http://www.ft500.in/backend/product_image"
-                  }
-                }
-              }
-            },
-            data: { blocks: this.post }
-          });
-        });
-      },
-
       handleFileUpload: function() {
         this.file = this.$refs.file.files[0];
       },
 
-      updateProduct: function() {
+      save() {
         this.editor.save().then(async outputData => {
           if (outputData.blocks.length) {
             let heading, featuredImg;
@@ -267,25 +183,17 @@
             }
           }
           var payload = new FormData();
-          payload.append("id", this.$route.params.id);
           payload.append("added_by", localStorage.getItem("user_id"));
-          payload.append("updated_by", localStorage.getItem("user_id"));
           const date_added = new Date();
           const day = date_added.getDate();
           const month = date_added.getMonth() + 1;
           const year = date_added.getFullYear();
           const added_dated = year + "-" + month + "-" + day;
-          payload.append("updated_date", added_dated);
-          payload.append("stage", this.stage);
-          payload.append("product_name", this.product_name);
-          payload.append("description", JSON.stringify(outputData.blocks));
-          payload.append("product_app_link", this.app_link);
-          payload.append("active_users", this.active_users);
-          payload.append("startup_name", this.startup_id);
-          if (this.file) {
-            payload.append("product_video", this.file);
-          }
-          this.$store.dispatch("updateProduct", payload).then(res => {});
+          payload.append("added_date", added_dated);
+          payload.append("product", this.$route.params.id);
+          payload.append("latest_updates", JSON.stringify(outputData.blocks));
+          payload.append("update_video", this.file);
+          this.$store.dispatch("postUpdate", payload).then(res => {});
           this.$router.push("/startup/listing");
         });
       }

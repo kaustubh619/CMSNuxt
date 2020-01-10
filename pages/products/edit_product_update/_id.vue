@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <div id="breadcrum-inner-block">
@@ -189,7 +190,7 @@
                 class: Image,
                 config: {
                   endpoints: {
-                    byFile: "http://127.0.0.1:8000/product_image"
+                    byFile: "http://www.ft500.in/backend/product_image"
                   }
                 }
               }

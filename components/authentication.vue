@@ -264,11 +264,11 @@
           new_payload.append("backend", "google-oauth2");
           new_payload.append(
             "client_id",
-            "tB9YEH7X4RnQPYHkG7HsBDSdpbpJmf3JVlPFAxSs"
+            "oyBLYzEeUfq1xwNYUscD0oF9rH8Gdm0FgYr8unCH"
           );
           new_payload.append(
             "client_secret",
-            "JyNuN19eofO7bRCTaDNYVzMDjlq6NpyxizaTmV2LA2dXd8CjIgHJN5FsqlZqyKlHR0hpi5Ydsxf2Mk3b9ckXYuOGWvQsfPXJVcJyE9VoAJrlzElvBKwbcH7hcIZ0ZG9T"
+            "1zxuIPtXtsHlzaAEfUNUo7Oqt1OOykvGaX8CLVRqtuCN1KYvRDgdPtEH0p1adprhzX6hH0K9Xd2duN8rdx7184JzFM91tpWT0SqPTu6GEt2hi7M7Ms1QqA9DkF9MlrSk"
           );
           payload.append("oauth", true);
           this.$store.dispatch("getBearerToken", new_payload).then(res => {

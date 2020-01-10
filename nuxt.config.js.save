@@ -1,8 +1,6 @@
-
 export default {
   // server: { port: 3002 },
-  mode: "spa",
-  server: {port:5000},
+  mode: "spa"
   /*
    ** Headers of the page
    */

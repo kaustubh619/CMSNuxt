@@ -5,11 +5,11 @@
         <div class="row">
           <div class="col-sm-12 text-center">
             <div class="breadcrum-inner-header">
-              <h1>Edit Product</h1>
+              <h1>Product Update</h1>
               <nuxt-link to="/">Home</nuxt-link>
               <i class="fa fa-circle"></i>
               <nuxt-link to>
-                <span>Edit Product</span>
+                <span>Product Update</span>
               </nuxt-link>
             </div>
           </div>
@@ -23,7 +23,7 @@
             <div class="col-md-12 all-categorie-list-title bt_heading_3">
               <h1>
                 Edit
-                <span>Product</span>
+                <span>Product Update</span>
               </h1>
               <div class="blind line_1"></div>
               <div class="flipInX-1 blind icon">
@@ -71,55 +71,15 @@
                 <div class="submit_listing_box">
                   <form class="form-alt">
                     <div class="row">
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Startup Name :-</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          v-model="startupname"
-                        />
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Stage :-</label>
-                        <input
-                          class="form-control"
-                          type="number"
-                          v-model="stage"
-                        />
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Product Name :-</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          v-model="product_name"
-                        />
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Application Link :-</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          v-model="app_link"
-                        />
-                      </div>
-                      <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Number of active users :-</label>
-                        <input
-                          class="form-control"
-                          type="number"
-                          v-model="active_users"
-                        />
-                      </div>
                       <div class="form-group col-xs-12">
-                        <label>Description :-</label>
+                        <label>Update :-</label>
                         <div
                           id="editorjs"
                           style="border: 1px solid #e9e6e0; border-radius: 4px; background-color: #fff; padding: 20px"
                         ></div>
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Product Video :-</label>
+                        <label>Update Video :-</label>
                         <p style="display: inline; float: left">Currently -</p>
                         <a
                           :href="video_url"
@@ -140,7 +100,11 @@
                 </div>
                 <div class="from-list-lt">
                   <div class="form-group">
-                    <button class="btn" type="submit" @click="updateProduct">
+                    <button
+                      class="btn"
+                      type="submit"
+                      @click="editProductUpdate"
+                    >
                       Update
                     </button>
                   </div>
@@ -183,12 +147,13 @@
         startup_id: "",
         file: "",
         video_url: "",
-        video_name: ""
+        video_name: "",
+        product_id: ""
       };
     },
 
     mounted() {
-      this.productById();
+      this.UpdateById();
       $("#user_profile")
         .addClass("active")
         .siblings()
@@ -206,19 +171,15 @@
         this.$router.push("/");
       },
 
-      productById: function() {
-        this.$store.dispatch("productById", this.$route.params.id).then(res => {
-          this.video_url = res.data.product_video;
-          if (res.data.product_video !== null) {
-            this.video_name = res.data.product_video.slice(43);
+      UpdateById: function() {
+        this.$store.dispatch("UpdateById", this.$route.params.id).then(res => {
+          this.product_id = res.data.product.id;
+          this.video_url = res.data.update_video;
+          if (res.data.update_video !== null) {
+            this.video_name = res.data.update_video.slice(43);
           }
-          this.startup_id = res.data.startup_name.id;
-          this.startupname = res.data.startup_name.name;
-          this.stage = res.data.stage;
-          this.product_name = res.data.product_name;
-          this.app_link = res.data.product_app_link;
-          this.active_users = res.data.active_users;
-          this.post = JSON.parse(res.data.description);
+
+          this.post = JSON.parse(res.data.latest_updates);
           this.editor = new EditorJS({
             holder: "editorjs",
             tools: {
@@ -228,8 +189,7 @@
                 class: Image,
                 config: {
                   endpoints: {
-                    byFile: "http://www.ft500.in/backend/product_image"
-                  }
+                    byFile: "http:///product_image"                  }
                 }
               }
             },
@@ -242,7 +202,7 @@
         this.file = this.$refs.file.files[0];
       },
 
-      updateProduct: function() {
+      editProductUpdate: function() {
         this.editor.save().then(async outputData => {
           if (outputData.blocks.length) {
             let heading, featuredImg;
@@ -276,16 +236,12 @@
           const year = date_added.getFullYear();
           const added_dated = year + "-" + month + "-" + day;
           payload.append("updated_date", added_dated);
-          payload.append("stage", this.stage);
-          payload.append("product_name", this.product_name);
-          payload.append("description", JSON.stringify(outputData.blocks));
-          payload.append("product_app_link", this.app_link);
-          payload.append("active_users", this.active_users);
-          payload.append("startup_name", this.startup_id);
+          payload.append("latest_updates", JSON.stringify(outputData.blocks));
           if (this.file) {
-            payload.append("product_video", this.file);
+            payload.append("update_video", this.file);
           }
-          this.$store.dispatch("updateProduct", payload).then(res => {});
+          payload.append("product", this.product_id);
+          this.$store.dispatch("editProductUpdate", payload).then(res => {});
           this.$router.push("/startup/listing");
         });
       }
