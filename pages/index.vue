@@ -244,9 +244,6 @@
                   >
                 </div>
                 <div class="listing-form-field">
-<<<<<<< HEAD
-                  <input type="submit" class="submit" value="login" @click="logInUser" style="cursor: pointer" />
-=======
                   <input
                     type="submit"
                     class="submit"
@@ -254,7 +251,6 @@
                     @click="logInUser"
                     style="cursor: pointer"
                   />
->>>>>>> f731a0eeada06816e82898ea28fcd3d5605818f5
                 </div>
                 <div class="divider">
                   <span>OR</span>
@@ -342,17 +338,6 @@
               <input type="checkbox" id="checkbox-1-2" class="regular-checkbox" />
               <label for="checkbox-1-2"></label>
                 <label class="checkbox-lable">i agree with</label> &nbsp; <a href="#">Terms & Conditions</a> </div>-->
-<<<<<<< HEAD
-                <div class="listing-form-field">
-                  <input type="submit"
-                    class="submit"
-                    value="create account"
-                    @click="registerUser"
-                    style="cursor: pointer"
-                  />
-                </div>
-              </form>
-=======
               <div class="listing-form-field">
                 <input
                   type="submit"
@@ -363,7 +348,6 @@
                 />
               </div>
               <!-- </form> -->
->>>>>>> f731a0eeada06816e82898ea28fcd3d5605818f5
             </div>
           </div>
         </div>
