@@ -9,29 +9,39 @@
             <p class="about-lt">
               <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
               justo lectus, consectetur quis nisi vitae, Nunc eget ultrices
-              ligula. -->
+              ligula.-->
               {{ about }}
             </p>
-            <nuxt-link to="/about" class="btn-primary-link more-detail"
-              ><i class="fa fa-hand-o-right"></i> Read More</nuxt-link
-            >
+            <nuxt-link to="/about" class="btn-primary-link more-detail">
+              <i class="fa fa-hand-o-right"></i> Read More
+            </nuxt-link>
             <h2>Follow Us</h2>
             <hr />
             <ul class="social-icons">
               <li>
-                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#">
+                  <i class="fa fa-facebook"></i>
+                </a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#">
+                  <i class="fa fa-twitter"></i>
+                </a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-google-plus"></i></a>
+                <a href="#">
+                  <i class="fa fa-google-plus"></i>
+                </a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                <a href="#">
+                  <i class="fa fa-pinterest-p"></i>
+                </a>
               </li>
               <li>
-                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                <a href="#">
+                  <i class="fa fa-youtube-play"></i>
+                </a>
               </li>
             </ul>
           </div>
@@ -39,30 +49,39 @@
             <h2>Recent Listing</h2>
             <hr />
             <ul class="widget-news-simple">
-              <li>
-                <div class="news-thum">
-                  <a href="#"
-                    ><img src="~static/images/new-thum-1.png" alt="new-thum-1"
-                  /></a>
-                </div>
+              <li v-for="(x,y) in footerStartupList" :key="y">
+                <!-- <div class="news-thum">
+                  <a href="#">
+                    <img src="~static/images/new-thum-1.png" alt="new-thum-1" />
+                  </a>
+                </div>-->
                 <div class="news-text-thum">
-                  <h6><a href="#">Hello Directory Listing</a></h6>
-                  <p>Phasellus ut condimentum diam, eget tempus lorem...</p>
+                  <h6>{{ x.name }}</h6>
+                  <p>{{ x.description.slice(0,140) }}......</p>
+                  <nuxt-link
+                    :to="{
+                          name: 'startup-details-id',
+                          params: { id: x.id }
+                        }"
+                  >Read More</nuxt-link>
+                  <br />
                   <div>Price: $117</div>
                 </div>
               </li>
-              <li>
+              <!-- <li>
                 <div class="news-thum">
-                  <a href="#"
-                    ><img src="~static/images/new-thum-1.png" alt="new-thum-1"
-                  /></a>
+                  <a href="#">
+                    <img src="~static/images/new-thum-1.png" alt="new-thum-1" />
+                  </a>
                 </div>
                 <div class="news-text-thum">
-                  <h6><a href="#">Hello Directory Listing</a></h6>
+                  <h6>
+                    <a href="#">Hello Directory Listing</a>
+                  </h6>
                   <p>Phasellus ut condimentum diam, eget tempus lorem...</p>
                   <div>Price: $117</div>
                 </div>
-              </li>
+              </li>-->
             </ul>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
@@ -70,32 +89,32 @@
             <hr />
             <ul class="use-slt-link">
               <li>
-                <a href="#"
-                  ><i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Privacy &
-                  Policy</a
-                >
+                <a href="#">
+                  <i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Privacy &
+                  Policy
+                </a>
               </li>
               <li>
-                <a href="#"
-                  ><i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Payment
-                  Method</a
-                >
+                <a href="#">
+                  <i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Payment
+                  Method
+                </a>
               </li>
               <li>
-                <a href="#"
-                  ><i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Sitemap</a
-                >
+                <a href="#">
+                  <i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Sitemap
+                </a>
               </li>
               <li>
-                <a href="#"
-                  ><i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Support</a
-                >
+                <a href="#">
+                  <i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Support
+                </a>
               </li>
               <li>
-                <a href="#"
-                  ><i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Terms &
-                  Condition</a
-                >
+                <a href="#">
+                  <i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Terms &
+                  Condition
+                </a>
               </li>
             </ul>
           </div>
@@ -104,27 +123,13 @@
             <hr />
             <form class="form-alt">
               <div class="form-group">
-                <input
-                  type="text"
-                  placeholder="Name :-"
-                  required
-                  class="form-control"
-                />
+                <input type="text" placeholder="Name :-" required class="form-control" />
               </div>
               <div class="form-group">
-                <input
-                  type="text"
-                  placeholder="Email :-"
-                  required
-                  class="form-control"
-                />
+                <input type="text" placeholder="Email :-" required class="form-control" />
               </div>
               <div class="form-group">
-                <textarea
-                  placeholder="Message :-"
-                  required
-                  class="form-control"
-                ></textarea>
+                <textarea placeholder="Message :-" required class="form-control"></textarea>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn-quote">Send Now</button>
@@ -148,25 +153,32 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        about: ""
-      };
-    },
-    mounted() {
-      this.activatedFooterCMS();
-    },
-    methods: {
-      activatedFooterCMS: function() {
-        this.$store.dispatch("activatedFooterCMS").then(res => {
-          res.data.map(item => {
-            this.about = item.about_us;
-          });
+export default {
+  data() {
+    return {
+      about: "",
+      footerStartupList: []
+    };
+  },
+  mounted() {
+    this.activatedFooterCMS();
+    this.getFooterStartUps();
+  },
+  methods: {
+    activatedFooterCMS: function() {
+      this.$store.dispatch("activatedFooterCMS").then(res => {
+        res.data.map(item => {
+          this.about = item.about_us;
         });
-      }
+      });
+    },
+    getFooterStartUps: function() {
+      this.$store.dispatch("getStartups").then(res => {
+        this.footerStartupList = res.data.reverse().splice(0, 2);
+      });
     }
-  };
+  }
+};
 </script>
 
 <style>
