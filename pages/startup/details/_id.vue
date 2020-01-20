@@ -295,7 +295,7 @@
 }
 
 .header-st-2 {
-  text-align: center;
+  text-align: justify;
   font-size: 16px;
   letter-spacing: 1px;
   font-weight: 100;
