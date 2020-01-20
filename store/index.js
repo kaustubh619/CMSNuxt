@@ -750,5 +750,21 @@ export const actions = {
           console.log(err);
         });
     });
+  },
+
+  getFeaturedStartups({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.getFeaturedStartups,
+        contentType: "application/json"
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
 };

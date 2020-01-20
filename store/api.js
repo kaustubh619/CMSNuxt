@@ -75,5 +75,7 @@ export const state = () => ({
 
   getContactForm: url + "/get_contact_form/",
 
-  getUserCount: url + "/user_count"
+  getUserCount: url + "/user_count",
+
+  getFeaturedStartups: url + "/featured_startups"
 });
