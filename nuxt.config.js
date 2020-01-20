@@ -1,8 +1,7 @@
-
 export default {
   // server: { port: 3002 },
   mode: "spa",
-  server: {port:5000},
+  // server: {port:5000},
   /*
    ** Headers of the page
    */
@@ -60,6 +59,23 @@ export default {
       {
         rel: "stylesheet",
         href: "https://cdn.plyr.io/3.5.6/plyr.css"
+      },
+      // {
+      //   rel: "stylesheet",
+      //   href:
+      //     "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css"
+      // },
+      // {
+      //   rel: "stylesheet",
+      //   href: "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css"
+      // },
+      // {
+      //   rel: "stylesheet",
+      //   href: "https://cdn.quilljs.com/1.3.6/quill.bubble.css"
+      // },
+      {
+        rel: "stylesheet",
+        href: "https://cdn.quilljs.com/1.3.6/quill.snow.css"
       }
     ],
     script: [
@@ -114,6 +130,19 @@ export default {
       },
       {
         src: "https://formbuilder.online/assets/js/form-render.min.js",
+        type: "text/javascript"
+      },
+      {
+        src:
+          "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js",
+        type: "text/javascript"
+      },
+      // {
+      //   src: "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js",
+      //   type: "text/javascript"
+      // },
+      {
+        src: "https://cdn.quilljs.com/1.3.6/quill.js",
         type: "text/javascript"
       }
     ]

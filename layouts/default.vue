@@ -6,13 +6,14 @@
   </div>
 </template>
 <script>
-import Header from '@/components/header.vue'
-import Footer from '@/components/footer.vue'
-export default {
-  components:{
-    Header, Footer
-  }
-}
+  import Header from "@/components/header.vue";
+  import Footer from "@/components/footer.vue";
+  export default {
+    components: {
+      Header,
+      Footer
+    }
+  };
 </script>
 <style>
 /* html {
@@ -63,6 +64,12 @@ export default {
   background-color: #35495e;
 } */
 body {
-  padding: 0px!important;
+  padding: 0px !important;
+}
+
+#logo-header {
+  position: relative;
+  width: 100%;
+  z-index: 10000;
 }
 </style>

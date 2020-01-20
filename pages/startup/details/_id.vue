@@ -19,445 +19,117 @@
     <div id="vfx-product-inner-item">
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-            <!-- col-md-9 col-sm-8 col-xs-12 -->
-            <div class="dlt-title-item">
-              <h2>Startup Description</h2>
-              <hr class="row" />
-              <div style="display:block">
-                <span>Category</span>
-                - {{ category }}
+          <p class="header-st-1">{{ name }}</p>
+          <p class="header-st-2">{{ description }}</p>
+          <div class="col-12 col-sm-8" style="margin-top: 40px">
+            <img :src="thumbnail" class="st-thumb" />
+            <div class="col-12">
+              <div class="tab">
+                <button
+                  class="tablinks"
+                  id="product"
+                  @click="openbtn('description')"
+                >
+                  Products
+                </button>
+                <button class="tablinks" id="faq" @click="openbtn('reviews')">
+                  FAQ
+                </button>
+                <button class="tablinks" id="com" @click="openbtn('community')">
+                  Community
+                </button>
               </div>
-              <div>
-                <span>Established</span>
-                - {{ estd }}
-              </div>
-              <div style="display:block">
-                <span>Location</span>
-                - {{ city }}, {{ country }}
-              </div>
-              <div style="display:block">
-                <span>Team Size</span>
-                - {{ team_size }}
-              </div>
-              <div style="display:block">
-                <span>Key Team Members</span>
-                - {{ key_team_members }}
-              </div>
-              <div style="display:block">
-                <span>Founders</span>
-                - {{ founders }}
-              </div>
-              <div style="display:block">
-                <span>Incubators</span>
-                - {{ incubators }}
-              </div>
-              <div style="display:block">
-                <span>Investors</span>
-                - {{ investors }}
-              </div>
-              <div style="display:block">
-                <span>Accelerators</span>
-                - {{ accelerators }}
-              </div>
-              <div style="display:block">
-                <span>Partnership Associations</span>
-                - {{ partners }}
-              </div>
-              <div style="display:block">
-                <span>Funding Round</span>
-                - {{ round }}
-              </div>
-              <div style="display:block">
-                <span>Added On</span>
-                - {{ added }}
-              </div>
-              <p>{{ description }}</p>
-            </div>
-            <hr class="row" />
-            <div class="dlt-title-item">
-              <h2>Products</h2>
-              <ul v-if="product_bool">
-                <li v-for="(x, y) in product_list" :key="y">
-                  <nuxt-link
-                    style="font-size: 20px"
-                    :to="{ name: 'products-id', params: { id: x.id } }"
-                    class="product_link"
-                  >{{ x.product_name }}</nuxt-link>
-                </li>
-              </ul>
-              <h4 v-else>No products added for this startup</h4>
-            </div>
-            <hr class="row" />
-            <div class="comments-wrapper">
-              <h2>2 Comments</h2>
-              <ul class="media-list">
-                <li class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img alt="image" src="~static/images/comment-thumb-1.jpg" />
-                    </a>
+
+              <div id="description" class="tabcontent">
+                <div class="row" v-if="product_bool">
+                  <div
+                    class="col-12"
+                    v-for="(a, b) in product_list"
+                    :key="b"
+                    style="padding: 10px"
+                  >
+                    <nuxt-link
+                      :to="{
+                        name: 'products-id',
+                        params: { id: a.id }
+                      }"
+                    >
+                      <p class="st-sub-text-1">
+                        {{ b + 1 }}.
+                        <span style="margin-left: 10px" class="prod_desc-11"
+                          >Product Name - {{ a.product_name }}</span
+                        >
+                        <video
+                          id="player"
+                          poster="../../../images/pro_img.jpg"
+                          playsinline
+                          controls
+                          style="margin-top: 20px; width: 100%;"
+                        >
+                          <source :src="a.product_video" type="video/mp4" />
+                          <source :src="a.product_video" type="video/webm" />
+                        </video>
+                      </p>
+                      <br />
+                    </nuxt-link>
                   </div>
-                  <div class="media-body">
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since they 1500s, when an unknown
-                      printer took a galley of type and scrambled.Nulla a enim
-                      et justo facilisis ornare. Sed ante sem, dignissim a
-                      vehicula et, rutrum volutpat turpis. Praesent id leo
-                      lacinia, malesuada tortor ut, lobortis leo.
-                    </p>
-                    <div class="comment-meta clearfix">
-                      <a href="#">
-                        <span class="author-name">John doe</span>
-                      </a>
-                      <span class="comment-lt-time">22 April - 2016</span>
-                      <span class="rating-box">
-                        <span class="rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
-                        </span>
-                      </span>
-                    </div>
+                </div>
+                <div class="row" v-else>
+                  <div class="col-12" style="padding: 10px; font-weight: 300">
+                    No Products added for this startup
                   </div>
-                </li>
-                <li class="media">
-                  <div class="media-left">
-                    <a href="#">
-                      <img alt="image" src="~static/images/comment-thumb-1.jpg" />
-                    </a>
-                  </div>
-                  <div class="media-body">
-                    <p>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since they 1500s, when an unknown
-                      printer took a galley of type and scrambled.Nulla a enim
-                      et justo facilisis ornare. Sed ante sem, dignissim a
-                      vehicula et, rutrum volutpat turpis. Praesent id leo
-                      lacinia, malesuada tortor ut, lobortis leo.
-                    </p>
-                    <div class="comment-meta clearfix">
-                      <a href="#">
-                        <span class="author-name">John doe</span>
-                      </a>
-                      <span class="comment-lt-time">22 April - 2016</span>
-                      <span class="rating-box">
-                        <span class="rating">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
-                        </span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-              <div class="comment-respond">
-                <h2>Post A Comment</h2>
-                <form>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <span class="rating-box">
-                          <span class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <input placeholder="Full Name" required class="form-control" type="text" />
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <input
-                          placeholder="Email Address"
-                          required
-                          class="form-control"
-                          type="email"
-                        />
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <input placeholder="Your Website" required class="form-control" type="text" />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <textarea
-                      placeholder="Type here message"
-                      rows="7"
-                      required
-                      class="form-control"
-                    ></textarea>
-                  </div>
-                  <button class="btn pull-right" type="submit">Submit</button>
-                </form>
+                </div>
+              </div>
+
+              <div id="reviews" class="tabcontent">
+                <p class="faq-11">Frequently Asked Questions</p>
+              </div>
+
+              <div id="community" class="tabcontent">
+                <p class="faq-11">Community</p>
               </div>
             </div>
           </div>
-          <!-- <div class="col-md-3 col-sm-4 col-xs-12">
-        <div class="left-slide-slt-block">
-          <h3>Search Listings</h3>
-        </div>
-        <div class="sidebar-listing-search-wrap">
-          <form action="#">
-            <p>Search For :</p>
-            <select class="sidebar-listing-search-select">
-              <option>All Categories 1</option>
-              <option>All Categories 2</option>
-              <option>All Categories 3</option>
-            </select>
-            <input class="sidebar-listing-search-input" placeholder="Search" name="search" type="text">
-            <p>Search Near :</p>
-            <select class="sidebar-listing-search-select">
-              <option>All Categories 1</option>
-              <option>All Categories 2</option>
-              <option>All Categories 3</option>
-            </select>
-            <input class="sidebar-listing-search-input" placeholder="Search" name="search" type="text">
-            
-            <div class="listing-search-btn">
-              <input class="sidebar-listing-search-btn" value="Search" type="submit">
-            </div>
-          </form>
-        </div>
-          </div>-->
-        </div>
-        <div id="recent-product-item-listing">
-          <div class="container">
-            <div class="row">
-              <div class="col-sm-12 text-center">
-                <div class="col-md-12 recent-item-listing-heading bt_heading_3">
-                  <h1>
-                    Recent
-                    <span>Listing</span>
-                  </h1>
-                  <div class="blind line_1"></div>
-                  <div class="flipInX-1 blind icon">
-                    <span class="icon">
-                      <i class="fa fa-stop"></i>&nbsp;&nbsp;
-                      <i class="fa fa-stop"></i>
-                    </span>
-                  </div>
-                  <div class="blind line_2"></div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4">
-                    <div class="recent-listing-box-container-item">
-                      <div class="col-xs-12 nopadding">
-                        <div class="recent-listing-box-item">
-                          <div class="listing-boxes-text">
-                            <a href="#">
-                              <h3>Hello Directory Listing</h3>
-                            </a>
-                            <a href="#">
-                              <i class="fa fa-phone"></i> +91 087 654 3210
-                            </a>
-                            <p>
-                              Eiusmod tempor incidiunt labore velit dolore magna
-                              aliqu sed veniam quis nostrud lorem ipsum dolor
-                              sit amet consectetur...
-                            </p>
-                          </div>
-                          <div class="recent-feature-item-rating">
-                            <h2>
-                              <i class="fa fa-map-marker"></i> Your City Here
-                            </h2>
-                            <span>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o"></i>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4">
-                    <div class="recent-listing-box-container-item">
-                      <div class="col-xs-12 nopadding">
-                        <div class="recent-listing-box-item">
-                          <div class="listing-boxes-text">
-                            <a href="#">
-                              <h3>Hello Directory Listing</h3>
-                            </a>
-                            <a href="#">
-                              <i class="fa fa-phone"></i> +91 087 654 3210
-                            </a>
-                            <p>
-                              Eiusmod tempor incidiunt labore velit dolore magna
-                              aliqu sed veniam quis nostrud lorem ipsum dolor
-                              sit amet consectetur...
-                            </p>
-                          </div>
-                          <div class="recent-feature-item-rating">
-                            <h2>
-                              <i class="fa fa-map-marker"></i> Your City Here
-                            </h2>
-                            <span>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o"></i>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4">
-                    <div class="recent-listing-box-container-item">
-                      <div class="col-xs-12 nopadding">
-                        <div class="recent-listing-box-item">
-                          <div class="listing-boxes-text">
-                            <a href="#">
-                              <h3>Hello Directory Listing</h3>
-                            </a>
-                            <a href="#">
-                              <i class="fa fa-phone"></i> +91 087 654 3210
-                            </a>
-                            <p>
-                              Eiusmod tempor incidiunt labore velit dolore magna
-                              aliqu sed veniam quis nostrud lorem ipsum dolor
-                              sit amet consectetur...
-                            </p>
-                          </div>
-                          <div class="recent-feature-item-rating">
-                            <h2>
-                              <i class="fa fa-map-marker"></i> Your City Here
-                            </h2>
-                            <span>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o"></i>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4">
-                    <div class="recent-listing-box-container-item">
-                      <div class="col-xs-12 nopadding">
-                        <div class="recent-listing-box-item">
-                          <div class="listing-boxes-text">
-                            <a href="#">
-                              <h3>Hello Directory Listing</h3>
-                            </a>
-                            <a href="#">
-                              <i class="fa fa-phone"></i> +91 087 654 3210
-                            </a>
-                            <p>
-                              Eiusmod tempor incidiunt labore velit dolore magna
-                              aliqu sed veniam quis nostrud lorem ipsum dolor
-                              sit amet consectetur...
-                            </p>
-                          </div>
-                          <div class="recent-feature-item-rating">
-                            <h2>
-                              <i class="fa fa-map-marker"></i> Your City Here
-                            </h2>
-                            <span>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o"></i>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4">
-                    <div class="recent-listing-box-container-item">
-                      <div class="col-xs-12 nopadding">
-                        <div class="recent-listing-box-item">
-                          <div class="listing-boxes-text">
-                            <a href="#">
-                              <h3>Hello Directory Listing</h3>
-                            </a>
-                            <a href="#">
-                              <i class="fa fa-phone"></i> +91 087 654 3210
-                            </a>
-                            <p>
-                              Eiusmod tempor incidiunt labore velit dolore magna
-                              aliqu sed veniam quis nostrud lorem ipsum dolor
-                              sit amet consectetur...
-                            </p>
-                          </div>
-                          <div class="recent-feature-item-rating">
-                            <h2>
-                              <i class="fa fa-map-marker"></i> Your City Here
-                            </h2>
-                            <span>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o"></i>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6 col-sm-6 col-xs-12 col-lg-4">
-                    <div class="recent-listing-box-container-item">
-                      <div class="col-xs-12 nopadding">
-                        <div class="recent-listing-box-item">
-                          <div class="listing-boxes-text">
-                            <a href="#">
-                              <h3>Hello Directory Listing</h3>
-                            </a>
-                            <a href="#">
-                              <i class="fa fa-phone"></i> +91 087 654 3210
-                            </a>
-                            <p>
-                              Eiusmod tempor incidiunt labore velit dolore magna
-                              aliqu sed veniam quis nostrud lorem ipsum dolor
-                              sit amet consectetur...
-                            </p>
-                          </div>
-                          <div class="recent-feature-item-rating">
-                            <h2>
-                              <i class="fa fa-map-marker"></i> Your City Here
-                            </h2>
-                            <span>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o"></i>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="col-12 col-sm-4" style="margin-top: 40px">
+            <hr style="margin-top: 0px; border: 3px solid #ffce10" />
+
+            <p class="st-text-1">{{ team_size }}</p>
+            <p class="st-sub-text-1">team size</p>
+
+            <p class="st-text-2">{{ key_team_members }}</p>
+            <p class="st-sub-text-2">key team members</p>
+
+            <p class="st-text-3">{{ incubators }}</p>
+            <p class="st-sub-text-3">incubators</p>
+
+            <p class="st-text-2">{{ accelerators }}</p>
+            <p class="st-sub-text-2">accelerators</p>
+
+            <p class="st-text-2">{{ investors }}</p>
+            <p class="st-sub-text-2">investors</p>
+
+            <p class="st-text-1">{{ estd }}</p>
+            <p class="st-sub-text-2">
+              <i class="fa fa-calendar" aria-hidden="true"></i>
+              date of launch
+            </p>
+
+            <p class="st-text-2">{{ founders }}</p>
+            <p class="st-sub-text-2">founders</p>
+
+            <p class="st-text-2">{{ city }}, {{ state }}, {{ country }}</p>
+            <p class="st-sub-text-2">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              location
+            </p>
+
+            <p class="st-text-1">{{ round }}</p>
+            <p class="st-sub-text-2">funding round</p>
+
+            <p class="st-text-2">{{ partners }}</p>
+            <p class="st-sub-text-2">partnership associations</p>
+
+            <button class="st-btn-11">Back this Startup</button>
           </div>
         </div>
       </div>
@@ -466,71 +138,99 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      name: "",
-      city: "",
-      country: "",
-      category: "",
-      estd: "",
-      description: "",
-      team_size: "",
-      key_team_members: "",
-      founders: "",
-      incubators: "",
-      investors: "",
-      accelerators: "",
-      partners: "",
-      round: "",
-      added: "",
-      product_list: [],
-      product_bool: false
-    };
-  },
-  mounted() {
-    $("#user_profile")
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
-    this.getStartupDetails();
-    this.getStProducts();
-  },
-  methods: {
-    getStartupDetails: function() {
-      var payload = new FormData();
-      payload.append("id", this.$route.params.id);
-      this.$store.dispatch("getStartupDetails", payload).then(res => {
-        this.name = res.data.name;
-        this.city = res.data.city;
-        this.country = res.data.country;
-        this.category = res.data.category.category;
-        this.estd = res.data.date_of_launch;
-        this.description = res.data.description;
-        this.team_size = res.data.team_size;
-        this.key_team_members = res.data.key_team_members;
-        this.founders = res.data.name_of_founders;
-        this.incubators = res.data.incubators;
-        this.investors = res.data.investors;
-        this.accelerators = res.data.accelerators;
-        this.partners = res.data.partnerships_associations;
-        this.round = res.data.funding_round;
-        this.added = res.data.added_date;
-      });
+  export default {
+    data() {
+      return {
+        name: "",
+        city: "",
+        country: "",
+        category: "",
+        estd: "",
+        description: "",
+        team_size: "",
+        key_team_members: "",
+        founders: "",
+        incubators: "",
+        investors: "",
+        accelerators: "",
+        partners: "",
+        round: "",
+        added: "",
+        product_list: [],
+        product_bool: false,
+        thumbnail: "",
+        state: ""
+      };
     },
+    mounted() {
+      $("#user_profile")
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+      this.getStartupDetails();
+      this.getStProducts();
 
-    getStProducts: function() {
-      var payload = new FormData();
-      payload.append("id", this.$route.params.id);
-      this.$store.dispatch("getStProducts", payload).then(res => {
-        this.product_list = res.data;
-        if (res.data.length !== 0) {
-          this.product_bool = true;
-        }
+      $(".tablinks").click(function() {
+        var id = $(this).attr("id");
+
+        $("#" + id)
+          .addClass("btn-activated")
+          .siblings()
+          .removeClass("btn-activated");
       });
+
+      document.getElementById("product").click();
+    },
+    methods: {
+      getStartupDetails: function() {
+        var payload = new FormData();
+        payload.append("id", this.$route.params.id);
+        this.$store.dispatch("getStartupDetails", payload).then(res => {
+          this.name = res.data.name;
+          this.city = res.data.city;
+          this.country = res.data.country;
+          this.category = res.data.category.category;
+          this.estd = res.data.date_of_launch;
+          this.description = res.data.description;
+          this.team_size = res.data.team_size;
+          this.key_team_members = res.data.key_team_members;
+          this.founders = res.data.name_of_founders;
+          this.incubators = res.data.incubators;
+          this.investors = res.data.investors;
+          this.accelerators = res.data.accelerators;
+          this.partners = res.data.partnerships_associations;
+          this.round = res.data.funding_round;
+          this.added = res.data.added_date;
+          this.thumbnail = res.data.thumbnail;
+          this.state = res.data.state;
+        });
+      },
+
+      getStProducts: function() {
+        var payload = new FormData();
+        payload.append("id", this.$route.params.id);
+        this.$store.dispatch("getStProducts", payload).then(res => {
+          console.log(res.data);
+          this.product_list = res.data;
+          if (res.data.length !== 0) {
+            this.product_bool = true;
+          }
+        });
+      },
+
+      openbtn: function(btnName) {
+        var i, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tabcontent");
+
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        document.getElementById(btnName).style.display = "block";
+      }
     }
-  }
-};
+  };
 </script>
 
 <style>
@@ -540,5 +240,168 @@ export default {
 
 .product_link:hover {
   color: #ffce10;
+}
+
+#vfx-product-inner-item {
+  padding: 40px 0px;
+}
+
+.header-st-1 {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.header-st-2 {
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 100;
+}
+
+.st-thumb {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  object-position: center;
+}
+
+@media (min-width: 56.25em) and (max-width: 75em) {
+  .st-thumb {
+    height: 350px;
+  }
+}
+
+@media (min-width: 37.5em) and (max-width: 56.25em) {
+  .st-thumb {
+    height: 300px;
+  }
+}
+
+@media (max-width: 56.25em) {
+  .st-thumb {
+    height: 260px;
+  }
+}
+
+.news-text-thum {
+  padding-left: 0px;
+}
+
+.st-text-1 {
+  color: #f9ca40;
+  font-size: 20px;
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+.st-sub-text-1 {
+  color: grey;
+  margin-bottom: 20px;
+}
+
+.st-text-2 {
+  color: grey;
+  font-size: 20px;
+  margin-bottom: 0px;
+  font-weight: 400;
+}
+
+.st-sub-text-2 {
+  color: grey;
+  margin-bottom: 20px;
+}
+
+.st-text-3 {
+  color: grey;
+  font-size: 20px;
+  margin-bottom: 0px;
+  font-weight: 400;
+}
+
+.st-sub-text-3 {
+  color: grey;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 37.5em) {
+  .st-text-1 {
+    text-align: center;
+  }
+  .st-text-2 {
+    text-align: center;
+  }
+  .st-text-3 {
+    text-align: center;
+  }
+  .st-sub-text-1 {
+    text-align: center;
+  }
+  .st-sub-text-2 {
+    text-align: center;
+  }
+  .st-sub-text-3 {
+    text-align: center;
+  }
+}
+
+.st-btn-11 {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #f9ca40;
+  border: none;
+  padding: 15px 30px;
+}
+
+.st-btn-11:hover {
+  background-color: #ffce10;
+  transform: scale(1.005);
+}
+
+.tab {
+  overflow: hidden;
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.tab button:hover {
+  background-color: #ffce10;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  width: 100%;
+  height: auto;
+}
+
+.btn-activated {
+  background-color: #f9ca40 !important;
+}
+
+.faq-11 {
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+.prod_desc-11 {
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 </style>

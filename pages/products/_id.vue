@@ -28,9 +28,7 @@
                   <i class="fa fa-link fa-custom"></i>
                   App Link -
                   <a :href="app_link" target="_blank" class="app-link">
-                    {{
-                    app_link
-                    }}
+                    {{ app_link }}
                   </a>
                 </p>
                 <p class="contact_number">
@@ -96,14 +94,30 @@
               <div class="col-xs-12 col-md-offset-1 col-md-10">
                 <!-- col-md-9 col-sm-8  -->
                 <div class="submit_listing_box">
-                  <div v-for="(item, i) in post" :key="i">
+                  <div id="editor-container"></div>
+                  <!-- <div v-for="(item, i) in post" :key="i">
+                    <p v-for="(j, k) in item" :key="k">
+                      <span v-if="!j.insert.image" :style="j.attributes">{{
+                        j.insert
+                      }}</span>
+                      <img :src="j.insert.image" />
+                    </p>
+
                     <post-image v-if="item.type === 'image'" :data="item" />
                     <post-heading v-if="item.type === 'header'" :data="item" />
-                    <post-paragraph v-if="item.type === 'paragraph'" :data="item" />
+                    <post-paragraph
+                      v-if="item.type === 'paragraph'"
+                      :data="item"
+                    />
                     <post-list v-if="item.type === 'list'" :data="item" />
-                  </div>
+                  </div> -->
                   <h3>Product Video</h3>
-                  <video id="player" poster="../images/pro_img.jpg" playsinline controls>
+                  <video
+                    id="player"
+                    poster="../images/pro_img.jpg"
+                    playsinline
+                    controls
+                  >
                     <source :src="product_video" type="video/mp4" />
                     <source :src="product_video" type="video/webm" />
                   </video>
@@ -124,7 +138,8 @@
                     style="font-size: 20px"
                     :to="{ name: 'products-updates-id', params: { id: x.id } }"
                     class="update-class"
-                  >Date Added: {{ x.added_date }}</nuxt-link>
+                    >Date Added: {{ x.added_date }}</nuxt-link
+                  >
                 </li>
               </ul>
             </div>
@@ -140,7 +155,10 @@
                   <li class="media">
                     <div class="media-left">
                       <a href="#">
-                        <img alt="image" src="~static/images/comment-thumb-1.jpg" />
+                        <img
+                          alt="image"
+                          src="~static/images/comment-thumb-1.jpg"
+                        />
                       </a>
                     </div>
                     <div class="media-body">
@@ -174,7 +192,10 @@
                   <li class="media">
                     <div class="media-left">
                       <a href="#">
-                        <img alt="image" src="~static/images/comment-thumb-1.jpg" />
+                        <img
+                          alt="image"
+                          src="~static/images/comment-thumb-1.jpg"
+                        />
                       </a>
                     </div>
                     <div class="media-body">
@@ -225,7 +246,12 @@
                       </div>
                       <div class="col-md-4">
                         <div class="form-group">
-                          <input placeholder="Full Name" required class="form-control" type="text" />
+                          <input
+                            placeholder="Full Name"
+                            required
+                            class="form-control"
+                            type="text"
+                          />
                         </div>
                       </div>
                       <div class="col-md-4">
@@ -270,83 +296,89 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
-import PostImage from "~/components/Image.vue";
-import PostHeading from "~/components/Heading.vue";
-import PostParagraph from "~/components/Paragraph.vue";
-import PostList from "~/components/List.vue";
-let player;
-export default {
-  components: { PostImage, PostHeading, PostParagraph, PostList },
-  data() {
-    return {
-      post: [],
-      product_name: "",
-      city: "",
-      country: "",
-      startup: "",
-      stage: "",
-      users: "",
-      app_link: "",
-      product_video: "",
-      update_list: [],
-      pro_bool: true
-    };
-  },
-  computed: {
-    authentication: {
-      get: function() {
-        return this.$store.state.authentication;
+  import Cookies from "js-cookie";
+  import PostImage from "~/components/Image.vue";
+  import PostHeading from "~/components/Heading.vue";
+  import PostParagraph from "~/components/Paragraph.vue";
+  import PostList from "~/components/List.vue";
+  let player;
+  export default {
+    components: { PostImage, PostHeading, PostParagraph, PostList },
+    data() {
+      return {
+        post: [],
+        product_name: "",
+        city: "",
+        country: "",
+        startup: "",
+        stage: "",
+        users: "",
+        app_link: "",
+        product_video: "",
+        update_list: [],
+        pro_bool: true
+      };
+    },
+    computed: {
+      authentication: {
+        get: function() {
+          return this.$store.state.authentication;
+        }
+      }
+    },
+    mounted() {
+      this.productById();
+      this.getUpdates();
+      $("#user_profile")
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+    },
+    methods: {
+      logOutUser: function() {
+        var payload = new FormData();
+        payload.append("login_status", "false");
+        this.$store.dispatch("logOutUser", payload).then(res => {});
+        localStorage.clear();
+        Cookies.remove("x-access-token");
+        this.$store.commit("authentication", false);
+        this.$router.push("/");
+      },
+      productById: function() {
+        this.$store.dispatch("productById", this.$route.params.id).then(res => {
+          this.post = JSON.parse(res.data.description);
+          this.product_name = res.data.product_name;
+          this.city = res.data.startup_name.city;
+          this.country = res.data.startup_name.country;
+          this.startup = res.data.startup_name.name;
+          this.stage = res.data.stage;
+          this.users = res.data.active_users;
+          this.app_link = res.data.product_app_link;
+          this.product_video = res.data.product_video;
+          var quill = new Quill("#editor-container", {
+            modules: { toolbar: [] },
+            readOnly: true,
+            theme: "bubble"
+          });
+          quill.setContents(this.post);
+          setTimeout(function() {
+            player = new Plyr("#player");
+          }, 1000);
+        });
+      },
+
+      getUpdates: function() {
+        var payload = new FormData();
+        payload.append("id", this.$route.params.id);
+        this.$store.dispatch("getUpdates", payload).then(res => {
+          this.update_list = res.data;
+          if (res.data.length == 0) {
+            this.pro_bool = false;
+          }
+        });
       }
     }
-  },
-  mounted() {
-    this.productById();
-    this.getUpdates();
-    $("#user_profile")
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
-  },
-  methods: {
-    logOutUser: function() {
-      var payload = new FormData();
-      payload.append("login_status", "false");
-      this.$store.dispatch("logOutUser", payload).then(res => {});
-      localStorage.clear();
-      Cookies.remove("x-access-token");
-      this.$store.commit("authentication", false);
-      this.$router.push("/");
-    },
-    productById: function() {
-      this.$store.dispatch("productById", this.$route.params.id).then(res => {
-        this.post = JSON.parse(res.data.description);
-        this.product_name = res.data.product_name;
-        this.city = res.data.startup_name.city;
-        this.country = res.data.startup_name.country;
-        this.startup = res.data.startup_name.name;
-        this.stage = res.data.stage;
-        this.users = res.data.active_users;
-        this.app_link = res.data.product_app_link;
-        this.product_video = res.data.product_video;
-        setTimeout(function() {
-          player = new Plyr("#player");
-        }, 1000);
-      });
-    },
-
-    getUpdates: function() {
-      var payload = new FormData();
-      payload.append("id", this.$route.params.id);
-      this.$store.dispatch("getUpdates", payload).then(res => {
-        this.update_list = res.data;
-        if (res.data.length == 0) {
-          this.pro_bool = false;
-        }
-      });
-    }
-  }
-};
+  };
 </script>
 
 <style>
