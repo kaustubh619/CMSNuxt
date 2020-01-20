@@ -130,7 +130,7 @@
                   :key="b"
                   style="padding: 10px; padding-top: 30px"
                 >
-                  <p class="st-sub-text-1">
+                  <p class="st-sub-text-11">
                     {{ b + 1 }}.
                     <span style="margin-left: 10px" class="prod_desc-11">{{
                       a.product_name
@@ -339,6 +339,11 @@
 }
 
 .st-sub-text-1 {
+  color: grey;
+  margin-bottom: 10px;
+}
+
+.st-sub-text-11 {
   color: grey;
   margin-bottom: 10px;
 }

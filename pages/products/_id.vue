@@ -94,7 +94,7 @@
               <div class="col-xs-12 col-md-offset-1 col-md-10">
                 <!-- col-md-9 col-sm-8  -->
                 <div class="submit_listing_box">
-                  <div id="editor-container"></div>
+                  <div id="editor-container" style="background-color: white"></div>
                   <!-- <div v-for="(item, i) in post" :key="i">
                     <p v-for="(j, k) in item" :key="k">
                       <span v-if="!j.insert.image" :style="j.attributes">{{
@@ -117,6 +117,7 @@
                     poster="../images/pro_img.jpg"
                     playsinline
                     controls
+                    style="width: 100%;"
                   >
                     <source :src="product_video" type="video/mp4" />
                     <source :src="product_video" type="video/webm" />
