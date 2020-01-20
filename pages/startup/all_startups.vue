@@ -29,7 +29,7 @@
               </h4>
               <div class="col-xs-12" v-for="(x, y) in startupList" :key="y">
                 <div class="recent-listing-box-container-item">
-                  <div class="col-md-6 col-xs-12 nopadding">
+                  <div class="col-md-6 col-sm-12 nopadding">
                     <div class="recent-listing-box-image">
                       <h1>{{ x.category.category }}</h1>
                       <img :src="x.thumbnail" alt="img1" class="thumb-img" />
