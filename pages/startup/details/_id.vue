@@ -23,78 +23,50 @@
           <p class="header-st-2">{{ description }}</p>
           <div class="col-12 col-sm-8" style="margin-top: 40px">
             <img :src="thumbnail" class="st-thumb" />
-            <div class="col-12">
-              <div class="tab">
-                <button
-                  class="tablinks"
-                  id="product"
-                  @click="openbtn('description')"
+            <div class="col-12 col-md-4">
+              <span>
+                <i
+                  class="fa fa-map-marker"
+                  aria-hidden="true"
+                  style="color: #009e74"
+                ></i>
+                <p
+                  style="display: inline-block; font-size: 14px; font-weight: 300"
                 >
-                  Products
-                </button>
-                <button class="tablinks" id="faq" @click="openbtn('reviews')">
-                  FAQ
-                </button>
-                <button class="tablinks" id="com" @click="openbtn('community')">
-                  Community
-                </button>
-              </div>
-
-              <div id="description" class="tabcontent">
-                <div class="row" v-if="product_bool">
-                  <div
-                    class="col-12"
-                    v-for="(a, b) in product_list"
-                    :key="b"
-                    style="padding: 10px;"
-                  >
-                    <nuxt-link
-                      :to="{
-                        name: 'products-id',
-                        params: { id: a.id }
-                      }"
-                    >
-                      <p class="st-sub-text-1">
-                        {{ b + 1 }}.
-                        <span style="margin-left: 10px" class="prod_desc-11">{{
-                          a.product_name
-                        }}</span>
-                        <video
-                          id="player"
-                          poster="../../../images/pro_img.jpg"
-                          playsinline
-                          controls
-                          style="margin-top: 20px; width: 100%;"
-                        >
-                          <source :src="a.product_video" type="video/mp4" />
-                          <source :src="a.product_video" type="video/webm" />
-                        </video>
-                      </p>
-                      <br />
-                    </nuxt-link>
-                  </div>
-                </div>
-                <div class="row" v-else>
-                  <div class="col-12" style="padding: 10px; font-weight: 300">
-                    No Products added for this startup
-                  </div>
-                </div>
-              </div>
-
-              <div id="reviews" class="tabcontent">
-                <p class="faq-11">Frequently Asked Questions</p>
-              </div>
-
-              <div id="community" class="tabcontent">
-                <p class="faq-11">Community</p>
-              </div>
+                  {{ city }}, {{ country }}
+                </p>
+              </span>
+            </div>
+            <div class="col-12 col-md-4">
+              <i
+                class="fa fa-calendar"
+                aria-hidden="true"
+                style="color: #009e74"
+              ></i>
+              <p
+                style="display: inline-block; font-size: 14px; font-weight: 300"
+              >
+                {{ estd }}
+              </p>
+            </div>
+            <div class="col-12 col-md-4">
+              <i
+                class="fa fa-users"
+                aria-hidden="true"
+                style="color: #009e74"
+              ></i>
+              <p
+                style="display: inline-block; font-size: 14px; font-weight: 300"
+              >
+                {{ team_size }}
+              </p>
             </div>
           </div>
           <div class="col-12 col-sm-4" style="margin-top: 40px">
-            <hr style="margin-top: 0px; border: 3px solid #ffce10" />
+            <hr style="margin-top: 0px; border: 3px solid #009e74" />
 
-            <p class="st-text-1">{{ team_size }}</p>
-            <p class="st-sub-text-1">team size</p>
+            <!-- <p class="st-text-1">{{ team_size }}</p>
+            <p class="st-sub-text-1">team size</p> -->
 
             <p class="st-text-2">{{ key_team_members }}</p>
             <p class="st-sub-text-2">key team members</p>
@@ -108,20 +80,20 @@
             <p class="st-text-2">{{ investors }}</p>
             <p class="st-sub-text-2">investors</p>
 
-            <p class="st-text-1">{{ estd }}</p>
+            <!-- <p class="st-text-1">{{ estd }}</p>
             <p class="st-sub-text-2">
               <i class="fa fa-calendar" aria-hidden="true"></i>
               date of launch
-            </p>
+            </p> -->
 
             <p class="st-text-2">{{ founders }}</p>
             <p class="st-sub-text-2">founders</p>
 
-            <p class="st-text-2">{{ city }}, {{ state }}, {{ country }}</p>
+            <!-- <p class="st-text-2">{{ city }}, {{ state }}, {{ country }}</p>
             <p class="st-sub-text-2">
               <i class="fa fa-map-marker" aria-hidden="true"></i>
               location
-            </p>
+            </p> -->
 
             <p class="st-text-1">{{ round }}</p>
             <p class="st-sub-text-2">funding round</p>
@@ -130,6 +102,76 @@
             <p class="st-sub-text-2">partnership associations</p>
 
             <button class="st-btn-11">Back this Startup</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 hide-lg-product">
+            <div class="tab">
+              <button
+                class="tablinks"
+                id="product"
+                @click="openbtn('description')"
+              >
+                Products
+              </button>
+              <button class="tablinks" id="faq" @click="openbtn('reviews')">
+                FAQ
+              </button>
+              <button class="tablinks" id="com" @click="openbtn('community')">
+                Community
+              </button>
+            </div>
+
+            <div id="description" class="tabcontent">
+              <div class="row" v-if="product_bool">
+                <div
+                  class="col-12"
+                  v-for="(a, b) in product_list"
+                  :key="b"
+                  style="padding: 10px; padding-top: 30px"
+                >
+                  <p class="st-sub-text-1">
+                    {{ b + 1 }}.
+                    <span style="margin-left: 10px" class="prod_desc-11">{{
+                      a.product_name
+                    }}</span>
+                    <video
+                      id="player"
+                      poster="../../../images/pro_img.jpg"
+                      playsinline
+                      controls
+                      style="margin-top: 20px;"
+                      class="video-width"
+                    >
+                      <source :src="a.product_video" type="video/mp4" />
+                      <source :src="a.product_video" type="video/webm" />
+                    </video>
+                  </p>
+                  <br />
+                  <nuxt-link
+                    class="product-nuxt-link"
+                    :to="{
+                      name: 'products-id',
+                      params: { id: a.id }
+                    }"
+                    >Know More</nuxt-link
+                  >
+                </div>
+              </div>
+              <div class="row" v-else>
+                <div class="col-12" style="padding: 10px; font-weight: 300">
+                  No Products added for this startup
+                </div>
+              </div>
+            </div>
+
+            <div id="reviews" class="tabcontent">
+              <p class="faq-11">Frequently Asked Questions</p>
+            </div>
+
+            <div id="community" class="tabcontent">
+              <p class="faq-11">Community</p>
+            </div>
           </div>
         </div>
       </div>
@@ -264,6 +306,7 @@
   height: 450px;
   object-fit: cover;
   object-position: center;
+  margin-bottom: 15px;
 }
 
 @media (min-width: 56.25em) and (max-width: 75em) {
@@ -289,32 +332,32 @@
 }
 
 .st-text-1 {
-  color: #f9ca40;
-  font-size: 20px;
+  color: grey;
+  font-size: 18px;
   margin-bottom: 0px;
   font-weight: 500;
 }
 
 .st-sub-text-1 {
   color: grey;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .st-text-2 {
   color: grey;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 0px;
   font-weight: 400;
 }
 
 .st-sub-text-2 {
   color: grey;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .st-text-3 {
   color: grey;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 0px;
   font-weight: 400;
 }
@@ -322,6 +365,32 @@
 .st-sub-text-3 {
   color: grey;
   margin-bottom: 20px;
+}
+
+@media (min-width: 37.5em) and (max-width: 75em) {
+  .st-text-1 {
+    font-size: 14px;
+  }
+
+  .st-sub-text-1 {
+    font-size: 12px;
+  }
+
+  .st-text-2 {
+    font-size: 14px;
+  }
+
+  .st-sub-text-2 {
+    font-size: 12px;
+  }
+
+  .st-text-3 {
+    font-size: 14px;
+  }
+
+  .st-sub-text-3 {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 37.5em) {
@@ -348,13 +417,14 @@
 .st-btn-11 {
   margin-top: 20px;
   width: 100%;
-  background-color: #f9ca40;
+  background-color: #009e74;
   border: none;
   padding: 15px 30px;
+  color: white;
 }
 
 .st-btn-11:hover {
-  background-color: #ffce10;
+  background-color: #1eb48c;
   transform: scale(1.005);
 }
 
@@ -379,7 +449,7 @@
 }
 
 .tab button:hover {
-  background-color: #ffce10;
+  background-color: #1eb48c;
 }
 
 .tabcontent {
@@ -391,7 +461,8 @@
 }
 
 .btn-activated {
-  background-color: #f9ca40 !important;
+  background-color: #009e74 !important;
+  color: white;
 }
 
 .faq-11 {
@@ -406,7 +477,27 @@
   color: black;
 }
 
-.prod_desc-11:hover {
-  color: #f9ca40;
+.video-width {
+  width: 50%;
+  display: block;
+}
+
+@media (max-width: 37.5em) {
+  .video-width {
+    width: 100%;
+  }
+}
+
+.product-nuxt-link {
+  background-color: #009e74;
+  border: none;
+  text-decoration: none;
+  padding: 10px 20px;
+  color: white;
+}
+
+.product-nuxt-link:hover {
+  background-color: #1eb48c;
+  color: white;
 }
 </style>
