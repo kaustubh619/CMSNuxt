@@ -6,7 +6,7 @@
           <div class="col-sm-3 col-xs-9">
             <div id="logo" @click="activeHome">
               <nuxt-link to="/"
-                ><img src="images/logo.png" alt="logo"
+                ><img src="~static/images/logo.png" alt="logo"
               /></nuxt-link>
             </div>
           </div>
