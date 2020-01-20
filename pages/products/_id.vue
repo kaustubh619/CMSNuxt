@@ -94,7 +94,10 @@
               <div class="col-xs-12 col-md-offset-1 col-md-10">
                 <!-- col-md-9 col-sm-8  -->
                 <div class="submit_listing_box">
-                  <div id="editor-container" style="background-color: white"></div>
+                  <div
+                    id="editor-container"
+                    style="background-color: white"
+                  ></div>
                   <!-- <div v-for="(item, i) in post" :key="i">
                     <p v-for="(j, k) in item" :key="k">
                       <span v-if="!j.insert.image" :style="j.attributes">{{
@@ -130,7 +133,7 @@
         <hr />
         <div class="container">
           <div class="row">
-            <div class="col-xs-12 col-sm-offset-1 col-sm-10">
+            <div class="col-xs-12">
               <h4 v-if="pro_bool">Product Updates</h4>
               <h4 v-else>No Product Updates</h4>
               <ul>
@@ -147,150 +150,6 @@
           </div>
         </div>
         <hr />
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12 col-sm-offset-1 col-sm-10">
-              <div class="comments-wrapper">
-                <h2>2 Comments</h2>
-                <ul class="media-list">
-                  <li class="media">
-                    <div class="media-left">
-                      <a href="#">
-                        <img
-                          alt="image"
-                          src="~static/images/comment-thumb-1.jpg"
-                        />
-                      </a>
-                    </div>
-                    <div class="media-body">
-                      <p>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since they 1500s,
-                        when an unknown printer took a galley of type and
-                        scrambled.Nulla a enim et justo facilisis ornare. Sed
-                        ante sem, dignissim a vehicula et, rutrum volutpat
-                        turpis. Praesent id leo lacinia, malesuada tortor ut,
-                        lobortis leo.
-                      </p>
-                      <div class="comment-meta clearfix">
-                        <a href="#">
-                          <span class="author-name">John doe</span>
-                        </a>
-                        <span class="comment-lt-time">22 April - 2016</span>
-                        <span class="rating-box">
-                          <span class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="media">
-                    <div class="media-left">
-                      <a href="#">
-                        <img
-                          alt="image"
-                          src="~static/images/comment-thumb-1.jpg"
-                        />
-                      </a>
-                    </div>
-                    <div class="media-body">
-                      <p>
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry's standard dummy text ever since they 1500s,
-                        when an unknown printer took a galley of type and
-                        scrambled.Nulla a enim et justo facilisis ornare. Sed
-                        ante sem, dignissim a vehicula et, rutrum volutpat
-                        turpis. Praesent id leo lacinia, malesuada tortor ut,
-                        lobortis leo.
-                      </p>
-                      <div class="comment-meta clearfix">
-                        <a href="#">
-                          <span class="author-name">John doe</span>
-                        </a>
-                        <span class="comment-lt-time">22 April - 2016</span>
-                        <span class="rating-box">
-                          <span class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-                <div class="comment-respond">
-                  <h2>Post A Comment</h2>
-                  <form>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <span class="rating-box">
-                            <span class="rating">
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star-o"></i>
-                            </span>
-                          </span>
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <input
-                            placeholder="Full Name"
-                            required
-                            class="form-control"
-                            type="text"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <input
-                            placeholder="Email Address"
-                            required
-                            class="form-control"
-                            type="email"
-                          />
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <input
-                            placeholder="Your Website"
-                            required
-                            class="form-control"
-                            type="text"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <textarea
-                        placeholder="Type here message"
-                        rows="7"
-                        required
-                        class="form-control"
-                      ></textarea>
-                    </div>
-                    <button class="btn" type="submit">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
