@@ -27,11 +27,7 @@
                 >
                 <hr />
               </h4>
-              <div
-                class="col-md-6 col-sm-6 col-xs-12"
-                v-for="(x, y) in startupList"
-                :key="y"
-              >
+              <div class="col-xs-12" v-for="(x, y) in startupList" :key="y">
                 <div class="recent-listing-box-container-item">
                   <div class="col-md-6 col-xs-12 nopadding">
                     <div class="recent-listing-box-image">
@@ -76,7 +72,7 @@
                           {{ x.date_of_launch }}
                         </a>
                         <p style="min-height: 88px">
-                          {{ x.description.slice(0, 69) }}.....
+                          {{ x.description.slice(0, 180) }}.....
                         </p>
                       </div>
                       <div class="recent-feature-item-rating">
@@ -84,13 +80,13 @@
                           <i class="fa fa-map-marker"></i>
                           {{ x.country }}
                         </h2>
-                        <!-- <span>
+                        <span>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star-o"></i>
-                        </span> -->
+                        </span>
                       </div>
                     </div>
                   </div>
