@@ -46,7 +46,7 @@
                     class="col-12"
                     v-for="(a, b) in product_list"
                     :key="b"
-                    style="padding: 10px"
+                    style="padding: 10px;"
                   >
                     <nuxt-link
                       :to="{
@@ -56,9 +56,9 @@
                     >
                       <p class="st-sub-text-1">
                         {{ b + 1 }}.
-                        <span style="margin-left: 10px" class="prod_desc-11"
-                          >Product Name - {{ a.product_name }}</span
-                        >
+                        <span style="margin-left: 10px" class="prod_desc-11">{{
+                          a.product_name
+                        }}</span>
                         <video
                           id="player"
                           poster="../../../images/pro_img.jpg"
@@ -403,5 +403,10 @@
   font-size: 16px;
   font-weight: 300;
   letter-spacing: 1px;
+  color: black;
+}
+
+.prod_desc-11:hover {
+  color: #f9ca40;
 }
 </style>
