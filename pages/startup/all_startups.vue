@@ -28,43 +28,71 @@
                 <hr />
               </h4>
               <div
-                class="col-md-4 col-sm-6 col-xs-12"
+                class="col-md-6 col-sm-6 col-xs-12"
                 v-for="(x, y) in startupList"
                 :key="y"
               >
-                <div class="feature-item-container-box listing-item">
-                  <div class="feature-box-text">
-                    <h3>
-                      <nuxt-link
-                        :to="{
-                          name: 'startup-details-id',
-                          params: { id: x.id }
-                        }"
-                        >{{ x.name }}</nuxt-link
-                      >
-                    </h3>
-                    <a href="#"
-                      ><span style="color: black">Year</span> Established:
-                      <span style="color: black">{{ x.year_founded }}</span></a
-                    >
-                    <!-- <a href="#"><span style="color: black"></span> Category: <span style="color: black">{{x.category}}</span></a> -->
-                    <p style="min-height: 70px">
-                      <span v-for="(a, b) in 80" :key="b">{{
-                        x.description[b]
-                      }}</span
-                      >.....
-                    </p>
+                <div class="recent-listing-box-container-item">
+                  <div class="col-md-6 col-xs-12 nopadding">
+                    <div class="recent-listing-box-image">
+                      <h1>{{ x.category.category }}</h1>
+                      <img :src="x.thumbnail" alt="img1" class="thumb-img" />
+                    </div>
+                    <div class="hover-overlay">
+                      <div class="hover-overlay-inner">
+                        <ul class="listing-links">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-heart green-1"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-map-marker blue-1"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-share yallow-1"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                  <div class="feature-item-location">
-                    <h2>
-                      <i class="fa fa-map-marker"></i> {{ x.city }},
-                      {{ x.country }}
-                    </h2>
-                    <span>
-                      <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                      <i class="fa fa-star-o"></i>
-                    </span>
+                  <div class="col-md-6 col-sm-12 nopadding">
+                    <div class="recent-listing-box-item">
+                      <div class="listing-boxes-text">
+                        <nuxt-link
+                          :to="{
+                            name: 'startup-details-id',
+                            params: { id: x.id }
+                          }"
+                        >
+                          <h3>{{ x.name }}</h3>
+                        </nuxt-link>
+                        <a>
+                          <i class="fa fa-calendar"></i>
+                          {{ x.date_of_launch }}
+                        </a>
+                        <p style="min-height: 88px">
+                          {{ x.description.slice(0, 69) }}.....
+                        </p>
+                      </div>
+                      <div class="recent-feature-item-rating">
+                        <h2>
+                          <i class="fa fa-map-marker"></i>
+                          {{ x.country }}
+                        </h2>
+                        <span>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -342,5 +370,10 @@
 .sidebar-listing-search-wrap form input.sidebar-listing-search-btn {
   text-align: center;
   cursor: pointer;
+}
+
+.thumb-img {
+  object-fit: cover;
+  object-position: center;
 }
 </style>
