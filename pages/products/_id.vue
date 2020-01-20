@@ -91,7 +91,7 @@
                   </ul>
                 </div>
               </div>-->
-              <div class="col-xs-12 col-md-offset-1 col-md-10">
+              <div class="col-xs-12">
                 <!-- col-md-9 col-sm-8  -->
                 <div class="submit_listing_box">
                   <div
