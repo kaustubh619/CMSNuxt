@@ -84,13 +84,13 @@
                           <i class="fa fa-map-marker"></i>
                           {{ x.country }}
                         </h2>
-                        <span>
+                        <!-- <span>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star"></i>
                           <i class="fa fa-star-o"></i>
-                        </span>
+                        </span> -->
                       </div>
                     </div>
                   </div>
@@ -373,6 +373,7 @@
 }
 
 .thumb-img {
+  height: 100%;
   object-fit: cover;
   object-position: center;
 }
