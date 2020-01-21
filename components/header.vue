@@ -57,8 +57,12 @@
                             Listing</nuxt-link
                           >
                         </li>
-                        <li @click="activeUserProfile" v-if="authentication">
-                          <nuxt-link to="/startup/listing" id="dash"
+                        <li
+                          @click="activeUserProfile"
+                          v-if="authentication"
+                          id="dashboard"
+                        >
+                          <nuxt-link to="/startup/listing"
                             ><i class="fa fa-angle-double-right"></i>
                             Dashboard</nuxt-link
                           >
@@ -140,10 +144,6 @@
       $("#st-list").click(function() {
         $(".navbar-collapse").removeClass("in");
       });
-
-      $("#dash").click(function() {
-        $(".navbar-collapse").removeClass("in");
-      });
     },
 
     methods: {
@@ -176,6 +176,7 @@
       },
 
       activeUserProfile: function() {
+        $(".navbar-collapse").removeClass("in");
         $("#user_profile")
           .addClass("active")
           .siblings()
