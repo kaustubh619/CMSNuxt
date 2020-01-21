@@ -318,6 +318,7 @@
       role="dialog"
       aria-labelledby="myModalLabel"
       aria-hidden="true"
+      style="z-index: 10000"
     >
       <div class="listing-modal-1 modal-dialog">
         <div class="modal-content">
@@ -399,6 +400,7 @@
       role="dialog"
       aria-labelledby="myModalLabel"
       aria-hidden="true"
+      style="z-index: 10000"
     >
       <div class="listing-modal-1 modal-dialog">
         <div class="modal-content">
