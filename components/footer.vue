@@ -202,4 +202,8 @@
 .news-text-thum {
   padding-left: 0px !important;
 }
+
+a.more-detail {
+  text-align: left !important;
+}
 </style>
