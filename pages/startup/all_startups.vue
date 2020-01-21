@@ -16,6 +16,68 @@
     <div id="vfx-product-inner-item">
       <div class="container">
         <div class="row">
+
+          <div class="col-md-3 col-sm-4 col-xs-12">
+            <div class="sidebar-listing-search-wrap">
+              <form action="#">
+                <p>Country Filter :</p>
+                <select
+                  class="sidebar-listing-search-select"
+                  id="country-select"
+                  style="width: 100%"
+                >
+                  <option value="0">Select Country</option>
+                </select>
+
+                <p>Year Filter :</p>
+                <input
+                  class="sidebar-listing-search-input"
+                  placeholder="Enter Year"
+                  name="search"
+                  id="year_filter"
+                  type="text"
+                />
+
+                <div class="listing-search-btn">
+                  <input
+                    class="sidebar-listing-search-btn"
+                    value="Search"
+                    type="button"
+                    @click="filterStartup"
+                  />
+                </div>
+              </form>
+            </div>
+            <hr class="row" />
+            <div class="left-slide-slt-block">
+              <h3>Categories</h3>
+            </div>
+            <div class="list-group">
+              <a
+                href="#"
+                class="list-group-item"
+                @click="getStartups"
+                id="allStartUp"
+                ><i class="fa fa-hand-o-right"></i> All Startup
+              </a>
+              <a
+                href="#"
+                class="list-group-item"
+                v-for="(x, y) in categoryList"
+                :key="y"
+                @click="getStartupByCategory(x.id)"
+                v-bind:id="x.id"
+                ><i class="fa fa-hand-o-right"></i> {{ x.category }}
+              </a>
+            </div>
+            <p class="cat_class" id="allCat" @click="showAllCat">
+              Show all categories
+            </p>
+            <p class="cat_class" id="lessCat" @click="getCategories">
+              Show less categories
+            </p>
+          </div>
+
           <div class="col-md-9 col-sm-8 col-xs-12">
             <div class="row">
               <h4 class="col-xs-12" style="letter-spacing: 1px;">
@@ -94,71 +156,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3 col-sm-4 col-xs-12">
-            <!-- <div class="news-search-lt">
-          <input class="form-control" placeholder="Search Listing" type="text">
-          <span class="input-search"> <i class="fa fa-search"></i> </span>
-        </div> -->
-            <div class="sidebar-listing-search-wrap">
-              <form action="#">
-                <p>Country Filter :</p>
-                <select
-                  class="sidebar-listing-search-select"
-                  id="country-select"
-                  style="width: 100%"
-                >
-                  <option value="0">Select Country</option>
-                </select>
-
-                <p>Year Filter :</p>
-                <input
-                  class="sidebar-listing-search-input"
-                  placeholder="Enter Year"
-                  name="search"
-                  id="year_filter"
-                  type="text"
-                />
-
-                <div class="listing-search-btn">
-                  <input
-                    class="sidebar-listing-search-btn"
-                    value="Search"
-                    type="button"
-                    @click="filterStartup"
-                  />
-                </div>
-              </form>
-            </div>
-            <hr class="row" />
-            <div class="left-slide-slt-block">
-              <h3>Categories</h3>
-            </div>
-            <div class="list-group">
-              <a
-                href="#"
-                class="list-group-item"
-                @click="getStartups"
-                id="allStartUp"
-                ><i class="fa fa-hand-o-right"></i> All Startup
-              </a>
-              <a
-                href="#"
-                class="list-group-item"
-                v-for="(x, y) in categoryList"
-                :key="y"
-                @click="getStartupByCategory(x.id)"
-                v-bind:id="x.id"
-                ><i class="fa fa-hand-o-right"></i> {{ x.category }}
-                <!-- <span class="list-lt">{{length}}</span> -->
-              </a>
-            </div>
-            <p class="cat_class" id="allCat" @click="showAllCat">
-              Show all categories
-            </p>
-            <p class="cat_class" id="lessCat" @click="getCategories">
-              Show less categories
-            </p>
-          </div>
+          
         </div>
       </div>
     </div>
