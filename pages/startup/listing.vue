@@ -139,7 +139,7 @@
                           >
                             <!-- <i class="fa fa-product-hunt"></i> -->
                             <span class="product-num" style="font-size: 17px"
-                              >{{ x.startup_products.length }} Product</span
+                              >{{ x.startup_products.length }} Products</span
                             >
                           </nuxt-link>
                         </div>
@@ -247,11 +247,10 @@
 <style>
 .product-num {
   color: white;
-  /* margin-top: 10px; */
+  margin-top: 1px;
   background-color: #263a50;
   text-align: center;
   padding: 9px 8px;
-
   border-radius: 20px;
 }
 

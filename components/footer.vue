@@ -57,16 +57,20 @@
                 </div>-->
                 <div class="news-text-thum">
                   <h6>{{ x.name }}</h6>
-                  <p>{{ x.description.slice(0, 140) }}......</p>
+                  <p>{{ x.description.slice(0, 100) }}......</p>
                   <nuxt-link
                     :to="{
                       name: 'startup-details-id',
                       params: { id: x.id }
                     }"
+                    style="color: #ffce10"
+                    ><i
+                      class="fa fa-hand-o-right"
+                      style="margin-right: 10px"
+                    ></i
                     >Read More</nuxt-link
                   >
                   <br />
-                  <div>Price: $117</div>
                 </div>
               </li>
               <!-- <li>
