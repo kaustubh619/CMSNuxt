@@ -51,14 +51,14 @@
                     <li id="user_profile">
                       <a href="#">Listing <i class="fa fa-caret-down"></i></a>
                       <ul class="dropdown">
-                        <li @click="activeUserProfile">
+                        <li @click="activeUserProfile" id="st-list">
                           <nuxt-link to="/startup/all_startups"
                             ><i class="fa fa-angle-double-right"></i> Startup
                             Listing</nuxt-link
                           >
                         </li>
                         <li @click="activeUserProfile" v-if="authentication">
-                          <nuxt-link to="/startup/listing"
+                          <nuxt-link to="/startup/listing" id="dash"
                             ><i class="fa fa-angle-double-right"></i>
                             Dashboard</nuxt-link
                           >
@@ -119,8 +119,31 @@
     },
 
     mounted() {
-      // this.$router.push('/')
       this.userState();
+
+      $("#home").click(function() {
+        $(".navbar-collapse").removeClass("in");
+      });
+
+      $("#about").click(function() {
+        $(".navbar-collapse").removeClass("in");
+      });
+
+      $("#category").click(function() {
+        $(".navbar-collapse").removeClass("in");
+      });
+
+      $("#contact").click(function() {
+        $(".navbar-collapse").removeClass("in");
+      });
+
+      $("#st-list").click(function() {
+        $(".navbar-collapse").removeClass("in");
+      });
+
+      $("#dash").click(function() {
+        $(".navbar-collapse").removeClass("in");
+      });
     },
 
     methods: {

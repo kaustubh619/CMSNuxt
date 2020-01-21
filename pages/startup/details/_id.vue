@@ -20,8 +20,8 @@
       <div class="container">
         <div class="row">
           <p class="header-st-1">{{ name }}</p>
-          <p class="header-st-2">{{ description }}</p>
-          <div class="col-12 col-sm-8" style="margin-top: 40px">
+          <p class="header-st-2" style="padding: 10px">{{ description }}</p>
+          <div class="col-12 col-sm-8" style="margin-top: 20px">
             <img :src="thumbnail" class="st-thumb" />
             <div class="col-12 col-md-4">
               <span>
