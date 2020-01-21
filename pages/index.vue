@@ -540,7 +540,6 @@
 
       getFeaturedStartups: function() {
         this.$store.dispatch("getFeaturedStartups").then(res => {
-          console.log(res.data);
           this.featuredList = res.data.reverse().splice(0, 6);
         });
         this.getCategories();

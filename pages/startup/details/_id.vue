@@ -252,7 +252,7 @@
         var payload = new FormData();
         payload.append("id", this.$route.params.id);
         this.$store.dispatch("getStProducts", payload).then(res => {
-          console.log(res.data);
+          
           this.product_list = res.data;
           if (res.data.length !== 0) {
             this.product_bool = true;

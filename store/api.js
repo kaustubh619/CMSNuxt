@@ -17,7 +17,7 @@ export const state = () => ({
 
   userInfoPost: url + "/user_ext_post",
 
-  getListing: url + "/startup/",
+  getListing: url + "/startupwithproducts/",
 
   submitStartup: url + "/startup_post",
 

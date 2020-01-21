@@ -105,6 +105,7 @@
                               >
                             </h4>
                             <span>Year Founded - {{ x.year_founded }}</span>
+
                             <span
                               >Location - {{ x.city }}, {{ x.state }},
                               {{ x.country }}</span
@@ -131,13 +132,15 @@
                         </div>
                         <div class="tg-listbox" data-action="products">
                           <nuxt-link
-                            class="tg-btn-list"
                             :to="{
                               name: 'products',
                               params: { id: x.id, startup: x.name }
                             }"
                           >
-                            <i class="fa fa-product-hunt"></i>
+                            <!-- <i class="fa fa-product-hunt"></i> -->
+                            <span class="product-num" style="font-size: 17px"
+                              >{{ x.startup_products.length }} Product</span
+                            >
                           </nuxt-link>
                         </div>
                         <div class="tg-listbox" data-action="addProduct">
@@ -204,9 +207,7 @@
       logOutUser: function() {
         var payload = new FormData();
         payload.append("login_status", "false");
-        this.$store.dispatch("logOutUser", payload).then(res => {
-          // console.log(res)
-        });
+        this.$store.dispatch("logOutUser", payload).then(res => {});
         localStorage.clear();
         Cookies.remove("x-access-token");
         this.$store.commit("authentication", false);
@@ -244,4 +245,18 @@
 </script>
 
 <style>
+.product-num {
+  color: white;
+  /* margin-top: 10px; */
+  background-color: #263a50;
+  text-align: center;
+  padding: 9px 8px;
+
+  border-radius: 20px;
+}
+
+.product-num:hover {
+  background-color: #ffce10;
+  color: #263a50;
+}
 </style>
