@@ -49,7 +49,7 @@
             <h2>Recent Listing</h2>
             <hr />
             <ul class="widget-news-simple">
-              <li v-for="(x,y) in footerStartupList" :key="y">
+              <li v-for="(x, y) in footerStartupList" :key="y">
                 <!-- <div class="news-thum">
                   <a href="#">
                     <img src="~static/images/new-thum-1.png" alt="new-thum-1" />
@@ -57,13 +57,14 @@
                 </div>-->
                 <div class="news-text-thum">
                   <h6>{{ x.name }}</h6>
-                  <p>{{ x.description.slice(0,140) }}......</p>
+                  <p>{{ x.description.slice(0, 140) }}......</p>
                   <nuxt-link
                     :to="{
-                          name: 'startup-details-id',
-                          params: { id: x.id }
-                        }"
-                  >Read More</nuxt-link>
+                      name: 'startup-details-id',
+                      params: { id: x.id }
+                    }"
+                    >Read More</nuxt-link
+                  >
                   <br />
                   <div>Price: $117</div>
                 </div>
@@ -90,14 +91,12 @@
             <ul class="use-slt-link">
               <li>
                 <a href="#">
-                  <i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Privacy &
-                  Policy
+                  <i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Privacy & Policy
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Payment
-                  Method
+                  <i class="fa fa-hand-o-right"></i>&nbsp;&nbsp;Payment Method
                 </a>
               </li>
               <li>
@@ -123,13 +122,27 @@
             <hr />
             <form class="form-alt">
               <div class="form-group">
-                <input type="text" placeholder="Name :-" required class="form-control" />
+                <input
+                  type="text"
+                  placeholder="Name :-"
+                  required
+                  class="form-control"
+                />
               </div>
               <div class="form-group">
-                <input type="text" placeholder="Email :-" required class="form-control" />
+                <input
+                  type="text"
+                  placeholder="Email :-"
+                  required
+                  class="form-control"
+                />
               </div>
               <div class="form-group">
-                <textarea placeholder="Message :-" required class="form-control"></textarea>
+                <textarea
+                  placeholder="Message :-"
+                  required
+                  class="form-control"
+                ></textarea>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn-quote">Send Now</button>
@@ -153,33 +166,36 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      about: "",
-      footerStartupList: []
-    };
-  },
-  mounted() {
-    this.activatedFooterCMS();
-    this.getFooterStartUps();
-  },
-  methods: {
-    activatedFooterCMS: function() {
-      this.$store.dispatch("activatedFooterCMS").then(res => {
-        res.data.map(item => {
-          this.about = item.about_us;
-        });
-      });
+  export default {
+    data() {
+      return {
+        about: "",
+        footerStartupList: []
+      };
     },
-    getFooterStartUps: function() {
-      this.$store.dispatch("getStartups").then(res => {
-        this.footerStartupList = res.data.reverse().splice(0, 2);
-      });
+    mounted() {
+      this.activatedFooterCMS();
+      this.getFooterStartUps();
+    },
+    methods: {
+      activatedFooterCMS: function() {
+        this.$store.dispatch("activatedFooterCMS").then(res => {
+          res.data.map(item => {
+            this.about = item.about_us;
+          });
+        });
+      },
+      getFooterStartUps: function() {
+        this.$store.dispatch("getStartups").then(res => {
+          this.footerStartupList = res.data.reverse().splice(0, 2);
+        });
+      }
     }
-  }
-};
+  };
 </script>
 
 <style>
+.news-text-thum {
+  padding-left: 0px !important;
+}
 </style>
