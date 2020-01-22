@@ -231,6 +231,7 @@
         this.$store.dispatch("getStartups").then(res => {
           this.startupList = res.data;
           this.length = res.data.length;
+          this.loading_bool = false;
         });
         this.getCategories();
         $("#allStartUp")
@@ -238,7 +239,6 @@
           .siblings()
           .removeClass("active");
         this.cat_bool = false;
-        this.loading_bool = false;
       },
 
       showAllCat: function() {
