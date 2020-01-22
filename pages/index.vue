@@ -574,7 +574,6 @@
           this.startupList = res.data.reverse().splice(0, 6);
         });
         this.getCategories();
-        this.loading_bool = false;
       },
 
       getFeaturedStartups: function() {
