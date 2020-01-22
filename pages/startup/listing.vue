@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="loading_bool" class="spinner"></div>
-    <div>
+    <div v-else>
       <div id="breadcrum-inner-block">
         <div class="container">
           <div class="row">
