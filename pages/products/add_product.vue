@@ -251,9 +251,8 @@
 
         this.$store.dispatch("postProduct", payload).then(res => {
           this.loading_bool = true;
+          this.$router.push("/startup/listing");
         });
-        this.$router.push("/startup/listing");
-        // });
       }
     }
   };
