@@ -238,7 +238,6 @@
 
       getContactForm: function() {
         this.$store.dispatch("getContactForm").then(res => {
-          console.log(res.data.form);
           const fbRender = document.getElementById("fb-render");
           jQuery(function($) {
             $(".fb-render").formRender({

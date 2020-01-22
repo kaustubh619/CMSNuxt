@@ -194,6 +194,7 @@
 
     mounted() {
       this.getCategories();
+      $("#lessCat").addClass("hide");
       this.getCountries();
       this.catselect();
       $("#user_profile")
