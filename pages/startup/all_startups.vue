@@ -83,7 +83,7 @@
             <p class="cat_class" id="allCat" @click="showAllCat">
               Show all categories
             </p>
-            <p class="cat_class" id="lessCat" @click="getCategories">
+            <p class="cat_class hide" id="lessCat" @click="getCategories">
               Show less categories
             </p>
           </div>
@@ -194,7 +194,7 @@
 
     mounted() {
       this.getCategories();
-      $("#lessCat").addClass("hide");
+
       this.getCountries();
       this.catselect();
       $("#user_profile")
