@@ -1,8 +1,7 @@
 
-<template>
+<template  v-if="loading_bool"  class="spinner"> </template>
+<template v-else>
   <div>
-    <div v-if="loading_bool" class="spinner"></div>
-    <div v-else>
       <div
         id="slider-banner-section"
         :style="{

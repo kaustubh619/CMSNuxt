@@ -1,164 +1,163 @@
-<template>
+<template  v-if="loading_bool"  class="spinner"> </template>
+<template v-else>
   <div>
-    <div v-if="loading_bool" class="spinner"></div>
-    <div v-else>
-      <div id="breadcrum-inner-block">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 text-center">
-              <div class="breadcrum-inner-header">
-                <h1>Dashboard</h1>
-                <span>
-                  <nuxt-link to="/">Home</nuxt-link>
-                </span>
-                <i class="fa fa-circle"></i>
-                <nuxt-link to="">
-                  <span>Dashboard</span>
-                </nuxt-link>
-              </div>
+    <div id="breadcrum-inner-block">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <div class="breadcrum-inner-header">
+              <h1>Dashboard</h1>
+              <span>
+                <nuxt-link to="/">Home</nuxt-link>
+              </span>
+              <i class="fa fa-circle"></i>
+              <nuxt-link to="">
+                <span>Dashboard</span>
+              </nuxt-link>
             </div>
           </div>
         </div>
       </div>
-      <div id="dashboard_inner_block">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <div class="col-md-12 all-categorie-list-title bt_heading_3">
-                <h1>
-                  My Startup
-                  <span>Listing</span>
-                </h1>
-                <div class="blind line_1"></div>
-                <div class="flipInX-1 blind icon">
-                  <span class="icon">
-                    <i class="fa fa-stop"></i>&nbsp;&nbsp;
-                    <i class="fa fa-stop"></i>
-                  </span>
-                </div>
-                <div class="blind line_2"></div>
+    </div>
+    <div id="dashboard_inner_block">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="col-md-12 all-categorie-list-title bt_heading_3">
+              <h1>
+                My Startup
+                <span>Listing</span>
+              </h1>
+              <div class="blind line_1"></div>
+              <div class="flipInX-1 blind icon">
+                <span class="icon">
+                  <i class="fa fa-stop"></i>&nbsp;&nbsp;
+                  <i class="fa fa-stop"></i>
+                </span>
               </div>
-              <div class="row">
-                <div class="col-md-3 col-sm-4 col-xs-12">
-                  <div class="dashboard_nav_item row" style="padding: 10px;">
-                    <ul>
-                      <li>
-                        <nuxt-link to="/startup/submit_listing">
-                          <i class="fa fa-users"></i> Submit Startup
-                        </nuxt-link>
-                      </li>
+              <div class="blind line_2"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-sm-4 col-xs-12">
+                <div class="dashboard_nav_item row" style="padding: 10px;">
+                  <ul>
+                    <li>
+                      <nuxt-link to="/startup/submit_listing">
+                        <i class="fa fa-users"></i> Submit Startup
+                      </nuxt-link>
+                    </li>
 
-                      <li class="active">
-                        <nuxt-link to="/startup/listing">
-                          <i class="fa fa-list-ul"></i> My Listing
-                        </nuxt-link>
-                      </li>
-                      <li>
-                        <nuxt-link to="/user/user_profile">
-                          <i class="fa fa-user"></i> Edit Profile
-                        </nuxt-link>
-                      </li>
-                      <li>
-                        <nuxt-link to="/user/change_password">
-                          <i class="fa fa-list-ul"></i> Change Password
-                        </nuxt-link>
-                      </li>
-                      <li>
-                        <a @click="logOutUser" style="cursor: pointer">
-                          <i class="fa fa-sign-out"></i> Logout
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+                    <li class="active">
+                      <nuxt-link to="/startup/listing">
+                        <i class="fa fa-list-ul"></i> My Listing
+                      </nuxt-link>
+                    </li>
+                    <li>
+                      <nuxt-link to="/user/user_profile">
+                        <i class="fa fa-user"></i> Edit Profile
+                      </nuxt-link>
+                    </li>
+                    <li>
+                      <nuxt-link to="/user/change_password">
+                        <i class="fa fa-list-ul"></i> Change Password
+                      </nuxt-link>
+                    </li>
+                    <li>
+                      <a @click="logOutUser" style="cursor: pointer">
+                        <i class="fa fa-sign-out"></i> Logout
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-                <div class="col-md-9 col-sm-8 col-xs-12">
-                  <div id="dashboard_listing_blcok">
-                    <div class="tg-listing" v-if="bool">
-                      <div class="tg-listing-head">
-                        <div class="tg-titlebox">
-                          <h3>Title</h3>
-                        </div>
-                        <div class="tg-titlebox">
-                          <h3>Action</h3>
-                        </div>
-                        <div class="tg-titlebox">
-                          <h3>Products</h3>
-                        </div>
-                        <div class="tg-titlebox">
-                          <h3>Add Product</h3>
-                        </div>
+              </div>
+              <div class="col-md-9 col-sm-8 col-xs-12">
+                <div id="dashboard_listing_blcok">
+                  <div class="tg-listing" v-if="bool">
+                    <div class="tg-listing-head">
+                      <div class="tg-titlebox">
+                        <h3>Title</h3>
                       </div>
-                      <div
-                        class="tg-lists"
-                        v-for="(x, y) in startupList"
-                        :key="y"
-                      >
-                        <div class="tg-list">
-                          <div class="tg-listbox" data-title="title">
-                            <!-- <span class="list_user_thu"> <img src="images/img-01.jpg" alt="image description"> </span> -->
-                            <div class="tg-listdata">
-                              <h4>
-                                <nuxt-link
-                                  :to="{
-                                    name: 'startup-details-id',
-                                    params: { id: x.id }
-                                  }"
-                                  >{{ x.name }}</nuxt-link
-                                >
-                              </h4>
-                              <span>Year Founded - {{ x.year_founded }}</span>
+                      <div class="tg-titlebox">
+                        <h3>Action</h3>
+                      </div>
+                      <div class="tg-titlebox">
+                        <h3>Products</h3>
+                      </div>
+                      <div class="tg-titlebox">
+                        <h3>Add Product</h3>
+                      </div>
+                    </div>
+                    <div
+                      class="tg-lists"
+                      v-for="(x, y) in startupList"
+                      :key="y"
+                    >
+                      <div class="tg-list">
+                        <div class="tg-listbox" data-title="title">
+                          <!-- <span class="list_user_thu"> <img src="images/img-01.jpg" alt="image description"> </span> -->
+                          <div class="tg-listdata">
+                            <h4>
+                              <nuxt-link
+                                :to="{
+                                  name: 'startup-details-id',
+                                  params: { id: x.id }
+                                }"
+                                >{{ x.name }}</nuxt-link
+                              >
+                            </h4>
+                            <span>Year Founded - {{ x.year_founded }}</span>
 
-                              <span
-                                >Location - {{ x.city }}, {{ x.state }},
-                                {{ x.country }}</span
-                              >
-                            </div>
-                          </div>
-                          <div class="tg-listbox" data-action="action">
-                            <nuxt-link
-                              class="tg-btn-list"
-                              :to="{
-                                name: 'startup-edit_startup-id',
-                                params: { id: x.id }
-                              }"
+                            <span
+                              >Location - {{ x.city }}, {{ x.state }},
+                              {{ x.country }}</span
                             >
-                              <i class="fa fa-pencil"></i>
-                            </nuxt-link>
-                            <a
-                              class="tg-btn-list"
-                              @click="deleteStartup(x.id)"
-                              style="cursor: pointer"
-                            >
-                              <i class="fa fa-trash-o"></i>
-                            </a>
-                          </div>
-                          <div class="tg-listbox" data-action="products">
-                            <nuxt-link
-                              :to="{
-                                name: 'products',
-                                params: { id: x.id, startup: x.name }
-                              }"
-                            >
-                              <!-- <i class="fa fa-product-hunt"></i> -->
-                              <span class="product-num" style="font-size: 17px"
-                                >{{ x.startup_products.length }} Products</span
-                              >
-                            </nuxt-link>
-                          </div>
-                          <div class="tg-listbox" data-action="addProduct">
-                            <nuxt-link
-                              class="tg-btn-list"
-                              :to="{
-                                name: 'products-add_product',
-                                params: { id: x.id, startup: x.name }
-                              }"
-                            >
-                              <i class="fa fa-plus"></i>
-                            </nuxt-link>
                           </div>
                         </div>
+                        <div class="tg-listbox" data-action="action">
+                          <nuxt-link
+                            class="tg-btn-list"
+                            :to="{
+                              name: 'startup-edit_startup-id',
+                              params: { id: x.id }
+                            }"
+                          >
+                            <i class="fa fa-pencil"></i>
+                          </nuxt-link>
+                          <a
+                            class="tg-btn-list"
+                            @click="deleteStartup(x.id)"
+                            style="cursor: pointer"
+                          >
+                            <i class="fa fa-trash-o"></i>
+                          </a>
+                        </div>
+                        <div class="tg-listbox" data-action="products">
+                          <nuxt-link
+                            :to="{
+                              name: 'products',
+                              params: { id: x.id, startup: x.name }
+                            }"
+                          >
+                            <!-- <i class="fa fa-product-hunt"></i> -->
+                            <span class="product-num" style="font-size: 17px"
+                              >{{ x.startup_products.length }} Products</span
+                            >
+                          </nuxt-link>
+                        </div>
+                        <div class="tg-listbox" data-action="addProduct">
+                          <nuxt-link
+                            class="tg-btn-list"
+                            :to="{
+                              name: 'products-add_product',
+                              params: { id: x.id, startup: x.name }
+                            }"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </nuxt-link>
+                        </div>
                       </div>
-                      <!-- <div class="vfx-person-block">
+                    </div>
+                    <!-- <div class="vfx-person-block">
                   <ul class="vfx-pagination">
                     <li><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
                     <li class="active"><a href="#">1</a></li>
@@ -167,17 +166,16 @@
                     <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
                   </ul>
                     </div>-->
-                    </div>
-                    <div v-else>
-                      <h3 style="text-align: left">
-                        You did not submit any startup
+                  </div>
+                  <div v-else>
+                    <h3 style="text-align: left">
+                      You did not submit any startup
+                    </h3>
+                    <nuxt-link to="/startup/submit_listing">
+                      <h3 style="text-align: left; color: #ffce10">
+                        Submit your startup now
                       </h3>
-                      <nuxt-link to="/startup/submit_listing">
-                        <h3 style="text-align: left; color: #ffce10">
-                          Submit your startup now
-                        </h3>
-                      </nuxt-link>
-                    </div>
+                    </nuxt-link>
                   </div>
                 </div>
               </div>

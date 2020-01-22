@@ -1,6 +1,5 @@
 <template>
-  <div v-if="loading_bool" class="spinner"></div>
-  <div v-else>
+  <div>
     <Header />
     <nuxt />
     <Footer />
@@ -10,17 +9,9 @@
   import Header from "@/components/header.vue";
   import Footer from "@/components/footer.vue";
   export default {
-    data() {
-      return {
-        loading_bool: true
-      };
-    },
     components: {
       Header,
       Footer
-    },
-    mounted() {
-      this.loading_bool = false;
     }
   };
 </script>
