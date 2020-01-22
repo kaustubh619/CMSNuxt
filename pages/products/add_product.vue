@@ -248,9 +248,8 @@
         payload.append("active_users", this.active_users);
         payload.append("startup_name", this.$route.params.id);
         payload.append("product_video", this.file);
-
+        this.loading_bool = true;
         this.$store.dispatch("postProduct", payload).then(res => {
-          this.loading_bool = true;
           this.$router.push("/startup/listing");
         });
       }
