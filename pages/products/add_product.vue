@@ -1,14 +1,34 @@
 <template>
-  <div class="sk-cube-grid" v-if="loading_bool">
-    <div class="sk-cube sk-cube1"></div>
-    <div class="sk-cube sk-cube2"></div>
-    <div class="sk-cube sk-cube3"></div>
-    <div class="sk-cube sk-cube4"></div>
-    <div class="sk-cube sk-cube5"></div>
-    <div class="sk-cube sk-cube6"></div>
-    <div class="sk-cube sk-cube7"></div>
-    <div class="sk-cube sk-cube8"></div>
-    <div class="sk-cube sk-cube9"></div>
+  <div v-if="loading_bool">
+    <div class="sk-cube-grid">
+      <div class="sk-cube sk-cube1"></div>
+      <div class="sk-cube sk-cube2"></div>
+      <div class="sk-cube sk-cube3"></div>
+      <div class="sk-cube sk-cube4"></div>
+      <div class="sk-cube sk-cube5"></div>
+      <div class="sk-cube sk-cube6"></div>
+      <div class="sk-cube sk-cube7"></div>
+      <div class="sk-cube sk-cube8"></div>
+      <div class="sk-cube sk-cube9"></div>
+    </div>
+    <div style="margin: 100px">
+      <h4
+        style="text-align: center;font-family: GothamRounded;
+          font-size: 26px;
+          font-weight: 600;
+          text-shadow: 2px 2px #e7e7e7;"
+      >
+        Submitting product, please wait
+      </h4>
+      <h4
+        style="text-align: center;font-family: GothamRounded;
+          font-size: 26px;
+          font-weight: 600;
+          text-shadow: 2px 2px #e7e7e7;"
+      >
+        This may take a little while
+      </h4>
+    </div>
   </div>
   <div v-else>
     <div id="breadcrum-inner-block">
