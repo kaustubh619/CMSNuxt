@@ -277,12 +277,15 @@
           res.data.map(item => {
             countryObj[item.countryID] = { country: item.countryName };
           });
-          for (this.i in countryObj) {
-            select.options[select.options.length] = new Option(
-              countryObj[this.i].country,
-              this.i
-            );
-          }
+
+          setTimeout(function() {
+            for (this.i in countryObj) {
+              select.options[select.options.length] = new Option(
+                countryObj[this.i].country,
+                this.i
+              );
+            }
+          }, 300);
 
           return {
             authors: res.data
