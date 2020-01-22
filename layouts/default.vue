@@ -73,8 +73,8 @@ body {
   z-index: 10000;
 }
 .sk-cube-grid {
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
   margin: 100px auto;
 }
 
