@@ -194,7 +194,6 @@
 
     mounted() {
       this.getCategories();
-      // this.getStartups()
       this.getCountries();
       this.catselect();
       $("#user_profile")
