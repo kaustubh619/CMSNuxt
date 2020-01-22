@@ -1,6 +1,18 @@
-<template  v-if="loading_bool"  class="spinner"> </template>
-<template v-else>
-  <div>
+
+<template>
+  <!-- <div class="spinner"></div> -->
+  <div class="sk-cube-grid" v-if="loading_bool">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+  </div>
+  <div v-else>
     <div id="breadcrum-inner-block">
       <div class="container">
         <div class="row">

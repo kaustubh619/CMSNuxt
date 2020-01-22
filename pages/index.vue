@@ -1,6 +1,4 @@
-
-<template  v-if="loading_bool"  class="spinner"> </template>
-<template v-else>
+<template>
   <div>
       <div
         id="slider-banner-section"
