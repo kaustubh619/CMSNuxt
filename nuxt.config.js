@@ -60,19 +60,6 @@ export default {
         rel: "stylesheet",
         href: "https://cdn.plyr.io/3.5.6/plyr.css"
       },
-      // {
-      //   rel: "stylesheet",
-      //   href:
-      //     "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css"
-      // },
-      // {
-      //   rel: "stylesheet",
-      //   href: "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css"
-      // },
-      // {
-      //   rel: "stylesheet",
-      //   href: "https://cdn.quilljs.com/1.3.6/quill.bubble.css"
-      // },
       {
         rel: "stylesheet",
         href: "https://cdn.quilljs.com/1.3.6/quill.snow.css"

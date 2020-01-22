@@ -37,18 +37,6 @@ export const mutations = {
 };
 
 export const actions = {
-  // nuxtServerInit({ commit }, context) {
-  //   return new Promise((resolve, reject) => {
-  //     const cookies = cookie.parse(context.req.headers.cookie || "");
-  //     if (cookies.hasOwnProperty("x-access-token")) {
-  //       commit("signin_user");
-  //       resolve(true);
-  //     } else {
-  //       resolve(false);
-  //     }
-  //   });
-  // },
-
   registerUser({ commit, state }, payload) {
     return new Promise((resolve, reject) => {
       axios({
