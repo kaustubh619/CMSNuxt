@@ -659,20 +659,21 @@
         this.$store.dispatch("getCategories").then(res => {
           this.category_length = res.data.length;
 
-          var select = document.getElementById("location-search-list");
-
           const categoryObj = {};
 
           res.data.map(item => {
             categoryObj[item.id] = { category: item.category };
           });
 
-          for (this.i in categoryObj) {
-            select.options[select.options.length] = new Option(
-              categoryObj[this.i].category,
-              this.i
-            );
-          }
+          setTimeout(function() {
+            var select = document.getElementById("location-search-list");
+            for (this.i in categoryObj) {
+              select.options[select.options.length] = new Option(
+                categoryObj[this.i].category,
+                this.i
+              );
+            }
+          }, 300);
         });
       },
 

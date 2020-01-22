@@ -270,8 +270,6 @@
 
       getCountries: function() {
         return axios.get("/json/countries.json").then(res => {
-          var select = document.getElementById("country-select");
-
           const countryObj = {};
 
           res.data.map(item => {
@@ -279,6 +277,7 @@
           });
 
           setTimeout(function() {
+            var select = document.getElementById("country-select");
             for (this.i in countryObj) {
               select.options[select.options.length] = new Option(
                 countryObj[this.i].country,
