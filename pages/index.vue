@@ -536,7 +536,7 @@
         startup_count: "",
         user_count: "",
         featuredList: [],
-        loading_bool: ""
+        loading_bool: true
       };
     },
 
@@ -545,7 +545,6 @@
     },
 
     mounted() {
-      this.loading_bool = true;
       this.getCategories();
       this.getStartups();
       this.getUserCount();
