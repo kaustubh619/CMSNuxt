@@ -1,5 +1,16 @@
 <template>
-  <div>
+  <div class="sk-cube-grid" v-if="loading_bool">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+  </div>
+  <div v-else>
     <div id="breadcrum-inner-block">
       <div class="container">
         <div class="row">
@@ -173,7 +184,8 @@
         active_users: "",
         desc: "",
         file: "",
-        delta: ""
+        delta: "",
+        loading_bool: false
       };
     },
     mounted() {
@@ -191,13 +203,9 @@
           ]
         },
         placeholder: "Write Product Description here...",
-        theme: "snow" // or 'bubble'
+        theme: "snow"
       });
-      // quill.setContents([
-      //   { insert: "Hello " },
-      //   { insert: "World!", attributes: { bold: true } },
-      //   { insert: "\n" }
-      // ]);
+
       quill.on("text-change", function() {
         this.delta = quill.getContents();
       });
@@ -208,21 +216,6 @@
         .addClass("active")
         .siblings()
         .removeClass("active");
-      // this.editor = new EditorJS({
-      //   holder: "editorjs",
-      //   tools: {
-      //     header: Header,
-      //     list: List,
-      //     image: {
-      //       class: Image,
-      //       config: {
-      //         endpoints: {
-      //           byFile: "http://www.ft500.in/backend/product_image"
-      //         }
-      //       }
-      //     }
-      //   }
-      // });
     },
     methods: {
       logOutUser: function() {
@@ -240,29 +233,6 @@
       },
 
       save() {
-        // this.editor.save().then(async outputData => {
-        // if (outputData.blocks.length) {
-        //   let heading, featuredImg;
-        //   for (let i = 0; i < outputData.blocks.length; i++) {
-        //     if (outputData.blocks[i].type === "header") {
-        //       heading = outputData.blocks[i].data.text;
-        //     }
-        //     if (outputData.blocks[i].type === "image") {
-        //       featuredImg = outputData.blocks[i].data.file.url;
-        //     }
-        //     if (heading && featuredImg) break;
-        //   }
-        //   if (heading && featuredImg && this.description) {
-        //     this.$store.dispatch("savePost", {
-        //       heading,
-        //       featuredImg,
-        //       router: this.$router,
-        //       description: this.description,
-        //       author: "John Doe",
-        //       data: outputData.blocks
-        //     });
-        //   }
-        // }
         var payload = new FormData();
         payload.append("added_by", localStorage.getItem("user_id"));
         const date_added = new Date();
@@ -278,7 +248,10 @@
         payload.append("active_users", this.active_users);
         payload.append("startup_name", this.$route.params.id);
         payload.append("product_video", this.file);
-        this.$store.dispatch("postProduct", payload).then(res => {});
+
+        this.$store.dispatch("postProduct", payload).then(res => {
+          this.loading_bool = true;
+        });
         this.$router.push("/startup/listing");
         // });
       }
