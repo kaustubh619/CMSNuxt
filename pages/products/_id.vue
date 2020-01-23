@@ -114,15 +114,21 @@
                     </div>
 
                     <div id="reviews" class="tabcontent">
-                      <p class="faq-11">No updates available</p>
+                      <div class="submit_listing_box">
+                        <p class="faq-11">No updates available</p>
+                      </div>
                     </div>
 
                     <div id="testimonials" class="tabcontent">
-                      <p class="faq-11">Section to be added soon</p>
+                      <div class="submit_listing_box">
+                        <p class="faq-11">Section to be added soon</p>
+                      </div>
                     </div>
 
                     <div id="rankings" class="tabcontent">
-                      <p class="faq-11">Section to be added soon</p>
+                      <div class="submit_listing_box">
+                        <p class="faq-11">Section to be added soon</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -247,7 +253,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .header_slt_block .user_logo_pic {
   background: transparent;
   width: 0px;
@@ -272,6 +278,12 @@ export default {
 
 .app-link:focus {
   color: white;
+}
+
+.submit_listing_box {
+  background: transparent !important;
+  border: none;
+  box-shadow: none;
 }
 
 .submit_listing_box h3 {
@@ -533,6 +545,7 @@ export default {
   overflow: hidden;
   border-top: 1px solid #e7e7e7;
   border-bottom: 1px solid #e7e7e7;
+
   width: 100%;
   margin-top: 30px;
 }
@@ -555,7 +568,7 @@ export default {
 
 .tabcontent {
   display: none;
-  padding: 6px 12px;
+  padding: 0px !important;
   border-top: none;
   width: 100%;
   height: auto;
