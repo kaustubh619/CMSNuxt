@@ -93,12 +93,18 @@
                 <div class="row">
                   <div class="col-12 hide-lg-product">
                     <div class="tab">
+                      <button class="tablinks" id="product" @click="openbtn('description')">Details</button>
+                      <button class="tablinks" id="faq" @click="openbtn('reviews')">Updates</button>
                       <button
                         class="tablinks"
-                        id="product"
-                        @click="openbtn('description')"
-                      >Product Details</button>
-                      <button class="tablinks" id="faq" @click="openbtn('reviews')">Product Updates</button>
+                        id="test"
+                        @click="openbtn('testimonials')"
+                      >Testimonials</button>
+                      <button
+                        class="tablinks"
+                        id="rate"
+                        @click="openbtn('rankings')"
+                      >Rankings/Ratings</button>
                     </div>
 
                     <div id="description" class="tabcontent">
@@ -109,6 +115,14 @@
 
                     <div id="reviews" class="tabcontent">
                       <p class="faq-11">No updates available</p>
+                    </div>
+
+                    <div id="testimonials" class="tabcontent">
+                      <p class="faq-11">Section to be added soon</p>
+                    </div>
+
+                    <div id="rankings" class="tabcontent">
+                      <p class="faq-11">Section to be added soon</p>
                     </div>
                   </div>
                 </div>
@@ -210,6 +224,7 @@ export default {
       var payload = new FormData();
       payload.append("id", this.$route.params.id);
       this.$store.dispatch("getUpdates", payload).then(res => {
+        console.log(res.data);
         this.update_list = res.data;
         if (res.data.length == 0) {
           this.pro_bool = false;
@@ -544,5 +559,11 @@ export default {
   border-top: none;
   width: 100%;
   height: auto;
+}
+
+@media (max-width: 37.5em) {
+  .tab button {
+    font-size: 11px;
+  }
 }
 </style>
