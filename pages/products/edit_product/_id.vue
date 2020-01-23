@@ -198,22 +198,7 @@ export default {
         this.app_link = res.data.product_app_link;
         this.active_users = res.data.active_users;
         this.post = JSON.parse(res.data.description);
-        // this.editor = new EditorJS({
-        //   holder: "editorjs",
-        //   tools: {
-        //     header: Header,
-        //     list: List,
-        //     image: {
-        //       class: Image,
-        //       config: {
-        //         endpoints: {
-        //           byFile: "http://www.ft500.in/backend/product_image"
-        //         }
-        //       }
-        //     }
-        //   },
-        //   data: { blocks: this.post }
-        // });
+
         quill = new Quill("#editor-container", {
           modules: {
             toolbar: [
@@ -239,29 +224,6 @@ export default {
     },
 
     updateProduct: function() {
-      // this.editor.save().then(async outputData => {
-      //   if (outputData.blocks.length) {
-      //     let heading, featuredImg;
-      //     for (let i = 0; i < outputData.blocks.length; i++) {
-      //       if (outputData.blocks[i].type === "header") {
-      //         heading = outputData.blocks[i].data.text;
-      //       }
-      //       if (outputData.blocks[i].type === "image") {
-      //         featuredImg = outputData.blocks[i].data.file.url;
-      //       }
-      //       if (heading && featuredImg) break;
-      //     }
-      //     if (heading && featuredImg && this.description) {
-      //       this.$store.dispatch("savePost", {
-      //         heading,
-      //         featuredImg,
-      //         router: this.$router,
-      //         description: this.description,
-      //         author: "John Doe",
-      //         data: outputData.blocks
-      //       });
-      //     }
-      //   }
       var payload = new FormData();
       payload.append("id", this.$route.params.id);
       payload.append("added_by", localStorage.getItem("user_id"));
@@ -283,7 +245,6 @@ export default {
       }
       this.$store.dispatch("updateProduct", payload).then(res => {});
       this.$router.push("/startup/listing");
-      // });
     }
   }
 };

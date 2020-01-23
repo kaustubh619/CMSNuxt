@@ -93,7 +93,7 @@
             <div id="description" class="tabcontent">
               <div class="row" v-if="product_bool">
                 <div
-                  class="col-12 col-sm-6"
+                  class="col-12"
                   v-for="(a, b) in product_list"
                   :key="b"
                   style="padding: 10px; padding-top: 30px"
@@ -126,9 +126,7 @@
                     }"
                   >Know More</nuxt-link>
                 </div>
-                <div class="col-12 col-sm-6">
-                  <h3>Testing Now</h3>
-                </div>
+                
               </div>
               <div class="row" v-else>
                 <div
@@ -225,7 +223,6 @@ export default {
       var payload = new FormData();
       payload.append("id", this.$route.params.id);
       this.$store.dispatch("getStProducts", payload).then(res => {
-        console.log(res.data);
         this.product_list = res.data;
         if (res.data.length !== 0) {
           this.product_bool = true;

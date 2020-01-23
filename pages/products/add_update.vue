@@ -8,7 +8,7 @@
               <h1>{{ product_name }}</h1>
               <nuxt-link to="/">Home</nuxt-link>
               <i class="fa fa-circle"></i>
-              <nuxt-link to="">
+              <nuxt-link to>
                 <span>Add Update</span>
               </nuxt-link>
             </div>
@@ -73,10 +73,7 @@
                     <div class="row">
                       <div class="form-group col-xs-12">
                         <label>Update :-</label>
-                        <div
-                          id="editorjs"
-                          style="border: 1px solid #e9e6e0; border-radius: 4px; background-color: #fff; padding: 20px"
-                        ></div>
+                        <div id="editor-container"></div>
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
                         <label>Update Video :-</label>
@@ -93,9 +90,7 @@
                 </div>
                 <div class="from-list-lt">
                   <div class="form-group">
-                    <button class="btn" type="submit" @click="save">
-                      Submit Update
-                    </button>
+                    <button class="btn" type="submit" @click="save">Submit Update</button>
                   </div>
                 </div>
               </div>
@@ -108,97 +103,71 @@
 </template>
 
 <script>
-  let EditorJS, Header, List, Image;
+let quill;
+export default {
+  middleware: "token-auth",
+  data() {
+    return {
+      product_name: "",
+      file: ""
+    };
+  },
+  mounted() {
+    this.product_name = this.$route.params.product;
+    quill = new Quill("#editor-container", {
+      modules: {
+        toolbar: [
+          [{ header: [1, 2, 3, 4, false] }],
+          ["bold", "italic", "underline"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          ["image"],
 
-  if (process.browser) {
-    EditorJS = require("@editorjs/editorjs");
-    Header = require("@editorjs/header");
-    List = require("@editorjs/list");
-    Image = require("@editorjs/image");
-  }
-  export default {
-    middleware: "token-auth",
-    data() {
-      return {
-        product_name: "",
-        file: ""
-      };
-    },
-    mounted() {
-      console.log(this.$route.params.id, this.$route.params.product);
-      this.product_name = this.$route.params.product;
-      this.editor = new EditorJS({
-        holder: "editorjs",
-        tools: {
-          header: Header,
-          list: List,
-          image: {
-            class: Image,
-            config: {
-              endpoints: {
-                byFile: "http://www.ft500.in/backend/product_image"
-              }
-            }
-          }
-        }
-      });
-    },
-    methods: {
-      logOutUser: function() {
-        var payload = new FormData();
-        payload.append("login_status", "false");
-        this.$store.dispatch("logOutUser", payload).then(res => {});
-        localStorage.clear();
-        Cookies.remove("x-access-token");
-        this.$store.commit("authentication", false);
-        this.$router.push("/");
+          [{ color: [] }, { background: [] }],
+          [{ font: [] }],
+          [{ align: [] }]
+        ]
       },
+      placeholder: "Write Product Description here...",
+      theme: "snow"
+    });
 
-      handleFileUpload: function() {
-        this.file = this.$refs.file.files[0];
-      },
+    quill.on("text-change", function() {
+      this.delta = quill.getContents();
+    });
+  },
+  methods: {
+    logOutUser: function() {
+      var payload = new FormData();
+      payload.append("login_status", "false");
+      this.$store.dispatch("logOutUser", payload).then(res => {});
+      localStorage.clear();
+      Cookies.remove("x-access-token");
+      this.$store.commit("authentication", false);
+      this.$router.push("/");
+    },
 
-      save() {
-        this.editor.save().then(async outputData => {
-          if (outputData.blocks.length) {
-            let heading, featuredImg;
-            for (let i = 0; i < outputData.blocks.length; i++) {
-              if (outputData.blocks[i].type === "header") {
-                heading = outputData.blocks[i].data.text;
-              }
-              if (outputData.blocks[i].type === "image") {
-                featuredImg = outputData.blocks[i].data.file.url;
-              }
-              if (heading && featuredImg) break;
-            }
-            if (heading && featuredImg && this.description) {
-              this.$store.dispatch("savePost", {
-                heading,
-                featuredImg,
-                router: this.$router,
-                description: this.description,
-                author: "John Doe",
-                data: outputData.blocks
-              });
-            }
-          }
-          var payload = new FormData();
-          payload.append("added_by", localStorage.getItem("user_id"));
-          const date_added = new Date();
-          const day = date_added.getDate();
-          const month = date_added.getMonth() + 1;
-          const year = date_added.getFullYear();
-          const added_dated = year + "-" + month + "-" + day;
-          payload.append("added_date", added_dated);
-          payload.append("product", this.$route.params.id);
-          payload.append("latest_updates", JSON.stringify(outputData.blocks));
-          payload.append("update_video", this.file);
-          this.$store.dispatch("postUpdate", payload).then(res => {});
-          this.$router.push("/startup/listing");
-        });
-      }
+    handleFileUpload: function() {
+      this.file = this.$refs.file.files[0];
+    },
+
+    save() {
+      var payload = new FormData();
+      payload.append("added_by", localStorage.getItem("user_id"));
+      const date_added = new Date();
+      const day = date_added.getDate();
+      const month = date_added.getMonth() + 1;
+      const year = date_added.getFullYear();
+      const added_dated = year + "-" + month + "-" + day;
+      payload.append("added_date", added_dated);
+      payload.append("product", this.$route.params.id);
+      payload.append("latest_updates", JSON.stringify(quill.getContents()));
+      // payload.append("latest_updates", JSON.stringify(outputData.blocks));
+      payload.append("update_video", this.file);
+      this.$store.dispatch("postUpdate", payload).then(res => {});
+      this.$router.push("/startup/listing");
     }
-  };
+  }
+};
 </script>
 
 <style>

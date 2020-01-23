@@ -54,37 +54,56 @@
 
                     <p class="st-text-1">{{ startup }}</p>
                     <p class="st-sub-text-1">
-                      <i class="fa fa-registered" style="color: #009e74"></i> registered to
+                      <i class="fa fa-registered" style="color: #009e74"></i>
+                      registered to
                     </p>
 
                     <p class="st-text-2">{{ stage }}</p>
                     <p class="st-sub-text-2">
-                      <i class="fa fa-angle-double-right" aria-hidden="true" style="color: #009e74"></i> stage
+                      <i
+                        class="fa fa-angle-double-right"
+                        aria-hidden="true"
+                        style="color: #009e74"
+                      ></i>
+                      stage
                     </p>
 
                     <p class="st-text-3">{{ product_name }}</p>
                     <p class="st-sub-text-3">
-                      <i class="fa fa-product-hunt" aria-hidden="true" style="color: #009e74"></i> product name
+                      <i
+                        class="fa fa-product-hunt"
+                        aria-hidden="true"
+                        style="color: #009e74"
+                      ></i>
+                      product name
                     </p>
 
                     <p class="st-text-2">{{ product_cat }}</p>
                     <p class="st-sub-text-2">
-                      <i class="fa fa-database" style="color: #009e74"></i> category
+                      <i class="fa fa-database" style="color: #009e74"></i>
+                      category
                     </p>
 
                     <p class="st-text-2">{{ app_link }}</p>
                     <p class="st-sub-text-2">
-                      <i class="fa fa-link" style="color: #009e74"></i> website/app link
+                      <i class="fa fa-link" style="color: #009e74"></i>
+                      website/app link
                     </p>
 
                     <p class="st-text-2">{{ date_added }}</p>
                     <p class="st-sub-text-2">
-                      <i class="fa fa-calendar" aria-hidden="true" style="color: #009e74"></i> date added
+                      <i
+                        class="fa fa-calendar"
+                        aria-hidden="true"
+                        style="color: #009e74"
+                      ></i>
+                      date added
                     </p>
 
                     <p class="st-text-2">{{ users }}</p>
                     <p class="st-sub-text-2">
-                      <i class="fa fa-users" style="color: #009e74"></i> number of users/downloads
+                      <i class="fa fa-users" style="color: #009e74"></i> number
+                      of users/downloads
                     </p>
                     <button class="st-btn-11">Button</button>
                   </div>
@@ -93,29 +112,68 @@
                 <div class="row">
                   <div class="col-12 hide-lg-product">
                     <div class="tab">
-                      <button class="tablinks" id="product" @click="openbtn('description')">Details</button>
-                      <button class="tablinks" id="faq" @click="openbtn('reviews')">Updates</button>
+                      <button
+                        class="tablinks"
+                        id="product"
+                        @click="openbtn('description')"
+                      >
+                        Details
+                      </button>
+                      <button
+                        class="tablinks"
+                        id="faq"
+                        @click="openbtn('reviews')"
+                      >
+                        Updates
+                      </button>
                       <button
                         class="tablinks"
                         id="test"
                         @click="openbtn('testimonials')"
-                      >Testimonials</button>
+                      >
+                        Testimonials
+                      </button>
                       <button
                         class="tablinks"
                         id="rate"
                         @click="openbtn('rankings')"
-                      >Rankings/Ratings</button>
+                      >
+                        Rankings/Ratings
+                      </button>
                     </div>
 
                     <div id="description" class="tabcontent">
                       <div class="submit_listing_box">
-                        <div id="editor-container" style="background-color: white"></div>
+                        <div
+                          id="editor-container"
+                          style="background-color: white"
+                        ></div>
                       </div>
                     </div>
 
                     <div id="reviews" class="tabcontent">
                       <div class="submit_listing_box">
-                        <p class="faq-11">No updates available</p>
+                        <div
+                          v-for="(l, m) in update_list"
+                          :key="m"
+                          style="background-color: #f9f9f9; margin: 10px; padding: 10px"
+                        >
+                          <h1 style="border: none">
+                            <span
+                              style="color: #009e74; text-shadow: 2px 3px #e7e7e7; display: block"
+                              >Product Update
+                            </span>
+                            <i
+                              class="fa fa-calendar"
+                              style="color: #009e74"
+                            ></i>
+                            <span
+                              style="color: #009e74; text-shadow: 2px 2px #e7e7e7"
+                              >Added Date: {{ l.added_date }}</span
+                            >
+                          </h1>
+                          <div class="update-container"></div>
+                        </div>
                       </div>
                     </div>
 
@@ -142,114 +200,148 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
-import PostImage from "~/components/Image.vue";
-import PostHeading from "~/components/Heading.vue";
-import PostParagraph from "~/components/Paragraph.vue";
-import PostList from "~/components/List.vue";
-let player;
-export default {
-  components: { PostImage, PostHeading, PostParagraph, PostList },
-  data() {
-    return {
-      post: [],
-      product_name: "",
-      city: "",
-      country: "",
-      startup: "",
-      stage: "",
-      users: "",
-      app_link: "",
-      product_video: "",
-      update_list: [],
-      pro_bool: true,
-      date_added: "",
-      product_cat: ""
-    };
-  },
-  computed: {
-    authentication: {
-      get: function() {
-        return this.$store.state.authentication;
-      }
-    }
-  },
-  mounted() {
-    this.productById();
-    this.getUpdates();
-    $("#user_profile")
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
-    $(".tablinks").click(function() {
-      var id = $(this).attr("id");
-
-      $("#" + id)
-        .addClass("btn-activated")
-        .siblings()
-        .removeClass("btn-activated");
-    });
-    document.getElementById("product").click();
-  },
-  methods: {
-    logOutUser: function() {
-      var payload = new FormData();
-      payload.append("login_status", "false");
-      this.$store.dispatch("logOutUser", payload).then(res => {});
-      localStorage.clear();
-      Cookies.remove("x-access-token");
-      this.$store.commit("authentication", false);
-      this.$router.push("/");
+  import Cookies from "js-cookie";
+  import PostImage from "~/components/Image.vue";
+  import PostHeading from "~/components/Heading.vue";
+  import PostParagraph from "~/components/Paragraph.vue";
+  import PostList from "~/components/List.vue";
+  let player;
+  export default {
+    components: { PostImage, PostHeading, PostParagraph, PostList },
+    async asyncData(ctx) {
+      const payload = new FormData();
+      payload.append("id", ctx.route.params.id);
+      const res = await ctx.store.dispatch("getUpdates", payload);
+      return { update_list: res.data };
     },
-    productById: function() {
-      this.$store.dispatch("productById", this.$route.params.id).then(res => {
-        this.post = JSON.parse(res.data.description);
-        this.product_name = res.data.product_name;
-        this.city = res.data.startup_name.city;
-        this.country = res.data.startup_name.country;
-        this.startup = res.data.startup_name.name;
-        this.stage = res.data.stage;
-        this.users = res.data.active_users;
-        this.app_link = res.data.product_app_link;
-        this.product_video = res.data.product_video;
-        this.date_added = res.data.added_date;
-        this.product_cat = res.data.startup_name.category.category;
-        var quill = new Quill("#editor-container", {
-          modules: { toolbar: [] },
-          readOnly: true,
-          theme: "bubble"
-        });
-        quill.setContents(this.post);
-        setTimeout(function() {
-          player = new Plyr("#player");
-        }, 1000);
-      });
+    data() {
+      return {
+        post: [],
+        product_name: "",
+        city: "",
+        country: "",
+        startup: "",
+        stage: "",
+        users: "",
+        app_link: "",
+        product_video: "",
+        pro_bool: true,
+        date_added: "",
+        product_cat: ""
+      };
     },
-
-    getUpdates: function() {
-      var payload = new FormData();
-      payload.append("id", this.$route.params.id);
-      this.$store.dispatch("getUpdates", payload).then(res => {
-        this.update_list = res.data;
-        if (res.data.length == 0) {
-          this.pro_bool = false;
+    computed: {
+      authentication: {
+        get: function() {
+          return this.$store.state.authentication;
         }
-      });
-    },
-
-    openbtn: function(btnName) {
-      var i, tabcontent, tablinks;
-
-      tabcontent = document.getElementsByClassName("tabcontent");
-
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
       }
+    },
+    mounted() {
+      this.productById();
+      this.getUpdates();
+      $("#user_profile")
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+      $(".tablinks").click(function() {
+        var id = $(this).attr("id");
 
-      document.getElementById(btnName).style.display = "block";
+        $("#" + id)
+          .addClass("btn-activated")
+          .siblings()
+          .removeClass("btn-activated");
+      });
+      document.getElementById("product").click();
+    },
+    methods: {
+      logOutUser: function() {
+        var payload = new FormData();
+        payload.append("login_status", "false");
+        this.$store.dispatch("logOutUser", payload).then(res => {});
+        localStorage.clear();
+        Cookies.remove("x-access-token");
+        this.$store.commit("authentication", false);
+        this.$router.push("/");
+      },
+      productById: function() {
+        this.$store.dispatch("productById", this.$route.params.id).then(res => {
+          this.post = JSON.parse(res.data.description);
+          this.product_name = res.data.product_name;
+          this.city = res.data.startup_name.city;
+          this.country = res.data.startup_name.country;
+          this.startup = res.data.startup_name.name;
+          this.stage = res.data.stage;
+          this.users = res.data.active_users;
+          this.app_link = res.data.product_app_link;
+          this.product_video = res.data.product_video;
+          this.date_added = res.data.added_date;
+          this.product_cat = res.data.startup_name.category.category;
+          var quill = new Quill("#editor-container", {
+            modules: { toolbar: [] },
+            readOnly: true,
+            theme: "bubble"
+          });
+          quill.setContents(this.post);
+          setTimeout(function() {
+            player = new Plyr("#player");
+          }, 1000);
+        });
+      },
+
+      getUpdates: function() {
+        let item;
+        const items = document.querySelectorAll(".update-container");
+        items.forEach((item, i) => {
+          const quill = new Quill(item, {
+            modules: { toolbar: [] },
+            readOnly: true,
+            theme: "bubble"
+          });
+          quill.setContents(JSON.parse(this.update_list[i].latest_updates));
+        });
+
+        // this.$refs.forEach(item => {
+        //   console.log(item);
+        // });
+        // const quill = new Quill("#" + item.id, {
+        //   modules: { toolbar: [] },
+        //   readOnly: true,
+        //   theme: "bubble"
+        // });
+        // quill.setContents(JSON.parse(item.latest_updates));
+        // this.$store.dispatch("getUpdates", payload).then(res => {
+        //   console.log(res.data);
+        //   setTimeout(function() {
+        //     res.data.map(item => {
+        //       console.log(item);
+        //       var quill = new Quill("#" + item.id, {
+        //         modules: { toolbar: [] },
+        //         readOnly: true,
+        //         theme: "bubble"
+        //       });
+        //       quill.setContents(JSON.parse(item.latest_updates));
+        //     });
+        //   }, 500);
+        // if (res.data.length == 0) {
+        //   this.pro_bool = false;
+        // }
+        // });
+      },
+
+      openbtn: function(btnName) {
+        var i, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tabcontent");
+
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        document.getElementById(btnName).style.display = "block";
+      }
     }
-  }
-};
+  };
 </script>
 
 <style scoped>
