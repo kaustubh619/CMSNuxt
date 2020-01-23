@@ -399,15 +399,6 @@ export default {
   background-image: none;
 }
 
-.ql-editor li::before {
-  display: unset;
-}
-
-.ql-editor ol > li,
-.ql-editor ul > li {
-  font-size: 18px !important;
-}
-
 .header-st-1 {
   text-align: center;
   font-size: 26px;
