@@ -405,7 +405,7 @@ export default {
 
 .ql-editor ol > li,
 .ql-editor ul > li {
-  font-size: 16px;
+  font-size: 18px !important;
 }
 
 .header-st-1 {

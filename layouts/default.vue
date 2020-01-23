@@ -152,4 +152,13 @@ body {
 #dashboard_inner_block {
   padding: 40px 0px;
 }
+
+.ql-editor li::before {
+  display: unset;
+}
+
+.ql-editor ol > li,
+.ql-editor ul > li {
+  font-size: 18px !important;
+}
 </style>
