@@ -152,6 +152,9 @@
                     </div>
 
                     <div id="reviews" class="tabcontent">
+                      <div v-if="pro_bool" class="submit_listing_box">
+                        <p class="faq-11">No product updates available</p>
+                      </div>
                       <div class="submit_listing_box">
                         <div
                           v-for="(l, m) in update_list"
@@ -290,6 +293,15 @@
       },
 
       getUpdates: function() {
+        var payload = new FormData();
+        payload.append("id", this.$route.params.id);
+        this.$store.dispatch("getUpdates", payload).then(res => {
+          if (res.data.length == 0) {
+            this.pro_bool = true;
+          } else {
+            this.pro_bool = false;
+          }
+        });
         let item;
         const items = document.querySelectorAll(".update-container");
         items.forEach((item, i) => {
@@ -298,35 +310,9 @@
             readOnly: true,
             theme: "bubble"
           });
+
           quill.setContents(JSON.parse(this.update_list[i].latest_updates));
         });
-
-        // this.$refs.forEach(item => {
-        //   console.log(item);
-        // });
-        // const quill = new Quill("#" + item.id, {
-        //   modules: { toolbar: [] },
-        //   readOnly: true,
-        //   theme: "bubble"
-        // });
-        // quill.setContents(JSON.parse(item.latest_updates));
-        // this.$store.dispatch("getUpdates", payload).then(res => {
-        //   console.log(res.data);
-        //   setTimeout(function() {
-        //     res.data.map(item => {
-        //       console.log(item);
-        //       var quill = new Quill("#" + item.id, {
-        //         modules: { toolbar: [] },
-        //         readOnly: true,
-        //         theme: "bubble"
-        //       });
-        //       quill.setContents(JSON.parse(item.latest_updates));
-        //     });
-        //   }, 500);
-        // if (res.data.length == 0) {
-        //   this.pro_bool = false;
-        // }
-        // });
       },
 
       openbtn: function(btnName) {
