@@ -174,6 +174,17 @@
                               style="color: #009e74; text-shadow: 2px 2px #e7e7e7"
                               >Added Date: {{ l.added_date }}</span
                             >
+                            <video
+                              id="player"
+                              poster="../../../images/pro_img.jpg"
+                              playsinline
+                              controls
+                              style="margin-top: 20px; display: block; margin-left: auto; margin-right: auto"
+                              class="video-width"
+                            >
+                              <source :src="l.update_video" type="video/mp4" />
+                              <source :src="l.update_video" type="video/webm" />
+                            </video>
                           </h1>
                           <div class="update-container"></div>
                         </div>
@@ -645,6 +656,17 @@
 @media (max-width: 37.5em) {
   .tab button {
     font-size: 11px;
+  }
+}
+
+.video-width {
+  width: 50%;
+  display: block;
+}
+
+@media (max-width: 37.5em) {
+  .video-width {
+    width: 100%;
   }
 }
 </style>
