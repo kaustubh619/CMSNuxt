@@ -11,33 +11,6 @@
               <nuxt-link to>
                 <span>Product Details</span>
               </nuxt-link>
-              <div style="margin-top: 20px; color: white">
-                <p class="contact_number">
-                  <i class="fa fa-angle-double-right fa-custom"></i>
-                  Stage - {{ stage }}
-                </p>
-                <p class="contact_number">
-                  <i class="fa fa-registered fa-custom"></i>
-                  Registered to {{ startup }}
-                </p>
-                <p class="location">
-                  <i class="fa fa-map-marker fa-custom"></i>
-                  Location - {{ city }}, {{ country }}
-                </p>
-                <p class="location">
-                  <i class="fa fa-link fa-custom"></i>
-                  App Link -
-                  <a
-                    :href="app_link"
-                    target="_blank"
-                    class="app-link"
-                  >{{ app_link }}</a>
-                </p>
-                <p class="contact_number">
-                  <i class="fa fa-users fa-custom"></i>
-                  Number of active users - {{ users }}
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -63,44 +36,86 @@
             </div>
             <div class="row">
               <div class="col-xs-12">
-                <div class="submit_listing_box">
-                  <div id="editor-container" style="background-color: white"></div>
+                <div class="row">
+                  <div class="col-12 col-sm-8">
+                    <video
+                      id="player"
+                      poster="../images/pro_img.jpg"
+                      playsinline
+                      controls
+                      style="width: 100%;"
+                    >
+                      <source :src="product_video" type="video/mp4" />
+                      <source :src="product_video" type="video/webm" />
+                    </video>
+                  </div>
+                  <div class="col-12 col-sm-4">
+                    <hr style="margin-top: 0px; border: 3px solid #009e74" />
 
-                  <h3>Product Video</h3>
-                  <video
-                    id="player"
-                    poster="../images/pro_img.jpg"
-                    playsinline
-                    controls
-                    style="width: 100%;"
-                  >
-                    <source :src="product_video" type="video/mp4" />
-                    <source :src="product_video" type="video/webm" />
-                  </video>
+                    <p class="st-text-1">{{ startup }}</p>
+                    <p class="st-sub-text-1">
+                      <i class="fa fa-registered" style="color: #009e74"></i> registered to
+                    </p>
+
+                    <p class="st-text-2">{{ stage }}</p>
+                    <p class="st-sub-text-2">
+                      <i class="fa fa-angle-double-right" aria-hidden="true" style="color: #009e74"></i> stage
+                    </p>
+
+                    <p class="st-text-3">{{ product_name }}</p>
+                    <p class="st-sub-text-3">
+                      <i class="fa fa-product-hunt" aria-hidden="true" style="color: #009e74"></i> product name
+                    </p>
+
+                    <p class="st-text-2">{{ product_cat }}</p>
+                    <p class="st-sub-text-2">
+                      <i class="fa fa-database" style="color: #009e74"></i> category
+                    </p>
+
+                    <p class="st-text-2">{{ app_link }}</p>
+                    <p class="st-sub-text-2">
+                      <i class="fa fa-link" style="color: #009e74"></i> website/app link
+                    </p>
+
+                    <p class="st-text-2">{{ date_added }}</p>
+                    <p class="st-sub-text-2">
+                      <i class="fa fa-calendar" aria-hidden="true" style="color: #009e74"></i> date added
+                    </p>
+
+                    <p class="st-text-2">{{ users }}</p>
+                    <p class="st-sub-text-2">
+                      <i class="fa fa-users" style="color: #009e74"></i> number of users/downloads
+                    </p>
+                    <button class="st-btn-11">Button</button>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 hide-lg-product">
+                    <div class="tab">
+                      <button
+                        class="tablinks"
+                        id="product"
+                        @click="openbtn('description')"
+                      >Product Details</button>
+                      <button class="tablinks" id="faq" @click="openbtn('reviews')">Product Updates</button>
+                    </div>
+
+                    <div id="description" class="tabcontent">
+                      <div class="submit_listing_box">
+                        <div id="editor-container" style="background-color: white"></div>
+                      </div>
+                    </div>
+
+                    <div id="reviews" class="tabcontent">
+                      <p class="faq-11">No updates available</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <hr />
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12">
-              <h4 v-if="pro_bool">Product Updates</h4>
-              <h4 v-else>No Product Updates</h4>
-              <ul>
-                <li v-for="(x, y) in update_list" :key="y">
-                  <nuxt-link
-                    style="font-size: 20px"
-                    :to="{ name: 'products-updates-id', params: { id: x.id } }"
-                    class="update-class"
-                  >Date Added: {{ x.added_date }}</nuxt-link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <hr />
       </div>
     </div>
   </div>
@@ -127,7 +142,9 @@ export default {
       app_link: "",
       product_video: "",
       update_list: [],
-      pro_bool: true
+      pro_bool: true,
+      date_added: "",
+      product_cat: ""
     };
   },
   computed: {
@@ -144,6 +161,15 @@ export default {
       .addClass("active")
       .siblings()
       .removeClass("active");
+    $(".tablinks").click(function() {
+      var id = $(this).attr("id");
+
+      $("#" + id)
+        .addClass("btn-activated")
+        .siblings()
+        .removeClass("btn-activated");
+    });
+    document.getElementById("product").click();
   },
   methods: {
     logOutUser: function() {
@@ -166,6 +192,8 @@ export default {
         this.users = res.data.active_users;
         this.app_link = res.data.product_app_link;
         this.product_video = res.data.product_video;
+        this.date_added = res.data.added_date;
+        this.product_cat = res.data.startup_name.category.category;
         var quill = new Quill("#editor-container", {
           modules: { toolbar: [] },
           readOnly: true,
@@ -187,6 +215,18 @@ export default {
           this.pro_bool = false;
         }
       });
+    },
+
+    openbtn: function(btnName) {
+      var i, tabcontent, tablinks;
+
+      tabcontent = document.getElementsByClassName("tabcontent");
+
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      document.getElementById(btnName).style.display = "block";
     }
   }
 };
@@ -257,5 +297,252 @@ export default {
 .edit-class:hover {
   background-color: #ffce10;
   color: black;
+}
+
+.product-slider {
+  padding: 45px;
+}
+
+.product-slider #carousel {
+  border: 4px solid #1089c0;
+  margin: 0;
+}
+
+.product-slider #thumbcarousel {
+  margin: 12px 0 0;
+  padding: 0 45px;
+}
+
+.product-slider #thumbcarousel .item {
+  text-align: center;
+}
+
+.product-slider #thumbcarousel .item .thumb {
+  border: 4px solid #cecece;
+  width: 20%;
+  margin: 0 2%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  max-width: 98px;
+}
+
+.product-slider #thumbcarousel .item .thumb:hover {
+  border-color: #1089c0;
+}
+
+.product-slider .item img {
+  width: 100%;
+  height: auto;
+}
+
+.carousel-control {
+  color: #0284b8;
+  text-align: center;
+  text-shadow: none;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+  line-height: 20px;
+  top: 23%;
+}
+
+.carousel-control:hover,
+.carousel-control:focus,
+.carousel-control:active {
+  color: #333;
+}
+
+.carousel-caption,
+.carousel-control .fa {
+  font: normal normal normal 30px/26px FontAwesome;
+}
+.carousel-control {
+  background-color: rgba(0, 0, 0, 0);
+  bottom: auto;
+  font-size: 20px;
+  left: 0;
+  position: absolute;
+  top: 30%;
+  width: auto;
+}
+
+.carousel-control.right,
+.carousel-control.left {
+  background-color: rgba(0, 0, 0, 0);
+  background-image: none;
+}
+
+.ql-editor li::before {
+  display: unset;
+}
+
+.ql-editor ol > li,
+.ql-editor ul > li {
+  font-size: 16px;
+}
+
+.header-st-1 {
+  text-align: center;
+  font-size: 26px;
+
+  font-family: GothamRounded;
+}
+
+.all-categorie-list-title {
+  margin-bottom: 25px;
+}
+
+.st-text-1 {
+  color: grey;
+  font-size: 18px;
+  margin-bottom: 0px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.st-sub-text-1 {
+  color: grey;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.st-sub-text-11 {
+  color: grey;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.st-text-2 {
+  color: grey;
+  font-size: 18px;
+  margin-bottom: 0px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.st-sub-text-2 {
+  color: grey;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.st-text-3 {
+  color: grey;
+  font-size: 18px;
+  margin-bottom: 0px;
+  font-weight: 400;
+  text-align: left;
+}
+
+.st-sub-text-3 {
+  color: grey;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+@media (min-width: 37.5em) and (max-width: 75em) {
+  .st-text-1 {
+    font-size: 14px;
+  }
+
+  .st-sub-text-1 {
+    font-size: 12px;
+  }
+
+  .st-text-2 {
+    font-size: 14px;
+  }
+
+  .st-sub-text-2 {
+    font-size: 12px;
+  }
+
+  .st-text-3 {
+    font-size: 14px;
+  }
+
+  .st-sub-text-3 {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 37.5em) {
+  .st-text-1 {
+    text-align: center;
+  }
+  .st-text-2 {
+    text-align: center;
+  }
+  .st-text-3 {
+    text-align: center;
+  }
+  .st-sub-text-1 {
+    text-align: center;
+  }
+  .st-sub-text-2 {
+    text-align: center;
+  }
+  .st-sub-text-3 {
+    text-align: center;
+  }
+}
+
+.st-btn-11 {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #009e74;
+  border: none;
+  padding: 15px 30px;
+  color: white;
+}
+
+.st-btn-11:hover {
+  background-color: #1eb48c;
+  transform: scale(1.005);
+}
+
+.btn-activated {
+  background-color: #009e74 !important;
+  color: white;
+}
+
+.faq-11 {
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  font-weight: 300;
+}
+
+.tab {
+  overflow: hidden;
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.tab button:hover {
+  background-color: #1eb48c;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  width: 100%;
+  height: auto;
 }
 </style>
