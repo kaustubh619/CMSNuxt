@@ -230,7 +230,6 @@ export default {
       var payload = new FormData();
       payload.append("id", this.$route.params.id);
       this.$store.dispatch("getUpdates", payload).then(res => {
-        console.log(res.data);
         this.update_list = res.data;
         if (res.data.length == 0) {
           this.pro_bool = false;

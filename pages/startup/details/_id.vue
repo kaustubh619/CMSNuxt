@@ -93,7 +93,7 @@
             <div id="description" class="tabcontent">
               <div class="row" v-if="product_bool">
                 <div
-                  class="col-12"
+                  class="col-12 col-sm-6"
                   v-for="(a, b) in product_list"
                   :key="b"
                   style="padding: 10px; padding-top: 30px"
@@ -125,6 +125,9 @@
                       params: { id: a.id }
                     }"
                   >Know More</nuxt-link>
+                </div>
+                <div class="col-12 col-sm-6">
+                  <h3>Testing Now</h3>
                 </div>
               </div>
               <div class="row" v-else>
@@ -222,6 +225,7 @@ export default {
       var payload = new FormData();
       payload.append("id", this.$route.params.id);
       this.$store.dispatch("getStProducts", payload).then(res => {
+        console.log(res.data);
         this.product_list = res.data;
         if (res.data.length !== 0) {
           this.product_bool = true;
@@ -231,13 +235,10 @@ export default {
 
     openbtn: function(btnName) {
       var i, tabcontent, tablinks;
-
       tabcontent = document.getElementsByClassName("tabcontent");
-
       for (i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = "none";
       }
-
       document.getElementById(btnName).style.display = "block";
     }
   }
@@ -452,7 +453,7 @@ export default {
 }
 
 .video-width {
-  width: 50%;
+  width: 100%;
   display: block;
 }
 

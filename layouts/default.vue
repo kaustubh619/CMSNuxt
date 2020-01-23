@@ -6,14 +6,14 @@
   </div>
 </template>
 <script>
-  import Header from "@/components/header.vue";
-  import Footer from "@/components/footer.vue";
-  export default {
-    components: {
-      Header,
-      Footer
-    }
-  };
+import Header from "@/components/header.vue";
+import Footer from "@/components/footer.vue";
+export default {
+  components: {
+    Header,
+    Footer
+  }
+};
 </script>
 <style>
 /* html {
@@ -147,5 +147,9 @@ body {
     -webkit-transform: scale3D(0, 0, 1);
     transform: scale3D(0, 0, 1);
   }
+}
+
+#dashboard_inner_block {
+  padding: 40px 0px;
 }
 </style>
