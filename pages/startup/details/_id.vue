@@ -274,6 +274,11 @@
             setTimeout(function() {
               document.getElementById("product").click();
             }, 1000);
+          } else {
+            this.loading_bool = false;
+            setTimeout(function() {
+              document.getElementById("product").click();
+            }, 1000);
           }
         });
       },
