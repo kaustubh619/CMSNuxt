@@ -33,8 +33,8 @@
           <div class="col-xs-12">
             <div class="row">
               <h4 class="col-xs-12" style="letter-spacing: 1px;">
-                Total {{ length }}
-                <span style="color: #ffce10">results</span> found
+                <span style="color: #ffce10">Featured</span> Startups, Total
+                {{ length }} <span style="color: #ffce10">results</span> found
 
                 <hr />
               </h4>
@@ -130,6 +130,10 @@
       };
     },
     mounted() {
+      $("#user_profile")
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
       this.getFeaturedStartups();
     },
     methods: {
