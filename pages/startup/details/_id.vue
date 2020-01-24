@@ -229,14 +229,16 @@
       this.getStartupDetails();
       this.getStProducts();
 
-      $(".tablinks").click(function() {
-        var id = $(this).attr("id");
+      setTimeout(function() {
+        $(".tablinks").click(function() {
+          var id = $(this).attr("id");
 
-        $("#" + id)
-          .addClass("btn-activated")
-          .siblings()
-          .removeClass("btn-activated");
-      });
+          $("#" + id)
+            .addClass("btn-activated")
+            .siblings()
+            .removeClass("btn-activated");
+        });
+      }, 1000);
     },
     methods: {
       getStartupDetails: function() {
