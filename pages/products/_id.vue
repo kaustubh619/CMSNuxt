@@ -159,7 +159,7 @@
                         <div
                           v-for="(l, m) in update_list"
                           :key="m"
-                          style="background-color: #f9f9f9; margin: 10px; padding: 10px"
+                          class="my-style"
                         >
                           <h1 style="border: none">
                             <span
@@ -668,5 +668,18 @@
   .video-width {
     width: 100%;
   }
+}
+
+.my-style {
+  background-color: #f9f9f9;
+  transition: all 1s ease-in;
+  margin: 0px;
+  margin-bottom: 50px;
+  padding: 10px;
+}
+
+.my-style:hover {
+  background-color: white;
+  box-shadow: 4px 4px 10px 0px #009e74;
 }
 </style>
