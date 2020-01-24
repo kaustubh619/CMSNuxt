@@ -66,7 +66,12 @@
               <h3>Categories</h3>
             </div>
             <div class="list-group">
-              <a href="#" class="list-group-item" @click="getStartups" id="allStartUp">
+              <a
+                href="#"
+                class="list-group-item"
+                @click="getStartups"
+                id="allStartUp"
+              >
                 <i class="fa fa-hand-o-right"></i> All Startup
               </a>
               <a
@@ -81,8 +86,12 @@
                 {{ x.category }}
               </a>
             </div>
-            <p class="cat_class" id="allCat" @click="showAllCat">Show all categories</p>
-            <p class="cat_class hide" id="lessCat" @click="getCategories">Show less categories</p>
+            <p class="cat_class" id="allCat" @click="showAllCat">
+              Show all categories
+            </p>
+            <p class="cat_class hide" id="lessCat" @click="getCategories">
+              Show less categories
+            </p>
           </div>
 
           <div class="col-md-9 col-sm-8 col-xs-12">
@@ -140,7 +149,9 @@
                           <i class="fa fa-calendar"></i>
                           {{ x.date_of_launch }}
                         </a>
-                        <p style="min-height: 88px">{{ x.description.slice(0, 180) }}.....</p>
+                        <p style="min-height: 88px">
+                          {{ x.description.slice(0, 180) }}.....
+                        </p>
                       </div>
                       <div class="recent-feature-item-rating">
                         <h2>
@@ -169,190 +180,190 @@
 </template>
 
 <script>
-import Auth from "~/components/authentication.vue";
-import axios from "axios";
-export default {
-  components: {
-    Auth
-  },
-
-  data() {
-    return {
-      categoryList: [],
-      startupList: [],
-      length: "",
-      cat_bool: false,
-      category_name: "",
-      loading_bool: true
-    };
-  },
-
-  mounted() {
-    this.getCategories();
-
-    this.getCountries();
-    this.catselect();
-    $("#user_profile")
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
-  },
-
-  destroyed() {
-    this.$store.commit("category", 0);
-  },
-
-  methods: {
-    catselect: function() {
-      if (this.$store.state.category !== 0) {
-        this.getStartupByCategory(this.$store.state.category);
-      } else {
-        this.getStartups();
-      }
+  import Auth from "~/components/authentication.vue";
+  import axios from "axios";
+  export default {
+    components: {
+      Auth
     },
 
-    getCategories: function() {
-      this.$store.dispatch("getCategories").then(res => {
-        this.categoryList = res.data.slice(0, 3);
-        $("#lessCat").addClass("hide");
-        $("#allCat").removeClass("hide");
-        const categoryObj = {};
-
-        res.data.map(item => {
-          categoryObj[item.id] = { category: item.category };
-        });
-      });
+    data() {
+      return {
+        categoryList: [],
+        startupList: [],
+        length: "",
+        cat_bool: false,
+        category_name: "",
+        loading_bool: true
+      };
     },
-    getStartups: function() {
-      this.$store.dispatch("getStartups").then(res => {
-        this.startupList = res.data;
-        this.length = res.data.length;
-        this.loading_bool = false;
-      });
+
+    mounted() {
       this.getCategories();
-      $("#allStartUp")
+
+      this.getCountries();
+      this.catselect();
+      $("#user_profile")
         .addClass("active")
         .siblings()
         .removeClass("active");
-      this.cat_bool = false;
     },
 
-    showAllCat: function() {
-      this.$store.dispatch("getCategories").then(res => {
-        this.categoryList = res.data;
-        $("#allCat").addClass("hide");
-        $("#lessCat").removeClass("hide");
-      });
+    destroyed() {
+      this.$store.commit("category", 0);
     },
 
-    getStartupByCategory(id) {
-      var payload = new FormData();
-      payload.append("id", id);
-      this.$store.dispatch("getStartupByCategory", payload).then(res => {
-        this.loading_bool = false;
-        this.startupList = res.data;
-        this.length = res.data.length;
-      });
+    methods: {
+      catselect: function() {
+        if (this.$store.state.category !== 0) {
+          this.getStartupByCategory(this.$store.state.category);
+        } else {
+          this.getStartups();
+        }
+      },
 
-      $("#allCat").click();
-      setTimeout(function() {
-        $("#" + id)
+      getCategories: function() {
+        this.$store.dispatch("getCategories").then(res => {
+          this.categoryList = res.data.slice(0, 3);
+          $("#lessCat").addClass("hide");
+          $("#allCat").removeClass("hide");
+          const categoryObj = {};
+
+          res.data.map(item => {
+            categoryObj[item.id] = { category: item.category };
+          });
+        });
+      },
+      getStartups: function() {
+        this.$store.dispatch("getStartups").then(res => {
+          this.startupList = res.data;
+          this.length = res.data.length;
+          this.loading_bool = false;
+        });
+        this.getCategories();
+        $("#allStartUp")
           .addClass("active")
           .siblings()
           .removeClass("active");
-      }, 100);
-      this.getCategoryById(id);
-      this.cat_bool = true;
-    },
+        this.cat_bool = false;
+      },
 
-    getCountries: function() {
-      return axios.get("/json/countries.json").then(res => {
-        const countryObj = {};
-
-        res.data.map(item => {
-          countryObj[item.countryID] = { country: item.countryName };
+      showAllCat: function() {
+        this.$store.dispatch("getCategories").then(res => {
+          this.categoryList = res.data;
+          $("#allCat").addClass("hide");
+          $("#lessCat").removeClass("hide");
         });
+      },
 
-        setTimeout(function() {
-          var select = document.getElementById("country-select");
-          for (this.i in countryObj) {
-            select.options[select.options.length] = new Option(
-              countryObj[this.i].country,
-              this.i
-            );
-          }
-        }, 300);
-
-        return {
-          authors: res.data
-        };
-      });
-    },
-
-    filterStartup: function() {
-      const country_name = $("#country-select :selected").text();
-      const year_founded = $("#year_filter").val();
-
-      if ($("#country-select").val() != 0 && $("#year_filter").val() === "") {
-        this.$store.dispatch("getStartups").then(res => {
-          var startupArray = res.data;
-          var filteredArray = startupArray.filter(function(el) {
-            return el.country === country_name;
-          });
-          this.startupList = filteredArray;
-          this.length = this.startupList.length;
-          $(".list-group")
-            .children()
-            .removeClass("active");
-        });
-      } else if ($("#country-select").val() == 0 && $("#year_filter").val()) {
-        this.$store.dispatch("getStartups").then(res => {
-          var startupArray = res.data;
-
-          var filteredArray = startupArray.filter(function(el) {
-            return el.year_founded == $("#year_filter").val();
-          });
-          this.startupList = filteredArray;
-          this.length = this.startupList.length;
-          $(".list-group")
-            .children()
-            .removeClass("active");
-        });
-      } else if ($("#country-select").val() != 0 && $("#year_filter").val()) {
-        this.$store.dispatch("getStartups").then(res => {
-          var startupArray = res.data;
-          var filteredArray = startupArray.filter(function(el) {
-            return el.country === country_name;
-          });
-          var doubleFilter = filteredArray.filter(function(el) {
-            return el.year_founded == $("#year_filter").val();
-          });
-          this.startupList = doubleFilter;
-          this.length = this.startupList.length;
-          $(".list-group")
-            .children()
-            .removeClass("active");
-        });
-      } else {
-        this.$store.dispatch("getStartups").then(res => {
+      getStartupByCategory(id) {
+        var payload = new FormData();
+        payload.append("id", id);
+        this.$store.dispatch("getStartupByCategory", payload).then(res => {
+          this.loading_bool = false;
           this.startupList = res.data;
+          this.length = res.data.length;
         });
-        $(".list-group")
-          .children()
-          .removeClass("active");
-        $("#allStartUp").addClass("active");
-      }
-    },
 
-    getCategoryById: function(id) {
-      var payload = new FormData();
-      payload.append("id", id);
-      this.$store.dispatch("getCategoryById", payload).then(res => {
-        this.category_name = res.data.category;
-      });
+        $("#allCat").click();
+        setTimeout(function() {
+          $("#" + id)
+            .addClass("active")
+            .siblings()
+            .removeClass("active");
+        }, 100);
+        this.getCategoryById(id);
+        this.cat_bool = true;
+      },
+
+      getCountries: function() {
+        return axios.get("/json/countries.json").then(res => {
+          const countryObj = {};
+
+          res.data.map(item => {
+            countryObj[item.countryID] = { country: item.countryName };
+          });
+
+          setTimeout(function() {
+            var select = document.getElementById("country-select");
+            for (this.i in countryObj) {
+              select.options[select.options.length] = new Option(
+                countryObj[this.i].country,
+                this.i
+              );
+            }
+          }, 300);
+
+          return {
+            authors: res.data
+          };
+        });
+      },
+
+      filterStartup: function() {
+        const country_name = $("#country-select :selected").text();
+        const year_founded = $("#year_filter").val();
+
+        if ($("#country-select").val() != 0 && $("#year_filter").val() === "") {
+          this.$store.dispatch("getStartups").then(res => {
+            var startupArray = res.data;
+            var filteredArray = startupArray.filter(function(el) {
+              return el.country === country_name;
+            });
+            this.startupList = filteredArray;
+            this.length = this.startupList.length;
+            $(".list-group")
+              .children()
+              .removeClass("active");
+          });
+        } else if ($("#country-select").val() == 0 && $("#year_filter").val()) {
+          this.$store.dispatch("getStartups").then(res => {
+            var startupArray = res.data;
+
+            var filteredArray = startupArray.filter(function(el) {
+              return el.year_founded == $("#year_filter").val();
+            });
+            this.startupList = filteredArray;
+            this.length = this.startupList.length;
+            $(".list-group")
+              .children()
+              .removeClass("active");
+          });
+        } else if ($("#country-select").val() != 0 && $("#year_filter").val()) {
+          this.$store.dispatch("getStartups").then(res => {
+            var startupArray = res.data;
+            var filteredArray = startupArray.filter(function(el) {
+              return el.country === country_name;
+            });
+            var doubleFilter = filteredArray.filter(function(el) {
+              return el.year_founded == $("#year_filter").val();
+            });
+            this.startupList = doubleFilter;
+            this.length = this.startupList.length;
+            $(".list-group")
+              .children()
+              .removeClass("active");
+          });
+        } else {
+          this.$store.dispatch("getStartups").then(res => {
+            this.startupList = res.data;
+          });
+          $(".list-group")
+            .children()
+            .removeClass("active");
+          $("#allStartUp").addClass("active");
+        }
+      },
+
+      getCategoryById: function(id) {
+        var payload = new FormData();
+        payload.append("id", id);
+        this.$store.dispatch("getCategoryById", payload).then(res => {
+          this.category_name = res.data.category;
+        });
+      }
     }
-  }
-};
+  };
 </script>
 
 <style>

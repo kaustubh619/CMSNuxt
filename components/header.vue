@@ -57,6 +57,12 @@
                             Listing</nuxt-link
                           >
                         </li>
+                        <li>
+                          <nuxt-link to="/startup/featured_startups"
+                            ><i class="fa fa-angle-double-right"></i> Featured
+                            Listing</nuxt-link
+                          >
+                        </li>
                         <li
                           @click="activeUserProfile"
                           v-if="authentication"
