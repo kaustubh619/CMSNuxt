@@ -232,10 +232,6 @@
           .siblings()
           .removeClass("btn-activated");
       });
-
-      setTimeout(function() {
-        document.getElementById("product").click();
-      }, 1000);
     },
     methods: {
       getStartupDetails: function() {
@@ -270,6 +266,9 @@
           if (res.data.length !== 0) {
             this.product_bool = true;
             this.loading_bool = false;
+            setTimeout(function() {
+              document.getElementById("product").click();
+            }, 1000);
           }
         });
       },
