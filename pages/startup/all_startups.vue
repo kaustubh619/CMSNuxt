@@ -115,6 +115,12 @@
                   <div class="col-md-6 col-sm-12 nopadding">
                     <div class="recent-listing-box-image">
                       <h1>{{ x.category.category }}</h1>
+                      <h1
+                        v-if="x.featured"
+                        style="left: auto; right: 0px; border-radius: 15px 0px 0px 15px"
+                      >
+                        Featured
+                      </h1>
                       <img :src="x.thumbnail" alt="img1" class="thumb-img" />
                     </div>
                     <div class="hover-overlay">
@@ -241,6 +247,7 @@
       },
       getStartups: function() {
         this.$store.dispatch("getStartups").then(res => {
+          console.log(res.data);
           this.startupList = res.data;
           this.length = res.data.length;
           this.loading_bool = false;
