@@ -812,7 +812,7 @@
       rgba(255, 255, 255, 0.219),
       rgba(255, 255, 255, 0.267)
     ),
-    url("~static/images/back-finale.png");
+    url("~static/images/back-finale.webp");
   width: 100%;
   min-height: 600px;
   background-size: cover;
