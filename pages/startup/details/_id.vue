@@ -240,10 +240,10 @@ export default {
           }, 1000);
         } else {
           this.loading_bool = false;
-          // setTimeout(function() {
-          //   document.getElementById("product").click();
-          //   $("#product").click();
-          // }, 1000);
+          setTimeout(function() {
+            document.getElementById("product").click();
+            $("#product").click();
+          }, 1000);
         }
       });
     },
