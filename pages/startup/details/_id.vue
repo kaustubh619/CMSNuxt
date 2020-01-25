@@ -101,7 +101,11 @@
         <div class="row">
           <div class="col-12 hide-lg-product">
             <div class="tab">
-              <button class="tablinks" id="product" @click="openbtn('description')">Products</button>
+              <button
+                class="tablinks btn-activated"
+                id="product"
+                @click="openbtn('description')"
+              >Products</button>
               <button class="tablinks" id="faq" @click="openbtn('reviews')">FAQ</button>
               <button class="tablinks" id="com" @click="openbtn('community')">Community</button>
             </div>
@@ -236,6 +240,10 @@ export default {
           }, 1000);
         } else {
           this.loading_bool = false;
+          // setTimeout(function() {
+          //   document.getElementById("product").click();
+          //   $("#product").click();
+          // }, 1000);
         }
       });
     },
@@ -247,19 +255,16 @@ export default {
         tabcontent[i].style.display = "none";
       }
       document.getElementById(btnName).style.display = "block";
-      setTimeout(function() {
-        document.getElementById("product").click();
-      }, 1000);
-      setTimeout(function() {
-        $(".tablinks").click(function() {
-          var id = $(this).attr("id");
+      // setTimeout(function() {
+      $(".tablinks").click(function() {
+        var id = $(this).attr("id");
 
-          $("#" + id)
-            .addClass("btn-activated")
-            .siblings()
-            .removeClass("btn-activated");
-        });
-      }, 1000);
+        $("#" + id)
+          .addClass("btn-activated")
+          .siblings()
+          .removeClass("btn-activated");
+      });
+      // }, 1000);
     }
   }
 };
