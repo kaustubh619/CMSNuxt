@@ -153,7 +153,11 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
+  modules: [
+    "@nuxtjs/axios",
+    "@nuxtjs/auth",
+    ["@nuxtjs/component-cache", { maxAge: 1000 * 60 * 60 }]
+  ],
 
   auth: {
     strategies: {
