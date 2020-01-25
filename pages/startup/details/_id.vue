@@ -41,41 +41,19 @@
             <img :src="thumbnail" class="st-thumb" />
             <div class="col-12 col-md-4">
               <span>
-                <i
-                  class="fa fa-map-marker"
-                  aria-hidden="true"
-                  style="color: #009e74"
-                ></i>
+                <i class="fa fa-map-marker" aria-hidden="true" style="color: #009e74"></i>
                 <p
                   style="display: inline-block; font-size: 14px; font-weight: 300"
-                >
-                  {{ city }}, {{ country }}
-                </p>
+                >{{ city }}, {{ country }}</p>
               </span>
             </div>
             <div class="col-12 col-md-4">
-              <i
-                class="fa fa-calendar"
-                aria-hidden="true"
-                style="color: #009e74"
-              ></i>
-              <p
-                style="display: inline-block; font-size: 14px; font-weight: 300"
-              >
-                {{ estd }}
-              </p>
+              <i class="fa fa-calendar" aria-hidden="true" style="color: #009e74"></i>
+              <p style="display: inline-block; font-size: 14px; font-weight: 300">{{ estd }}</p>
             </div>
             <div class="col-12 col-md-4">
-              <i
-                class="fa fa-users"
-                aria-hidden="true"
-                style="color: #009e74"
-              ></i>
-              <p
-                style="display: inline-block; font-size: 14px; font-weight: 300"
-              >
-                {{ team_size }}
-              </p>
+              <i class="fa fa-users" aria-hidden="true" style="color: #009e74"></i>
+              <p style="display: inline-block; font-size: 14px; font-weight: 300">{{ team_size }}</p>
             </div>
           </div>
           <div class="col-12 col-sm-4" style="margin-top: 40px">
@@ -123,19 +101,9 @@
         <div class="row">
           <div class="col-12 hide-lg-product">
             <div class="tab">
-              <button
-                class="tablinks"
-                id="product"
-                @click="openbtn('description')"
-              >
-                Products
-              </button>
-              <button class="tablinks" id="faq" @click="openbtn('reviews')">
-                FAQ
-              </button>
-              <button class="tablinks" id="com" @click="openbtn('community')">
-                Community
-              </button>
+              <button class="tablinks" id="product" @click="openbtn('description')">Products</button>
+              <button class="tablinks" id="faq" @click="openbtn('reviews')">FAQ</button>
+              <button class="tablinks" id="com" @click="openbtn('community')">Community</button>
             </div>
 
             <div id="description" class="tabcontent">
@@ -148,9 +116,10 @@
                 >
                   <p class="st-sub-text-11">
                     {{ b + 1 }}.
-                    <span style="margin-left: 10px" class="prod_desc-11">
-                      {{ a.product_name }}
-                    </span>
+                    <span
+                      style="margin-left: 10px"
+                      class="prod_desc-11"
+                    >{{ a.product_name }}</span>
                     <video
                       id="player"
                       poster="../../../images/pro_img.jpg"
@@ -170,14 +139,14 @@
                       name: 'products-id',
                       params: { id: a.id }
                     }"
-                    >Know More</nuxt-link
-                  >
+                  >Know More</nuxt-link>
                 </div>
               </div>
               <div class="row" v-else>
-                <div class="col-12" style="padding: 10px; font-weight: 300">
-                  No Products added for this startup
-                </div>
+                <div
+                  class="col-12"
+                  style="padding: 10px; font-weight: 300"
+                >No Products added for this startup</div>
               </div>
             </div>
 
@@ -196,39 +165,91 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        name: "",
-        city: "",
-        country: "",
-        category: "",
-        estd: "",
-        description: "",
-        team_size: "",
-        key_team_members: "",
-        founders: "",
-        incubators: "",
-        investors: "",
-        accelerators: "",
-        partners: "",
-        round: "",
-        added: "",
-        product_list: [],
-        product_bool: false,
-        thumbnail: "",
-        state: "",
-        loading_bool: true
-      };
+export default {
+  data() {
+    return {
+      name: "",
+      city: "",
+      country: "",
+      category: "",
+      estd: "",
+      description: "",
+      team_size: "",
+      key_team_members: "",
+      founders: "",
+      incubators: "",
+      investors: "",
+      accelerators: "",
+      partners: "",
+      round: "",
+      added: "",
+      product_list: [],
+      product_bool: false,
+      thumbnail: "",
+      state: "",
+      loading_bool: true
+    };
+  },
+  mounted() {
+    $("#user_profile")
+      .addClass("active")
+      .siblings()
+      .removeClass("active");
+    this.getStartupDetails();
+    this.getStProducts();
+  },
+  methods: {
+    getStartupDetails: function() {
+      var payload = new FormData();
+      payload.append("id", this.$route.params.id);
+      this.$store.dispatch("getStartupDetails", payload).then(res => {
+        this.name = res.data.name;
+        this.city = res.data.city;
+        this.country = res.data.country;
+        this.category = res.data.category.category;
+        this.estd = res.data.date_of_launch;
+        this.description = res.data.description;
+        this.team_size = res.data.team_size;
+        this.key_team_members = res.data.key_team_members;
+        this.founders = res.data.name_of_founders;
+        this.incubators = res.data.incubators;
+        this.investors = res.data.investors;
+        this.accelerators = res.data.accelerators;
+        this.partners = res.data.partnerships_associations;
+        this.round = res.data.funding_round;
+        this.added = res.data.added_date;
+        this.thumbnail = res.data.thumbnail;
+        this.state = res.data.state;
+      });
     },
-    mounted() {
-      $("#user_profile")
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
-      this.getStartupDetails();
-      this.getStProducts();
 
+    getStProducts: function() {
+      var payload = new FormData();
+      payload.append("id", this.$route.params.id);
+      this.$store.dispatch("getStProducts", payload).then(res => {
+        this.product_list = res.data;
+        if (res.data.length !== 0) {
+          this.product_bool = true;
+          this.loading_bool = false;
+          setTimeout(function() {
+            document.getElementById("product").click();
+          }, 1000);
+        } else {
+          this.loading_bool = false;
+        }
+      });
+    },
+
+    openbtn: function(btnName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      document.getElementById(btnName).style.display = "block";
+      setTimeout(function() {
+        document.getElementById("product").click();
+      }, 1000);
       setTimeout(function() {
         $(".tablinks").click(function() {
           var id = $(this).attr("id");
@@ -239,62 +260,9 @@
             .removeClass("btn-activated");
         });
       }, 1000);
-    },
-    methods: {
-      getStartupDetails: function() {
-        var payload = new FormData();
-        payload.append("id", this.$route.params.id);
-        this.$store.dispatch("getStartupDetails", payload).then(res => {
-          this.name = res.data.name;
-          this.city = res.data.city;
-          this.country = res.data.country;
-          this.category = res.data.category.category;
-          this.estd = res.data.date_of_launch;
-          this.description = res.data.description;
-          this.team_size = res.data.team_size;
-          this.key_team_members = res.data.key_team_members;
-          this.founders = res.data.name_of_founders;
-          this.incubators = res.data.incubators;
-          this.investors = res.data.investors;
-          this.accelerators = res.data.accelerators;
-          this.partners = res.data.partnerships_associations;
-          this.round = res.data.funding_round;
-          this.added = res.data.added_date;
-          this.thumbnail = res.data.thumbnail;
-          this.state = res.data.state;
-        });
-      },
-
-      getStProducts: function() {
-        var payload = new FormData();
-        payload.append("id", this.$route.params.id);
-        this.$store.dispatch("getStProducts", payload).then(res => {
-          this.product_list = res.data;
-          if (res.data.length !== 0) {
-            this.product_bool = true;
-            this.loading_bool = false;
-            setTimeout(function() {
-              document.getElementById("product").click();
-            }, 1000);
-          } else {
-            this.loading_bool = false;
-            setTimeout(function() {
-              document.getElementById("product").click();
-            }, 1000);
-          }
-        });
-      },
-
-      openbtn: function(btnName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
-        document.getElementById(btnName).style.display = "block";
-      }
     }
-  };
+  }
+};
 </script>
 
 <style>

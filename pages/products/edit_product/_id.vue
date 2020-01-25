@@ -135,14 +135,7 @@
 <script>
 import Cookies from "js-cookie";
 
-let EditorJS, Header, List, Image, quill;
-
-if (process.browser) {
-  EditorJS = require("@editorjs/editorjs");
-  Header = require("@editorjs/header");
-  List = require("@editorjs/list");
-  Image = require("@editorjs/image");
-}
+let quill;
 
 export default {
   middleware: "token-auth",

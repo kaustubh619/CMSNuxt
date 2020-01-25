@@ -290,6 +290,7 @@
           this.app_link = res.data.product_app_link;
           this.product_video = res.data.product_video;
           this.date_added = res.data.added_date;
+          console.log(res.data);
           this.product_cat = res.data.startup_name.category.category;
           var quill = new Quill("#editor-container", {
             modules: { toolbar: [] },
@@ -680,6 +681,6 @@
 
 .my-style:hover {
   background-color: white;
-  box-shadow: 4px 4px 10px 0px #009e74;
+  box-shadow: 4px 4px 10px 0px #f9f9f9;
 }
 </style>
