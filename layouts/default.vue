@@ -161,4 +161,31 @@ body {
 .ql-editor ul > li {
   font-size: 18px !important;
 }
+
+.h5,
+h5 {
+  font-size: 16px !important;
+}
+
+.h4,
+h4 {
+  font-size: 18px !important;
+}
+
+.h3,
+h3 {
+  font-size: 20px !important;
+  margin: none;
+  padding: 0px;
+}
+
+.h2,
+h2 {
+  font-size: 22px !important;
+}
+
+.h1,
+h1 {
+  font-size: 24px !important;
+}
 </style>

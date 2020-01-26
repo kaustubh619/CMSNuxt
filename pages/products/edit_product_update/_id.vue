@@ -83,7 +83,8 @@
                           :href="video_url"
                           target="_blank"
                           style="cursor: pointer; float: left; margin-left: 6px"
-                        >{{ video_name }}</a>
+                          >{{ video_name }}</a
+                        >
                         <input
                           class="form-control"
                           type="file"
@@ -97,7 +98,13 @@
                 </div>
                 <div class="from-list-lt">
                   <div class="form-group">
-                    <button class="btn" type="submit" @click="editProductUpdate">Update</button>
+                    <button
+                      class="btn"
+                      type="submit"
+                      @click="editProductUpdate"
+                    >
+                      Update
+                    </button>
                   </div>
                 </div>
               </div>
@@ -110,106 +117,106 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
-let quill;
+  import Cookies from "js-cookie";
+  let quill;
 
-export default {
-  middleware: "token-auth",
-  data() {
-    return {
-      post: [],
-      id: "",
-      product_name: "",
-      city: "",
-      country: "",
-      startup: "",
-      stage: "",
-      users: "",
-      app_link: "",
-      startupname: "",
-      active_users: "",
-      startup_id: "",
-      file: "",
-      video_url: "",
-      video_name: "",
-      product_id: ""
-    };
-  },
-
-  mounted() {
-    this.UpdateById();
-    $("#user_profile")
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
-  },
-
-  methods: {
-    logOutUser: function() {
-      var payload = new FormData();
-      payload.append("login_status", "false");
-      this.$store.dispatch("logOutUser", payload).then(res => {});
-      localStorage.clear();
-      Cookies.remove("x-access-token");
-      this.$store.commit("authentication", false);
-      this.$router.push("/");
+  export default {
+    middleware: "token-auth",
+    data() {
+      return {
+        post: [],
+        id: "",
+        product_name: "",
+        city: "",
+        country: "",
+        startup: "",
+        stage: "",
+        users: "",
+        app_link: "",
+        startupname: "",
+        active_users: "",
+        startup_id: "",
+        file: "",
+        video_url: "",
+        video_name: "",
+        product_id: ""
+      };
     },
 
-    UpdateById: function() {
-      this.$store.dispatch("UpdateById", this.$route.params.id).then(res => {
-        this.product_id = res.data.product.id;
-        this.video_url = res.data.update_video;
-        if (res.data.update_video !== null) {
-          this.video_name = res.data.update_video.slice(43);
-        }
+    mounted() {
+      this.UpdateById();
+      $("#user_profile")
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+    },
 
-        this.post = JSON.parse(res.data.latest_updates);
-        quill = new Quill("#editor-container", {
-          modules: {
-            toolbar: [
-              [{ header: [1, 2, 3, 4, false] }],
-              ["bold", "italic", "underline"],
-              [{ list: "ordered" }, { list: "bullet" }],
-              ["image"],
+    methods: {
+      logOutUser: function() {
+        var payload = new FormData();
+        payload.append("login_status", "false");
+        this.$store.dispatch("logOutUser", payload).then(res => {});
+        localStorage.clear();
+        Cookies.remove("x-access-token");
+        this.$store.commit("authentication", false);
+        this.$router.push("/");
+      },
 
-              [{ color: [] }, { background: [] }],
-              [{ font: [] }],
-              [{ align: [] }]
-            ]
-          },
+      UpdateById: function() {
+        this.$store.dispatch("UpdateById", this.$route.params.id).then(res => {
+          this.product_id = res.data.product.id;
+          this.video_url = res.data.update_video;
+          if (res.data.update_video !== null) {
+            this.video_name = res.data.update_video.slice(43);
+          }
 
-          theme: "snow" // or 'bubble'
+          this.post = JSON.parse(res.data.latest_updates);
+          quill = new Quill("#editor-container", {
+            modules: {
+              toolbar: [
+                [{ header: [1, 2, 3, 4, false] }],
+                ["bold", "italic", "underline"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["image"],
+
+                [{ color: [] }, { background: [] }],
+                [{ font: [] }],
+                [{ align: [] }]
+              ]
+            },
+
+            theme: "snow" // or 'bubble'
+          });
+          quill.setContents(this.post);
         });
-        quill.setContents(this.post);
-      });
-    },
+      },
 
-    handleFileUpload: function() {
-      this.file = this.$refs.file.files[0];
-    },
+      handleFileUpload: function() {
+        this.file = this.$refs.file.files[0];
+      },
 
-    editProductUpdate: function() {
-      var payload = new FormData();
-      payload.append("id", this.$route.params.id);
-      payload.append("added_by", localStorage.getItem("user_id"));
-      payload.append("updated_by", localStorage.getItem("user_id"));
-      const date_added = new Date();
-      const day = date_added.getDate();
-      const month = date_added.getMonth() + 1;
-      const year = date_added.getFullYear();
-      const added_dated = year + "-" + month + "-" + day;
-      payload.append("updated_date", added_dated);
-      payload.append("latest_updates", JSON.stringify(quill.getContents()));
-      // payload.append("latest_updates", JSON.stringify(outputData.blocks));
-      if (this.file) {
-        payload.append("update_video", this.file);
+      editProductUpdate: function() {
+        var payload = new FormData();
+        payload.append("id", this.$route.params.id);
+        payload.append("added_by", localStorage.getItem("user_id"));
+        payload.append("updated_by", localStorage.getItem("user_id"));
+        const date_added = new Date();
+        const day = date_added.getDate();
+        const month = date_added.getMonth() + 1;
+        const year = date_added.getFullYear();
+        const added_dated = year + "-" + month + "-" + day;
+        payload.append("updated_date", added_dated);
+        payload.append("latest_updates", JSON.stringify(quill.getContents()));
+        // payload.append("latest_updates", JSON.stringify(outputData.blocks));
+        if (this.file) {
+          payload.append("update_video", this.file);
+        }
+        payload.append("product", this.product_id);
+        this.$store.dispatch("editProductUpdate", payload).then(res => {});
+        this.$router.push("/startup/listing");
       }
-      payload.append("product", this.product_id);
-      this.$store.dispatch("editProductUpdate", payload).then(res => {});
-      this.$router.push("/startup/listing");
     }
-  }
-};
+  };
 </script>
 
 <style>
