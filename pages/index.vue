@@ -165,7 +165,7 @@
         </div>
       </div>
 
-      <div class="vfx-counter-block">
+      <!-- <div class="vfx-counter-block">
         <div
           class="vfx-item-container-slope vfx-item-bottom-slope vfx-item-left-slope"
         ></div>
@@ -220,17 +220,48 @@
                   <div class="counter_text">Categories</div>
                 </div>
               </div>
-              <!-- <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="vfx-item-countup last-countup">
-            <div class="vfx-item-black-top-arrow"><i class="fa fa-th-list"></i></div>
-            <div id="count-4" class="vfx-coutter-item count_number vfx-item-count-up">274</div>
-            <div class="counter_text">Listings Types</div>
+            </div>
           </div>
-            </div>-->
+        </div>
+      </div> -->
+      <div
+      id="search-categorie-item"
+      :style="{
+        background: `linear-gradient( to right bottom, rgba(0, 0, 0, 0.801), rgba(128, 128, 128, 0.601) ), url(${header_img}) top center no-repeat`
+      }"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <div class="row">
+              <div class="col-md-12 categories-heading bt_heading_3">
+                <h1 style="color: white">
+                  Directory
+                  <span>Category</span>
+                </h1>
+                <div class="blind line_1"></div>
+                <div class="flipInX-1 blind icon">
+                  <span class="icon">
+                    <i class="fa fa-stop"></i>&nbsp;&nbsp;
+                    <i class="fa fa-stop"></i>
+                  </span>
+                </div>
+                <div class="blind line_2"></div>
+              </div>
+              <div class="col-md-3 col-sm-6 col-xs-12" v-for="(x, y) in categoryList" :key="y">
+                <div class="categorie_item" v-bind:id="x.id" @click="getListing(x.id)">
+                  <div class="cate_item_block hi-icon-effect-8">
+                    <h1>
+                      <a href="#">{{ x.category }}</a>
+                    </h1>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
       <div id="recent-product-item-listing">
         <div class="container">
           <div class="row">
@@ -549,7 +580,8 @@
         startup_count: "",
         user_count: "",
         featuredList: [],
-        loading_bool: true
+        loading_bool: true,
+        categoryList: []
       };
     },
 
@@ -595,13 +627,6 @@
         });
       },
 
-      showAllCat: function() {
-        this.$store.dispatch("getCategories").then(res => {
-          this.categoryList = res.data;
-          $("#allCat").addClass("hide");
-          $("#lessCat").removeClass("hide");
-        });
-      },
       logInUser: function() {
         var payload = new FormData();
         payload.append("username", this.username);
@@ -663,6 +688,7 @@
       getCategories: function() {
         this.$store.dispatch("getCategories").then(res => {
           this.category_length = res.data.length;
+          this.categoryList = res.data;
 
           const categoryObj = {};
 
@@ -742,6 +768,11 @@
         } else {
           $(".btn_login").click();
         }
+      },
+
+      getListing: function(id) {
+        this.$store.commit("category", id);
+        this.$router.push("/startup/all_startups");
       }
     }
   };
@@ -947,5 +978,11 @@
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
   }
+}
+
+#search-categorie-item {
+  background-size: cover !important;
+  background-position: center !important;
+  background-attachment: fixed !important;
 }
 </style>
