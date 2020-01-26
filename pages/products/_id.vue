@@ -174,19 +174,30 @@
                               style="color: #009e74; text-shadow: 2px 2px #e7e7e7"
                               >Added Date: {{ l.added_date }}</span
                             >
-                            <video
-                              id="player"
-                              poster="../../../images/pro_img.jpg"
-                              playsinline
-                              controls
-                              style="margin-top: 20px; display: block; margin-left: auto; margin-right: auto"
-                              class="video-width"
-                            >
-                              <source :src="l.update_video" type="video/mp4" />
-                              <source :src="l.update_video" type="video/webm" />
-                            </video>
                           </h1>
-                          <div class="update-container"></div>
+                          <div class="row">
+                            <div class="col-12 col-md-6">
+                              <video
+                                id="player"
+                                poster="../../../images/pro_img.jpg"
+                                playsinline
+                                controls
+                                style="margin-top: 20px; display: block; margin-left: auto; margin-right: auto; width: 100%"
+                              >
+                                <source
+                                  :src="l.update_video"
+                                  type="video/mp4"
+                                />
+                                <source
+                                  :src="l.update_video"
+                                  type="video/webm"
+                                />
+                              </video>
+                            </div>
+                            <div class="col-12 col-md-6">
+                              <div class="update-container"></div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -672,15 +683,16 @@
 }
 
 .my-style {
-  background-color: #f9f9f9;
+  background-color: white;
+  box-shadow: 4px 4px 10px 2px #e7e7e7;
   transition: all 1s ease-in;
   margin: 0px;
   margin-bottom: 50px;
   padding: 10px;
+  border-radius: 20px;
 }
 
-.my-style:hover {
-  background-color: white;
-  box-shadow: 4px 4px 10px 0px #f9f9f9;
-}
+/* .my-style:hover {
+  
+} */
 </style>
