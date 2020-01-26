@@ -695,9 +695,4 @@
 /* .my-style:hover {
   
 } */
-
-.h5,
-h5 {
-  font-size: 30px !important;
-}
 </style>

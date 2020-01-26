@@ -188,4 +188,8 @@ h2 {
 h1 {
   font-size: 24px !important;
 }
+
+span {
+  font-size: 16px;
+}
 </style>
