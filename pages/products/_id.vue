@@ -353,7 +353,7 @@
   };
 </script>
 
-<style scoped>
+<style>
 .header_slt_block .user_logo_pic {
   background: transparent;
   width: 0px;
@@ -692,7 +692,33 @@
   border-radius: 20px;
 }
 
-/* .my-style:hover {
-  
-} */
+.my-style:hover {
+  box-shadow: 4px 4px 10px 2px #f7f7f7;
+}
+
+.h4,
+h4 {
+  font-size: 18px !important;
+}
+
+.h3,
+h3 {
+  font-size: 20px !important;
+  margin: none;
+  padding: 0px;
+}
+
+.h2,
+h2 {
+  font-size: 22px !important;
+}
+
+.h1,
+h1 {
+  font-size: 24px !important;
+}
+
+.ql-editor p {
+  font-size: 16px;
+}
 </style>

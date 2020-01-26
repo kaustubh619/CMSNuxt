@@ -73,23 +73,43 @@
                     <div class="row">
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
                         <label>Startup Name :-</label>
-                        <input class="form-control" type="text" v-model="startupname" />
+                        <input
+                          class="form-control"
+                          type="text"
+                          v-model="startupname"
+                        />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
                         <label>Stage :-</label>
-                        <input class="form-control" type="number" v-model="stage" />
+                        <input
+                          class="form-control"
+                          type="number"
+                          v-model="stage"
+                        />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
                         <label>Product Name :-</label>
-                        <input class="form-control" type="text" v-model="product_name" />
+                        <input
+                          class="form-control"
+                          type="text"
+                          v-model="product_name"
+                        />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
                         <label>Application Link :-</label>
-                        <input class="form-control" type="text" v-model="app_link" />
+                        <input
+                          class="form-control"
+                          type="text"
+                          v-model="app_link"
+                        />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
                         <label>Number of active users :-</label>
-                        <input class="form-control" type="number" v-model="active_users" />
+                        <input
+                          class="form-control"
+                          type="number"
+                          v-model="active_users"
+                        />
                       </div>
                       <div class="form-group col-xs-12">
                         <label>Description :-</label>
@@ -106,7 +126,8 @@
                           :href="video_url"
                           target="_blank"
                           style="cursor: pointer; float: left; margin-left: 6px"
-                        >{{ video_name }}</a>
+                          >{{ video_name }}</a
+                        >
                         <input
                           class="form-control"
                           type="file"
@@ -120,7 +141,9 @@
                 </div>
                 <div class="from-list-lt">
                   <div class="form-group">
-                    <button class="btn" type="submit" @click="updateProduct">Update</button>
+                    <button class="btn" type="submit" @click="updateProduct">
+                      Update
+                    </button>
                   </div>
                 </div>
               </div>
@@ -133,115 +156,140 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
+  import Cookies from "js-cookie";
 
-let quill;
+  let quill;
 
-export default {
-  middleware: "token-auth",
-  data() {
-    return {
-      post: [],
-      id: "",
-      product_name: "",
-      city: "",
-      country: "",
-      startup: "",
-      stage: "",
-      users: "",
-      app_link: "",
-      startupname: "",
-      active_users: "",
-      startup_id: "",
-      file: "",
-      video_url: "",
-      video_name: ""
-    };
-  },
-
-  mounted() {
-    this.productById();
-    $("#user_profile")
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
-  },
-
-  methods: {
-    logOutUser: function() {
-      var payload = new FormData();
-      payload.append("login_status", "false");
-      this.$store.dispatch("logOutUser", payload).then(res => {});
-      localStorage.clear();
-      Cookies.remove("x-access-token");
-      this.$store.commit("authentication", false);
-      this.$router.push("/");
+  export default {
+    middleware: "token-auth",
+    data() {
+      return {
+        post: [],
+        id: "",
+        product_name: "",
+        city: "",
+        country: "",
+        startup: "",
+        stage: "",
+        users: "",
+        app_link: "",
+        startupname: "",
+        active_users: "",
+        startup_id: "",
+        file: "",
+        video_url: "",
+        video_name: ""
+      };
     },
 
-    productById: function() {
-      this.$store.dispatch("productById", this.$route.params.id).then(res => {
-        this.video_url = res.data.product_video;
-        if (res.data.product_video !== null) {
-          this.video_name = res.data.product_video.slice(43);
-        }
-        this.startup_id = res.data.startup_name.id;
-        this.startupname = res.data.startup_name.name;
-        this.stage = res.data.stage;
-        this.product_name = res.data.product_name;
-        this.app_link = res.data.product_app_link;
-        this.active_users = res.data.active_users;
-        this.post = JSON.parse(res.data.description);
+    mounted() {
+      this.productById();
+      $("#user_profile")
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+    },
 
-        quill = new Quill("#editor-container", {
-          modules: {
-            toolbar: [
-              [{ header: [1, 2, 3, 4, false] }],
-              ["bold", "italic", "underline"],
-              [{ list: "ordered" }, { list: "bullet" }],
-              ["image"],
+    methods: {
+      logOutUser: function() {
+        var payload = new FormData();
+        payload.append("login_status", "false");
+        this.$store.dispatch("logOutUser", payload).then(res => {});
+        localStorage.clear();
+        Cookies.remove("x-access-token");
+        this.$store.commit("authentication", false);
+        this.$router.push("/");
+      },
 
-              [{ color: [] }, { background: [] }],
-              [{ font: [] }],
-              [{ align: [] }]
-            ]
-          },
+      productById: function() {
+        this.$store.dispatch("productById", this.$route.params.id).then(res => {
+          this.video_url = res.data.product_video;
+          if (res.data.product_video !== null) {
+            this.video_name = res.data.product_video.slice(43);
+          }
+          this.startup_id = res.data.startup_name.id;
+          this.startupname = res.data.startup_name.name;
+          this.stage = res.data.stage;
+          this.product_name = res.data.product_name;
+          this.app_link = res.data.product_app_link;
+          this.active_users = res.data.active_users;
+          this.post = JSON.parse(res.data.description);
 
-          theme: "snow" // or 'bubble'
+          quill = new Quill("#editor-container", {
+            modules: {
+              toolbar: [
+                [{ header: [1, 2, 3, 4, false] }],
+                ["bold", "italic", "underline"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["image"],
+
+                [{ color: [] }, { background: [] }],
+                [{ font: [] }],
+                [{ align: [] }]
+              ]
+            },
+
+            theme: "snow" // or 'bubble'
+          });
+          quill.setContents(this.post);
         });
-        quill.setContents(this.post);
-      });
-    },
+      },
 
-    handleFileUpload: function() {
-      this.file = this.$refs.file.files[0];
-    },
+      handleFileUpload: function() {
+        this.file = this.$refs.file.files[0];
+      },
 
-    updateProduct: function() {
-      var payload = new FormData();
-      payload.append("id", this.$route.params.id);
-      payload.append("added_by", localStorage.getItem("user_id"));
-      payload.append("updated_by", localStorage.getItem("user_id"));
-      const date_added = new Date();
-      const day = date_added.getDate();
-      const month = date_added.getMonth() + 1;
-      const year = date_added.getFullYear();
-      const added_dated = year + "-" + month + "-" + day;
-      payload.append("updated_date", added_dated);
-      payload.append("stage", this.stage);
-      payload.append("product_name", this.product_name);
-      payload.append("description", JSON.stringify(quill.getContents()));
-      payload.append("product_app_link", this.app_link);
-      payload.append("active_users", this.active_users);
-      payload.append("startup_name", this.startup_id);
-      if (this.file) {
-        payload.append("product_video", this.file);
+      updateProduct: function() {
+        var payload = new FormData();
+        payload.append("id", this.$route.params.id);
+        payload.append("added_by", localStorage.getItem("user_id"));
+        payload.append("updated_by", localStorage.getItem("user_id"));
+        const date_added = new Date();
+        const day = date_added.getDate();
+        const month = date_added.getMonth() + 1;
+        const year = date_added.getFullYear();
+        const added_dated = year + "-" + month + "-" + day;
+        payload.append("updated_date", added_dated);
+        payload.append("stage", this.stage);
+        payload.append("product_name", this.product_name);
+        payload.append("description", JSON.stringify(quill.getContents()));
+        payload.append("product_app_link", this.app_link);
+        payload.append("active_users", this.active_users);
+        payload.append("startup_name", this.startup_id);
+        if (this.file) {
+          payload.append("product_video", this.file);
+        }
+        this.$store.dispatch("updateProduct", payload).then(res => {});
+        this.$router.push("/startup/listing");
       }
-      this.$store.dispatch("updateProduct", payload).then(res => {});
-      this.$router.push("/startup/listing");
     }
-  }
-};
+  };
 </script>
 
 <style>
+.h4,
+h4 {
+  font-size: 18px !important;
+}
+
+.h3,
+h3 {
+  font-size: 20px !important;
+  margin: none;
+  padding: 0px;
+}
+
+.h2,
+h2 {
+  font-size: 22px !important;
+}
+
+.h1,
+h1 {
+  font-size: 24px !important;
+}
+
+.ql-editor p {
+  font-size: 16px;
+}
 </style>
