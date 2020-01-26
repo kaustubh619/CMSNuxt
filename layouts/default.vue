@@ -161,4 +161,8 @@ body {
 .ql-editor ul > li {
   font-size: 18px !important;
 }
+
+#breadcrum-inner-block {
+  padding: 25px 0px;
+}
 </style>
