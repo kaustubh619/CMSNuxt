@@ -220,25 +220,25 @@
 </script>
 
 <style>
-.h4,
-h4 {
+.ql-editor .h4,
+.ql-editor h4 {
   font-size: 18px !important;
 }
 
-.h3,
-h3 {
+.ql-editor .h3,
+.ql-editor h3 {
   font-size: 20px !important;
   margin: none;
   padding: 0px;
 }
 
-.h2,
-h2 {
+.ql-editor .h2,
+.ql-editor h2 {
   font-size: 22px !important;
 }
 
-.h1,
-h1 {
+.ql-editor .h1,
+.ql-editor h1 {
   font-size: 24px !important;
 }
 
