@@ -189,7 +189,7 @@ h1 {
   font-size: 24px !important;
 }
 
-span {
+.ql-editor span {
   font-size: 16px;
 }
 </style>
