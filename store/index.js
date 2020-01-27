@@ -754,5 +754,79 @@ export const actions = {
           console.log(err);
         });
     });
+  },
+
+  postRating({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "POST",
+        data: payload,
+        url: state.api.postRating,
+        contentType: "application/json",
+        headers: {
+          Authorization: state.bearer
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
+  },
+
+  getUserRatings({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.getUserRatings + payload,
+        contentType: "application/json",
+        headers: {
+          Authorization: state.bearer
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
+  updateRatings({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "PUT",
+        data: payload,
+        url: state.api.user_ratings_update + payload.get("id"),
+        contentType: "application/json",
+        headers: {
+          Authorization: state.bearer
+        }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
+  },
+
+  allProductRatings({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.allProductRatings,
+        contentType: "application/json"
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
 };

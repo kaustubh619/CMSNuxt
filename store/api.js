@@ -77,5 +77,15 @@ export const state = () => ({
 
   getUserCount: url + "/user_count",
 
-  getFeaturedStartups: url + "/featured_startups"
+  getFeaturedStartups: url + "/featured_startups",
+
+  postRating: url + "/post_ratings",
+
+  getUserRatings: url + "/update_ratings/",
+
+  updateRatings: url + "/update_ratings/",
+
+  user_ratings_update: url + "/user_update_ratings/",
+
+  allProductRatings: url + "/all_ratings"
 });
