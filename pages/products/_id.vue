@@ -258,7 +258,7 @@
                             </p>
                           </div>
                           <div class="row" id="review_box" v-if="review_bool">
-                            <form>
+                            <div>
                               <textarea
                                 style="margin-left: 10px"
                                 name
@@ -273,7 +273,7 @@
                               >
                                 Submit
                               </button>
-                            </form>
+                            </div>
                           </div>
                           <div v-else>
                             <div class="row">
