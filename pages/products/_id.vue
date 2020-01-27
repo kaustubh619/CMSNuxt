@@ -288,7 +288,7 @@
                               </button>
                             </div>
                             <div class="row show_hide_box">
-                              <form style="display: inline">
+                              <div style="display: inline">
                                 <textarea
                                   style="margin-left: 10px"
                                   name
@@ -303,7 +303,7 @@
                                 >
                                   Submit
                                 </button>
-                              </form>
+                              </div>
 
                               <button
                                 class="review_button"
