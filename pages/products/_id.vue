@@ -677,12 +677,10 @@
           this.raitngswithreviews = [];
           res.data.reverse().map(item => {
             if (item.reviews != "") {
-              console.log("sex")
+              
               this.raitngswithreviews.push(item);
             }
-            else {
-              console.log("no sex")
-            }
+            
           });
 
           this.totalVotes = res.data.length;
