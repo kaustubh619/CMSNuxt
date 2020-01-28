@@ -60,21 +60,13 @@
 
                     <p class="st-text-2">{{ stage }}</p>
                     <p class="st-sub-text-2">
-                      <i
-                        class="fa fa-angle-double-right"
-                        aria-hidden="true"
-                        style="color: #009e74"
-                      ></i>
+                      <i class="fa fa-angle-double-right" aria-hidden="true" style="color: #009e74"></i>
                       stage
                     </p>
 
                     <p class="st-text-3">{{ product_name }}</p>
                     <p class="st-sub-text-3">
-                      <i
-                        class="fa fa-product-hunt"
-                        aria-hidden="true"
-                        style="color: #009e74"
-                      ></i>
+                      <i class="fa fa-product-hunt" aria-hidden="true" style="color: #009e74"></i>
                       product name
                     </p>
 
@@ -92,11 +84,7 @@
 
                     <p class="st-text-2">{{ date_added }}</p>
                     <p class="st-sub-text-2">
-                      <i
-                        class="fa fa-calendar"
-                        aria-hidden="true"
-                        style="color: #009e74"
-                      ></i>
+                      <i class="fa fa-calendar" aria-hidden="true" style="color: #009e74"></i>
                       date added
                     </p>
 
@@ -112,42 +100,23 @@
                 <div class="row">
                   <div class="col-12 hide-lg-product">
                     <div class="tab">
-                      <button
-                        class="tablinks"
-                        id="product"
-                        @click="openbtn('description')"
-                      >
-                        Details
-                      </button>
-                      <button
-                        class="tablinks"
-                        id="faq"
-                        @click="openbtn('reviews')"
-                      >
-                        Updates
-                      </button>
+                      <button class="tablinks" id="product" @click="openbtn('description')">Details</button>
+                      <button class="tablinks" id="faq" @click="openbtn('reviews')">Updates</button>
                       <button
                         class="tablinks"
                         id="test"
                         @click="openbtn('testimonials')"
-                      >
-                        Testimonials
-                      </button>
+                      >Testimonials</button>
                       <button
                         class="tablinks"
                         id="rate"
                         @click="openbtn('rankings')"
-                      >
-                        Rankings/Ratings
-                      </button>
+                      >Rankings/Ratings</button>
                     </div>
 
                     <div id="description" class="tabcontent">
                       <div class="submit_listing_box">
-                        <div
-                          id="editor-container"
-                          style="background-color: white"
-                        ></div>
+                        <div id="editor-container" style="background-color: white"></div>
                       </div>
                     </div>
 
@@ -156,24 +125,15 @@
                         <p class="faq-11">No product updates available</p>
                       </div>
                       <div class="submit_listing_box">
-                        <div
-                          v-for="(l, m) in update_list"
-                          :key="m"
-                          class="my-style"
-                        >
+                        <div v-for="(l, m) in update_list" :key="m" class="my-style">
                           <h1 style="border: none">
                             <span
                               style="color: #009e74; text-shadow: 2px 3px #e7e7e7; display: block"
-                              >Product Update</span
-                            >
-                            <i
-                              class="fa fa-calendar"
-                              style="color: #009e74"
-                            ></i>
+                            >Product Update</span>
+                            <i class="fa fa-calendar" style="color: #009e74"></i>
                             <span
                               style="color: #009e74; text-shadow: 2px 2px #e7e7e7"
-                              >Added Date: {{ l.added_date }}</span
-                            >
+                            >Added Date: {{ l.added_date }}</span>
                           </h1>
                           <div class="row">
                             <div class="col-12 col-md-6">
@@ -184,14 +144,8 @@
                                 controls
                                 style="margin-top: 20px; display: block; margin-left: auto; margin-right: auto; width: 100%"
                               >
-                                <source
-                                  :src="l.update_video"
-                                  type="video/mp4"
-                                />
-                                <source
-                                  :src="l.update_video"
-                                  type="video/webm"
-                                />
+                                <source :src="l.update_video" type="video/mp4" />
+                                <source :src="l.update_video" type="video/webm" />
                               </video>
                             </div>
                             <div class="col-12 col-md-6">
@@ -226,16 +180,9 @@
                             </div>
                             <div>
                               <div style="display: block">
-                                <p
-                                  style="padding-left: 10px; padding-top: 10px"
-                                >
-                                  {{ username }}
-                                </p>
+                                <p style="padding-left: 10px; padding-top: 10px">{{ username }}</p>
                               </div>
-                              <div
-                                class="rating-stars text-center"
-                                style="display: block"
-                              >
+                              <div class="rating-stars text-center" style="display: block">
                                 <ul id="stars">
                                   <li
                                     class="star"
@@ -253,12 +200,10 @@
                             </div>
                           </div>
                           <div class="row">
-                            <p class="pHover" v-if="review_bool">
-                              Write a review
-                            </p>
+                            <p class="pHover" v-if="review_bool">Write a review</p>
                           </div>
                           <div class="row" id="review_box" v-if="review_bool">
-                            <div>
+                            <form>
                               <textarea
                                 style="margin-left: 10px"
                                 name
@@ -267,28 +212,19 @@
                                 rows="10"
                                 v-model="review_content"
                               ></textarea>
-                              <button
-                                class="review_button"
-                                @click="submitReview"
-                              >
-                                Submit
-                              </button>
-                            </div>
+                              <button class="review_button" @click="submitReview">Submit</button>
+                            </form>
                           </div>
                           <div v-else>
                             <div class="row">
-                              <p style="padding-left: 10px" class="qwe">
-                                {{ review_content }}
-                              </p>
+                              <p style="padding-left: 10px" class="qwe">{{ review_content }}</p>
                               <button
                                 class="review_button qwe"
                                 @click="showHideBlock"
-                              >
-                                Edit Your Review
-                              </button>
+                              >Edit Your Review</button>
                             </div>
                             <div class="row show_hide_box">
-                              <div style="display: inline">
+                              <form style="display: inline">
                                 <textarea
                                   style="margin-left: 10px"
                                   name
@@ -297,122 +233,125 @@
                                   rows="10"
                                   v-model="review_content"
                                 ></textarea>
-                                <button
-                                  class="review_button"
-                                  @click="submitReview"
-                                >
-                                  Submit
-                                </button>
-                              </div>
+                                <button class="review_button" @click="submitReview">Submit</button>
+                              </form>
 
                               <button
                                 class="review_button"
                                 @click="cancelReview"
                                 style="background-color: #a45a52"
-                              >
-                                Cancel
-                              </button>
+                              >Cancel</button>
                             </div>
-                            
                           </div>
                           <div style="margin-top: 20px" class="myDiv2">
-                              <div class="myDiv">
-                                <p style="font-size: 40px; text-align: center; margin-top: 30px">
-                                  {{ averageRating }}
-                                </p>
-                                <div class="star-ratings">
-                                  <div
-                                    class="fill-ratings"
-                                    :style="{ width: `${avgPercent}%` }"
-                                  >
-                                    <span>★★★★★</span>
-                                  </div>
-                                  <div class="empty-ratings">
-                                    <span>★★★★★</span>
-                                  </div>
+                            <div class="myDiv">
+                              <p
+                                style="font-size: 40px; text-align: center; margin-top: 30px"
+                              >{{ averageRating }}</p>
+                              <div class="star-ratings">
+                                <div class="fill-ratings" :style="{ width: `${avgPercent}%` }">
+                                  <span>★★★★★</span>
                                 </div>
-                                <p style="font-size: 24px; text-align: center; margin-top: 0px">
-                                  <i class="fa fa-user"></i><span style="margin-left: 10px">{{ totalVotes }} Total</span>
-                                </p>
+                                <div class="empty-ratings">
+                                  <span>★★★★★</span>
+                                </div>
                               </div>
-                              <div>
-                                <div
-                                  class="container-fluid"
-                                  style="display: flex"
-                                >
-                                  <p style="margin-right: 15px">1</p>
-                                  <div class="progress">
-                                    <div
-                                      class="progress-bar"
-                                      role="progressbar"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                      :style="{ width: `${width1}%` }"
-                                    ></div>
-                                  </div>
+                              <p style="font-size: 24px; text-align: center; margin-top: 0px">
+                                <i class="fa fa-user"></i>
+                                <span style="margin-left: 10px">{{ totalVotes }} Total</span>
+                              </p>
+                            </div>
+                            <div>
+                              <div class="container-fluid" style="display: flex">
+                                <p style="margin-right: 10px">5</p>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar pbar1"
+                                    role="progressbar"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    :style="{ width: `${width5}%` }"
+                                  ></div>
                                 </div>
-                                <div
-                                  class="container-fluid"
-                                  style="display: flex"
-                                >
-                                  <p style="margin-right: 10px">2</p>
-                                  <div class="progress">
-                                    <div
-                                      class="progress-bar"
-                                      role="progressbar"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                      :style="{ width: `${width2}%` }"
-                                    ></div>
-                                  </div>
+                              </div>
+                              <div class="container-fluid" style="display: flex">
+                                <p style="margin-right: 10px">4</p>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar pbar2"
+                                    role="progressbar"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    :style="{ width: `${width4}%` }"
+                                  ></div>
                                 </div>
-                                <div
-                                  class="container-fluid"
-                                  style="display: flex"
-                                >
-                                  <p style="margin-right: 10px">3</p>
-                                  <div class="progress">
-                                    <div
-                                      class="progress-bar"
-                                      role="progressbar"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                      :style="{ width: `${width3}%` }"
-                                    ></div>
-                                  </div>
+                              </div>
+                              <div class="container-fluid" style="display: flex">
+                                <p style="margin-right: 10px">3</p>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar pbar3"
+                                    role="progressbar"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    :style="{ width: `${width3}%` }"
+                                  ></div>
                                 </div>
-                                <div
-                                  class="container-fluid"
-                                  style="display: flex"
-                                >
-                                  <p style="margin-right: 10px">4</p>
-                                  <div class="progress">
-                                    <div
-                                      class="progress-bar"
-                                      role="progressbar"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                      :style="{ width: `${width4}%` }"
-                                    ></div>
-                                  </div>
+                              </div>
+                              <div class="container-fluid" style="display: flex">
+                                <p style="margin-right: 10px">2</p>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar pbar4"
+                                    role="progressbar"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    :style="{ width: `${width2}%` }"
+                                  ></div>
                                 </div>
-                                <div
-                                  class="container-fluid"
-                                  style="display: flex"
-                                >
-                                  <p style="margin-right: 10px">5</p>
-                                  <div class="progress">
-                                    <div
-                                      class="progress-bar"
-                                      role="progressbar"
-                                      aria-valuemin="0"
-                                      aria-valuemax="100"
-                                      :style="{ width: `${width5}%` }"
-                                    ></div>
-                                  </div>
+                              </div>
+                              <div class="container-fluid" style="display: flex">
+                                <p style="margin-right: 15px">1</p>
+                                <div class="progress">
+                                  <div
+                                    class="progress-bar pbar5"
+                                    role="progressbar"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    :style="{ width: `${width1}%` }"
+                                  ></div>
                                 </div>
                               </div>
                             </div>
+                          </div>
+                          <div class="row" style="margin-top: 30px">
+                            <div
+                              class="col-xs-12"
+                              v-for="(j,k) in raitngswithreviews"
+                              :key="k"
+                              style="padding: 10px"
+                            >
+                              <p style="font-weight: 600">{{j.user.username}}</p>
+                              <div>
+                                <!-- <div class="rating-stars1 text-center" style="display: block">
+                                  <ul id="stars1">
+                                    <li
+                                      class="star1"
+                                      title
+                                      v-for="(x, y) in 5"
+                                      :key="y"
+                                      :value="y + 1"
+                                      :id="y"
+                                    >
+                                      <i class="fa fa-star fa-fw" style="font-size: 16px"></i>
+                                    </li>
+                                  </ul>
+                                </div>-->
+                                <p style="color: grey">{{j.added_date}}</p>
+                              </div>
+                              <p>{{j.reviews}}</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -428,225 +367,257 @@
 </template>
 
 <script>
-  import Cookies from "js-cookie";
-  import PostImage from "~/components/Image.vue";
-  import PostHeading from "~/components/Heading.vue";
-  import PostParagraph from "~/components/Paragraph.vue";
-  import PostList from "~/components/List.vue";
-  let player;
-  export default {
-    components: { PostImage, PostHeading, PostParagraph, PostList },
-    async asyncData(ctx) {
-      const payload = new FormData();
-      payload.append("id", ctx.route.params.id);
-      const res = await ctx.store.dispatch("getUpdates", payload);
-      return { update_list: res.data };
-    },
-    data() {
-      return {
-        post: [],
-        product_name: "",
-        city: "",
-        country: "",
-        startup: "",
-        stage: "",
-        users: "",
-        app_link: "",
-        product_video: "",
-        pro_bool: true,
-        date_added: "",
-        product_cat: "",
-        username: "",
-        dp_url: "",
-        review_content: "",
-        review_bool: true,
-        user_review: "",
-        view_content: "",
-        auth_bool: true,
-        new_v: "",
-        review1: [],
-        review2: [],
-        review3: [],
-        review4: [],
-        review5: [],
-        width1: "",
-        width2: "",
-        width3: "",
-        width4: "",
-        width5: "",
-        averageRating: "",
-        avgPercent: "",
-        totalVotes: ""
-      };
-    },
-    computed: {
-      authentication: {
-        get: function() {
-          return this.$store.state.authentication;
-        }
+import Cookies from "js-cookie";
+import PostImage from "~/components/Image.vue";
+import PostHeading from "~/components/Heading.vue";
+import PostParagraph from "~/components/Paragraph.vue";
+import PostList from "~/components/List.vue";
+let player;
+export default {
+  components: { PostImage, PostHeading, PostParagraph, PostList },
+  async asyncData(ctx) {
+    const payload = new FormData();
+    payload.append("id", ctx.route.params.id);
+    const res = await ctx.store.dispatch("getUpdates", payload);
+    return { update_list: res.data };
+  },
+  data() {
+    return {
+      post: [],
+      product_name: "",
+      city: "",
+      country: "",
+      startup: "",
+      stage: "",
+      users: "",
+      app_link: "",
+      product_video: "",
+      pro_bool: true,
+      date_added: "",
+      product_cat: "",
+      username: "",
+      dp_url: "",
+      review_content: "",
+      review_bool: true,
+      user_review: "",
+      view_content: "",
+      auth_bool: true,
+      new_v: "",
+      review1: [],
+      review2: [],
+      review3: [],
+      review4: [],
+      review5: [],
+      width1: "",
+      width2: "",
+      width3: "",
+      width4: "",
+      width5: "",
+      averageRating: "",
+      avgPercent: "",
+      totalVotes: "",
+      raitngswithreviews: []
+    };
+  },
+  computed: {
+    authentication: {
+      get: function() {
+        return this.$store.state.authentication;
       }
-    },
-    mounted() {
-      this.allProductRatings();
-      if (localStorage.getItem("bearer")) {
-        this.auth_bool = false;
-      }
-      this.getUserRatings();
-      // $("#review_box").css("display", "none");
-      this.getUser();
-      this.getUserAdditionalDetails();
-      $("#stars li")
-        .on("mouseover", function() {
-          var onStar = parseInt($(this).data("value"), 10); // The star currently mouse on
+    }
+  },
+  mounted() {
+    this.allProductRatings();
+    if (localStorage.getItem("bearer")) {
+      this.auth_bool = false;
+    }
+    this.getUserRatings();
+    // $("#review_box").css("display", "none");
+    this.getUser();
+    this.getUserAdditionalDetails();
+    $("#stars li")
+      .on("mouseover", function() {
+        var onStar = parseInt($(this).data("value"), 10); // The star currently mouse on
 
-          // Now highlight all the stars that's not after the current hovered star
-          $(this)
-            .parent()
-            .children("li.star")
-            .each(function(e) {
-              if (e < onStar) {
-                $(this).addClass("hover");
-              } else {
-                $(this).removeClass("hover");
-              }
-            });
-        })
-        .on("mouseout", function() {
-          $(this)
-            .parent()
-            .children("li.star")
-            .each(function(e) {
+        // Now highlight all the stars that's not after the current hovered star
+        $(this)
+          .parent()
+          .children("li.star")
+          .each(function(e) {
+            if (e < onStar) {
+              $(this).addClass("hover");
+            } else {
               $(this).removeClass("hover");
-            });
-        });
-
-      /* 2. Action to perform on click */
-
-      this.productById();
-      this.getUpdates();
-      $("#user_profile")
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
-      $(".tablinks").click(function() {
-        var id = $(this).attr("id");
-
-        $("#" + id)
-          .addClass("btn-activated")
-          .siblings()
-          .removeClass("btn-activated");
-      });
-      document.getElementById("product").click();
-    },
-    methods: {
-      logOutUser: function() {
-        var payload = new FormData();
-        payload.append("login_status", "false");
-        this.$store.dispatch("logOutUser", payload).then(res => {});
-        localStorage.clear();
-        Cookies.remove("x-access-token");
-        this.$store.commit("authentication", false);
-        this.$router.push("/");
-      },
-      productById: function() {
-        this.$store.dispatch("productById", this.$route.params.id).then(res => {
-          this.post = JSON.parse(res.data.description);
-          this.product_name = res.data.product_name;
-          this.city = res.data.startup_name.city;
-          this.country = res.data.startup_name.country;
-          this.startup = res.data.startup_name.name;
-          this.stage = res.data.stage;
-          this.users = res.data.active_users;
-          this.app_link = res.data.product_app_link;
-          this.product_video = res.data.product_video;
-          this.date_added = res.data.added_date;
-          this.product_cat = res.data.startup_name.category.category;
-          var quill = new Quill("#editor-container", {
-            modules: { toolbar: [] },
-            readOnly: true,
-            theme: "bubble"
+            }
           });
-          quill.setContents(this.post);
-          setTimeout(function() {
-            player = new Plyr("#player");
-          }, 1000);
-        });
-      },
+      })
+      .on("mouseout", function() {
+        $(this)
+          .parent()
+          .children("li.star")
+          .each(function(e) {
+            $(this).removeClass("hover");
+          });
+      });
 
-      getUpdates: function() {
-        var payload = new FormData();
-        payload.append("id", this.$route.params.id);
-        this.$store.dispatch("getUpdates", payload).then(res => {
-          if (res.data.length == 0) {
-            this.pro_bool = true;
+    /* 2. Action to perform on click */
+
+    this.productById();
+    this.getUpdates();
+    $("#user_profile")
+      .addClass("active")
+      .siblings()
+      .removeClass("active");
+    $(".tablinks").click(function() {
+      var id = $(this).attr("id");
+
+      $("#" + id)
+        .addClass("btn-activated")
+        .siblings()
+        .removeClass("btn-activated");
+    });
+    document.getElementById("product").click();
+  },
+  methods: {
+    logOutUser: function() {
+      var payload = new FormData();
+      payload.append("login_status", "false");
+      this.$store.dispatch("logOutUser", payload).then(res => {});
+      localStorage.clear();
+      Cookies.remove("x-access-token");
+      this.$store.commit("authentication", false);
+      this.$router.push("/");
+    },
+    productById: function() {
+      this.$store.dispatch("productById", this.$route.params.id).then(res => {
+        this.post = JSON.parse(res.data.description);
+        this.product_name = res.data.product_name;
+        this.city = res.data.startup_name.city;
+        this.country = res.data.startup_name.country;
+        this.startup = res.data.startup_name.name;
+        this.stage = res.data.stage;
+        this.users = res.data.active_users;
+        this.app_link = res.data.product_app_link;
+        this.product_video = res.data.product_video;
+        this.date_added = res.data.added_date;
+        this.product_cat = res.data.startup_name.category.category;
+        var quill = new Quill("#editor-container", {
+          modules: { toolbar: [] },
+          readOnly: true,
+          theme: "bubble"
+        });
+        quill.setContents(this.post);
+        setTimeout(function() {
+          player = new Plyr("#player");
+        }, 1000);
+      });
+    },
+
+    getUpdates: function() {
+      var payload = new FormData();
+      payload.append("id", this.$route.params.id);
+      this.$store.dispatch("getUpdates", payload).then(res => {
+        if (res.data.length == 0) {
+          this.pro_bool = true;
+        } else {
+          this.pro_bool = false;
+        }
+      });
+      let item;
+      const items = document.querySelectorAll(".update-container");
+      items.forEach((item, i) => {
+        const quill = new Quill(item, {
+          modules: { toolbar: [] },
+          readOnly: true,
+          theme: "bubble"
+        });
+
+        quill.setContents(JSON.parse(this.update_list[i].latest_updates));
+      });
+    },
+
+    openbtn: function(btnName) {
+      var i, tabcontent, tablinks;
+
+      tabcontent = document.getElementsByClassName("tabcontent");
+
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      document.getElementById(btnName).style.display = "block";
+    },
+
+    getUser: function() {
+      const id = localStorage.getItem("user_id");
+      this.$store.dispatch("getUser", id).then(res => {
+        this.username = res.data.username;
+      });
+    },
+
+    getUserAdditionalDetails: function() {
+      const id = localStorage.getItem("user_id");
+      this.$store.dispatch("getUserAdditionalDetails", id).then(res => {
+        this.dp_url = res.data.display_pic;
+      });
+    },
+
+    getUserRatings: function() {
+      this.$store
+        .dispatch("getUserRatings", localStorage.getItem("user_id"))
+        .then(res => {
+          this.review_content = res.data.reviews;
+          this.new_v = res.data.reviews;
+          if (res.data.reviews) {
+            this.review_bool = false;
           } else {
-            this.pro_bool = false;
+            // console.log("no review");
+          }
+          var stars = $("#stars li")
+            .parent()
+            .children("li.star");
+          let i;
+          for (i = 0; i < res.data.ratings; i++) {
+            $(stars[i]).addClass("selected");
           }
         });
-        let item;
-        const items = document.querySelectorAll(".update-container");
-        items.forEach((item, i) => {
-          const quill = new Quill(item, {
-            modules: { toolbar: [] },
-            readOnly: true,
-            theme: "bubble"
-          });
+    },
 
-          quill.setContents(JSON.parse(this.update_list[i].latest_updates));
-        });
-      },
+    postUserRating: function(id) {
+      this.$store
+        .dispatch("getUserRatings", localStorage.getItem("user_id"))
+        .then(res => {
+          let i;
 
-      openbtn: function(btnName) {
-        var i, tabcontent, tablinks;
+          var onStar = parseInt($("#" + id).val(), 10);
 
-        tabcontent = document.getElementsByClassName("tabcontent");
+          var stars = $("#stars li")
+            .parent()
+            .children("li.star");
 
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
+          for (i = 0; i < stars.length; i++) {
+            $(stars[i]).removeClass("selected");
+          }
 
-        document.getElementById(btnName).style.display = "block";
-      },
+          for (i = 0; i < onStar; i++) {
+            $(stars[i]).addClass("selected");
+          }
 
-      getUser: function() {
-        const id = localStorage.getItem("user_id");
-        this.$store.dispatch("getUser", id).then(res => {
-          this.username = res.data.username;
-        });
-      },
+          if (onStar > 0) {
+            const payload = new FormData();
+            const id = localStorage.getItem("user_id");
+            payload.append("id", res.data.id);
+            payload.append("user", id);
+            payload.append("product", this.$route.params.id);
+            payload.append("ratings", onStar);
 
-      getUserAdditionalDetails: function() {
-        const id = localStorage.getItem("user_id");
-        this.$store.dispatch("getUserAdditionalDetails", id).then(res => {
-          this.dp_url = res.data.display_pic;
-        });
-      },
-
-      getUserRatings: function() {
-        this.$store
-          .dispatch("getUserRatings", localStorage.getItem("user_id"))
-          .then(res => {
-            this.review_content = res.data.reviews;
-            this.new_v = res.data.reviews;
-            if (res.data.reviews) {
-              this.review_bool = false;
-            } else {
-              console.log("no review");
-            }
-            var stars = $("#stars li")
-              .parent()
-              .children("li.star");
-            let i;
-            for (i = 0; i < res.data.ratings; i++) {
-              $(stars[i]).addClass("selected");
-            }
-          });
-      },
-
-      postUserRating: function(id) {
-        this.$store
-          .dispatch("getUserRatings", localStorage.getItem("user_id"))
-          .then(res => {
+            this.$store.dispatch("updateRatings", payload).then(res => {
+              this.allProductRatings();
+            });
+          }
+        })
+        .catch(err => {
+          if (err.response.status === 404) {
             let i;
 
             var onStar = parseInt($("#" + id).val(), 10);
@@ -666,117 +637,93 @@
             if (onStar > 0) {
               const payload = new FormData();
               const id = localStorage.getItem("user_id");
-              payload.append("id", res.data.id);
               payload.append("user", id);
               payload.append("product", this.$route.params.id);
               payload.append("ratings", onStar);
 
-              this.$store.dispatch("updateRatings", payload).then(res => {
-                this.allProductRatings()
-              });
+              this.$store.dispatch("postRating", payload);
             }
-          })
-          .catch(err => {
-            if (err.response.status === 404) {
-              let i;
-
-              var onStar = parseInt($("#" + id).val(), 10);
-
-              var stars = $("#stars li")
-                .parent()
-                .children("li.star");
-
-              for (i = 0; i < stars.length; i++) {
-                $(stars[i]).removeClass("selected");
-              }
-
-              for (i = 0; i < onStar; i++) {
-                $(stars[i]).addClass("selected");
-              }
-
-              if (onStar > 0) {
-                const payload = new FormData();
-                const id = localStorage.getItem("user_id");
-                payload.append("user", id);
-                payload.append("product", this.$route.params.id);
-                payload.append("ratings", onStar);
-
-                this.$store.dispatch("postRating", payload);
-              }
-            }
-          });
-      },
-
-      submitReview: function() {
-        this.$store
-          .dispatch("getUserRatings", localStorage.getItem("user_id"))
-          .then(res => {
-            const payL = new FormData();
-            payL.append("id", res.data.id);
-            payL.append("ratings", res.data.ratings);
-            payL.append("reviews", this.review_content);
-            payL.append("user", res.data.user);
-            payL.append("product", res.data.product);
-            this.$store.dispatch("updateRatings", payL).then(res => {
-              alert("Your review is submitted");
-            });
-          });
-      },
-
-      showHideBlock: function() {
-        $(".show_hide_box").css("display", "block");
-        $(".qwe").css("display", "none");
-      },
-
-      cancelReview: function() {
-        $(".show_hide_box").css("display", "none");
-        $(".qwe").css("display", "block");
-        this.review_content = this.new_v;
-      },
-
-      allProductRatings: function() {
-        this.review1 = []
-        this.review2 = []
-        this.review3 = []
-        this.review4 = []
-        this.review5 = []
-        this.$store.dispatch("allProductRatings").then(res => {
-          this.totalVotes = res.data.length
-          res.data.map(item => {
-            if (item.ratings === 1) {
-              this.review1.push(item);
-            } else if (item.ratings === 2) {
-              this.review2.push(item);
-            } else if (item.ratings === 3) {
-              this.review3.push(item);
-            } else if (item.ratings === 4) {
-              this.review4.push(item);
-            } else if (item.ratings === 5) {
-              this.review5.push(item);
-            }
-          });
-
-          let p1 = this.review1.length;
-          let p2 = this.review2.length;
-          let p3 = this.review3.length;
-          let p4 = this.review4.length;
-          let p5 = this.review5.length;
-          let ptotal = p1 + p2 + p3 + p4 + p5;
-          this.width1 = (p1 / ptotal) * 100;
-          this.width2 = (p2 / ptotal) * 100;
-          this.width3 = (p3 / ptotal) * 100;
-          this.width4 = (p4 / ptotal) * 100;
-          this.width5 = (p5 / ptotal) * 100;
-
-          let avg =
-            (p1 * 1 + p2 * 2 + p3 * 3 + p4 * 4 + p5 * 5) /
-            (p1 + p2 + p3 + p4 + p5);
-          this.averageRating = avg.toFixed(2);
-          this.avgPercent = (this.averageRating / 5) * 100;
+          }
         });
-      }
+    },
+
+    submitReview: function() {
+      this.$store
+        .dispatch("getUserRatings", localStorage.getItem("user_id"))
+        .then(res => {
+          const payL = new FormData();
+          payL.append("id", res.data.id);
+          payL.append("ratings", res.data.ratings);
+          payL.append("reviews", this.review_content);
+          payL.append("user", res.data.user);
+          payL.append("product", res.data.product);
+          this.$store.dispatch("updateRatings", payL).then(res => {
+            alert("Your review is submitted");
+          });
+        });
+    },
+
+    showHideBlock: function() {
+      $(".show_hide_box").css("display", "block");
+      $(".qwe").css("display", "none");
+    },
+
+    cancelReview: function() {
+      $(".show_hide_box").css("display", "none");
+      $(".qwe").css("display", "block");
+      this.review_content = this.new_v;
+    },
+
+    allProductRatings: function() {
+      this.review1 = [];
+      this.review2 = [];
+      this.review3 = [];
+      this.review4 = [];
+      this.review5 = [];
+      this.$store.dispatch("allProductRatings").then(res => {
+        this.raitngswithreviews = [];
+        res.data.map(item => {
+          if (item.reviews !== "") {
+            this.raitngswithreviews.push(item);
+          }
+        });
+
+        this.totalVotes = res.data.length;
+        res.data.map(item => {
+          if (item.ratings === 1) {
+            this.review1.push(item);
+          } else if (item.ratings === 2) {
+            this.review2.push(item);
+          } else if (item.ratings === 3) {
+            this.review3.push(item);
+          } else if (item.ratings === 4) {
+            this.review4.push(item);
+          } else if (item.ratings === 5) {
+            this.review5.push(item);
+          }
+        });
+
+        let p1 = this.review1.length;
+        let p2 = this.review2.length;
+        let p3 = this.review3.length;
+        let p4 = this.review4.length;
+        let p5 = this.review5.length;
+        let ptotal = p1 + p2 + p3 + p4 + p5;
+        this.width1 = (p1 / ptotal) * 100;
+        this.width2 = (p2 / ptotal) * 100;
+        this.width3 = (p3 / ptotal) * 100;
+        this.width4 = (p4 / ptotal) * 100;
+        this.width5 = (p5 / ptotal) * 100;
+
+        let avg =
+          (p1 * 1 + p2 * 2 + p3 * 3 + p4 * 4 + p5 * 5) /
+          (p1 + p2 + p3 + p4 + p5);
+        this.averageRating = avg.toFixed(2);
+        this.avgPercent = (this.averageRating / 5) * 100;
+      });
     }
-  };
+  }
+};
 </script>
 
 <style>
@@ -1180,6 +1127,38 @@
   float: left;
 }
 
+.rating-stars1 ul {
+  list-style-type: none;
+  padding: 0;
+
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.rating-stars1 ul > li.star1 {
+  display: inline-block;
+}
+
+/* Idle State of the stars */
+.rating-stars1 ul > li.star1 > i.fa {
+  font-size: 2.5em; /* Change the size of the stars */
+  color: #ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+.rating-star1s ul > li.star1:hover > i.fa {
+  color: #1eb48c;
+  cursor: pointer;
+}
+
+/* Selected state of the stars */
+.rating-stars1 ul > li.star1.selected > i.fa {
+  color: #009e74;
+}
+
+.rating-stars1 ul {
+  float: left;
+}
+
 .pHover {
   padding-left: 10px;
   padding-top: 10px;
@@ -1275,5 +1254,25 @@
   .myDiv2 {
     display: flex;
   }
+}
+
+.pbar1 {
+  background-color: #57bb8a;
+}
+
+.pbar2 {
+  background-color: #9ace6a;
+}
+
+.pbar3 {
+  background-color: #ffcf02;
+}
+
+.pbar4 {
+  background-color: #ff9f02;
+}
+
+.pbar5 {
+  background-color: #ff6f31;
 }
 </style>
