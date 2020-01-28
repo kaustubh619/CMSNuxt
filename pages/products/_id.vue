@@ -333,21 +333,14 @@
                             >
                               <p style="font-weight: 600">{{j.user.username}}</p>
                               <div>
-                                <!-- <div class="rating-stars1 text-center" style="display: block">
-                                  <ul id="stars1">
-                                    <li
-                                      class="star1"
-                                      title
-                                      v-for="(x, y) in 5"
-                                      :key="y"
-                                      :value="y + 1"
-                                      :id="y"
-                                    >
-                                      <i class="fa fa-star fa-fw" style="font-size: 16px"></i>
-                                    </li>
-                                  </ul>
-                                </div>-->
-                                <p style="color: grey">{{j.added_date}}</p>
+                                <div style="position: absolute" >
+                                  <i class="fa fa-star" aria-hidden="true" v-for="(o,p) in 5" :key="p" style="color: grey"></i>
+                                </div>
+                                <div style="position: absolute" >
+                                  <i class="fa fa-star" aria-hidden="true" v-for="(o,p) in j.ratings" :key="p" style="color: #009e74"></i>
+                                </div>
+                                
+                                <p style="color: grey; position: relative; margin-left: 80px">{{j.added_date}}</p>
                               </div>
                               <p>{{j.reviews}}</p>
                             </div>
@@ -367,257 +360,226 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
-import PostImage from "~/components/Image.vue";
-import PostHeading from "~/components/Heading.vue";
-import PostParagraph from "~/components/Paragraph.vue";
-import PostList from "~/components/List.vue";
-let player;
-export default {
-  components: { PostImage, PostHeading, PostParagraph, PostList },
-  async asyncData(ctx) {
-    const payload = new FormData();
-    payload.append("id", ctx.route.params.id);
-    const res = await ctx.store.dispatch("getUpdates", payload);
-    return { update_list: res.data };
-  },
-  data() {
-    return {
-      post: [],
-      product_name: "",
-      city: "",
-      country: "",
-      startup: "",
-      stage: "",
-      users: "",
-      app_link: "",
-      product_video: "",
-      pro_bool: true,
-      date_added: "",
-      product_cat: "",
-      username: "",
-      dp_url: "",
-      review_content: "",
-      review_bool: true,
-      user_review: "",
-      view_content: "",
-      auth_bool: true,
-      new_v: "",
-      review1: [],
-      review2: [],
-      review3: [],
-      review4: [],
-      review5: [],
-      width1: "",
-      width2: "",
-      width3: "",
-      width4: "",
-      width5: "",
-      averageRating: "",
-      avgPercent: "",
-      totalVotes: "",
-      raitngswithreviews: []
-    };
-  },
-  computed: {
-    authentication: {
-      get: function() {
-        return this.$store.state.authentication;
+  import Cookies from "js-cookie";
+  import PostImage from "~/components/Image.vue";
+  import PostHeading from "~/components/Heading.vue";
+  import PostParagraph from "~/components/Paragraph.vue";
+  import PostList from "~/components/List.vue";
+  let player;
+  export default {
+    components: { PostImage, PostHeading, PostParagraph, PostList },
+    async asyncData(ctx) {
+      const payload = new FormData();
+      payload.append("id", ctx.route.params.id);
+      const res = await ctx.store.dispatch("getUpdates", payload);
+      return { update_list: res.data };
+    },
+    data() {
+      return {
+        post: [],
+        product_name: "",
+        city: "",
+        country: "",
+        startup: "",
+        stage: "",
+        users: "",
+        app_link: "",
+        product_video: "",
+        pro_bool: true,
+        date_added: "",
+        product_cat: "",
+        username: "",
+        dp_url: "",
+        review_content: "",
+        review_bool: true,
+        user_review: "",
+        view_content: "",
+        auth_bool: true,
+        new_v: "",
+        review1: [],
+        review2: [],
+        review3: [],
+        review4: [],
+        review5: [],
+        width1: "",
+        width2: "",
+        width3: "",
+        width4: "",
+        width5: "",
+        averageRating: "",
+        avgPercent: "",
+        totalVotes: "",
+        raitngswithreviews: []
+      };
+    },
+    computed: {
+      authentication: {
+        get: function() {
+          return this.$store.state.authentication;
+        }
       }
-    }
-  },
-  mounted() {
-    this.allProductRatings();
-    if (localStorage.getItem("bearer")) {
-      this.auth_bool = false;
-    }
-    this.getUserRatings();
-    // $("#review_box").css("display", "none");
-    this.getUser();
-    this.getUserAdditionalDetails();
-    $("#stars li")
-      .on("mouseover", function() {
-        var onStar = parseInt($(this).data("value"), 10); // The star currently mouse on
+    },
+    mounted() {
+      this.allProductRatings();
+      if (localStorage.getItem("bearer")) {
+        this.auth_bool = false;
+      }
+      this.getUserRatings();
+      // $("#review_box").css("display", "none");
+      this.getUser();
+      this.getUserAdditionalDetails();
+      $("#stars li")
+        .on("mouseover", function() {
+          var onStar = parseInt($(this).data("value"), 10); // The star currently mouse on
 
-        // Now highlight all the stars that's not after the current hovered star
-        $(this)
-          .parent()
-          .children("li.star")
-          .each(function(e) {
-            if (e < onStar) {
-              $(this).addClass("hover");
-            } else {
+          // Now highlight all the stars that's not after the current hovered star
+          $(this)
+            .parent()
+            .children("li.star")
+            .each(function(e) {
+              if (e < onStar) {
+                $(this).addClass("hover");
+              } else {
+                $(this).removeClass("hover");
+              }
+            });
+        })
+        .on("mouseout", function() {
+          $(this)
+            .parent()
+            .children("li.star")
+            .each(function(e) {
               $(this).removeClass("hover");
+            });
+        });
+
+      /* 2. Action to perform on click */
+
+      this.productById();
+      this.getUpdates();
+      $("#user_profile")
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+      $(".tablinks").click(function() {
+        var id = $(this).attr("id");
+
+        $("#" + id)
+          .addClass("btn-activated")
+          .siblings()
+          .removeClass("btn-activated");
+      });
+      document.getElementById("product").click();
+    },
+    methods: {
+      logOutUser: function() {
+        var payload = new FormData();
+        payload.append("login_status", "false");
+        this.$store.dispatch("logOutUser", payload).then(res => {});
+        localStorage.clear();
+        Cookies.remove("x-access-token");
+        this.$store.commit("authentication", false);
+        this.$router.push("/");
+      },
+      productById: function() {
+        this.$store.dispatch("productById", this.$route.params.id).then(res => {
+          this.post = JSON.parse(res.data.description);
+          this.product_name = res.data.product_name;
+          this.city = res.data.startup_name.city;
+          this.country = res.data.startup_name.country;
+          this.startup = res.data.startup_name.name;
+          this.stage = res.data.stage;
+          this.users = res.data.active_users;
+          this.app_link = res.data.product_app_link;
+          this.product_video = res.data.product_video;
+          this.date_added = res.data.added_date;
+          this.product_cat = res.data.startup_name.category.category;
+          var quill = new Quill("#editor-container", {
+            modules: { toolbar: [] },
+            readOnly: true,
+            theme: "bubble"
+          });
+          quill.setContents(this.post);
+          setTimeout(function() {
+            player = new Plyr("#player");
+          }, 1000);
+        });
+      },
+
+      getUpdates: function() {
+        var payload = new FormData();
+        payload.append("id", this.$route.params.id);
+        this.$store.dispatch("getUpdates", payload).then(res => {
+          if (res.data.length == 0) {
+            this.pro_bool = true;
+          } else {
+            this.pro_bool = false;
+          }
+        });
+        let item;
+        const items = document.querySelectorAll(".update-container");
+        items.forEach((item, i) => {
+          const quill = new Quill(item, {
+            modules: { toolbar: [] },
+            readOnly: true,
+            theme: "bubble"
+          });
+
+          quill.setContents(JSON.parse(this.update_list[i].latest_updates));
+        });
+      },
+
+      openbtn: function(btnName) {
+        var i, tabcontent, tablinks;
+
+        tabcontent = document.getElementsByClassName("tabcontent");
+
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        document.getElementById(btnName).style.display = "block";
+      },
+
+      getUser: function() {
+        const id = localStorage.getItem("user_id");
+        this.$store.dispatch("getUser", id).then(res => {
+          this.username = res.data.username;
+        });
+      },
+
+      getUserAdditionalDetails: function() {
+        const id = localStorage.getItem("user_id");
+        this.$store.dispatch("getUserAdditionalDetails", id).then(res => {
+          this.dp_url = res.data.display_pic;
+        });
+      },
+
+      getUserRatings: function() {
+        this.$store
+          .dispatch("getUserRatings", localStorage.getItem("user_id"))
+          .then(res => {
+            this.review_content = res.data.reviews;
+            this.new_v = res.data.reviews;
+            if (res.data.reviews) {
+              this.review_bool = false;
+            } else {
+              // console.log("no review");
+            }
+            var stars = $("#stars li")
+              .parent()
+              .children("li.star");
+            let i;
+            for (i = 0; i < res.data.ratings; i++) {
+              $(stars[i]).addClass("selected");
             }
           });
-      })
-      .on("mouseout", function() {
-        $(this)
-          .parent()
-          .children("li.star")
-          .each(function(e) {
-            $(this).removeClass("hover");
-          });
-      });
+      },
 
-    /* 2. Action to perform on click */
-
-    this.productById();
-    this.getUpdates();
-    $("#user_profile")
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
-    $(".tablinks").click(function() {
-      var id = $(this).attr("id");
-
-      $("#" + id)
-        .addClass("btn-activated")
-        .siblings()
-        .removeClass("btn-activated");
-    });
-    document.getElementById("product").click();
-  },
-  methods: {
-    logOutUser: function() {
-      var payload = new FormData();
-      payload.append("login_status", "false");
-      this.$store.dispatch("logOutUser", payload).then(res => {});
-      localStorage.clear();
-      Cookies.remove("x-access-token");
-      this.$store.commit("authentication", false);
-      this.$router.push("/");
-    },
-    productById: function() {
-      this.$store.dispatch("productById", this.$route.params.id).then(res => {
-        this.post = JSON.parse(res.data.description);
-        this.product_name = res.data.product_name;
-        this.city = res.data.startup_name.city;
-        this.country = res.data.startup_name.country;
-        this.startup = res.data.startup_name.name;
-        this.stage = res.data.stage;
-        this.users = res.data.active_users;
-        this.app_link = res.data.product_app_link;
-        this.product_video = res.data.product_video;
-        this.date_added = res.data.added_date;
-        this.product_cat = res.data.startup_name.category.category;
-        var quill = new Quill("#editor-container", {
-          modules: { toolbar: [] },
-          readOnly: true,
-          theme: "bubble"
-        });
-        quill.setContents(this.post);
-        setTimeout(function() {
-          player = new Plyr("#player");
-        }, 1000);
-      });
-    },
-
-    getUpdates: function() {
-      var payload = new FormData();
-      payload.append("id", this.$route.params.id);
-      this.$store.dispatch("getUpdates", payload).then(res => {
-        if (res.data.length == 0) {
-          this.pro_bool = true;
-        } else {
-          this.pro_bool = false;
-        }
-      });
-      let item;
-      const items = document.querySelectorAll(".update-container");
-      items.forEach((item, i) => {
-        const quill = new Quill(item, {
-          modules: { toolbar: [] },
-          readOnly: true,
-          theme: "bubble"
-        });
-
-        quill.setContents(JSON.parse(this.update_list[i].latest_updates));
-      });
-    },
-
-    openbtn: function(btnName) {
-      var i, tabcontent, tablinks;
-
-      tabcontent = document.getElementsByClassName("tabcontent");
-
-      for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
-
-      document.getElementById(btnName).style.display = "block";
-    },
-
-    getUser: function() {
-      const id = localStorage.getItem("user_id");
-      this.$store.dispatch("getUser", id).then(res => {
-        this.username = res.data.username;
-      });
-    },
-
-    getUserAdditionalDetails: function() {
-      const id = localStorage.getItem("user_id");
-      this.$store.dispatch("getUserAdditionalDetails", id).then(res => {
-        this.dp_url = res.data.display_pic;
-      });
-    },
-
-    getUserRatings: function() {
-      this.$store
-        .dispatch("getUserRatings", localStorage.getItem("user_id"))
-        .then(res => {
-          this.review_content = res.data.reviews;
-          this.new_v = res.data.reviews;
-          if (res.data.reviews) {
-            this.review_bool = false;
-          } else {
-            // console.log("no review");
-          }
-          var stars = $("#stars li")
-            .parent()
-            .children("li.star");
-          let i;
-          for (i = 0; i < res.data.ratings; i++) {
-            $(stars[i]).addClass("selected");
-          }
-        });
-    },
-
-    postUserRating: function(id) {
-      this.$store
-        .dispatch("getUserRatings", localStorage.getItem("user_id"))
-        .then(res => {
-          let i;
-
-          var onStar = parseInt($("#" + id).val(), 10);
-
-          var stars = $("#stars li")
-            .parent()
-            .children("li.star");
-
-          for (i = 0; i < stars.length; i++) {
-            $(stars[i]).removeClass("selected");
-          }
-
-          for (i = 0; i < onStar; i++) {
-            $(stars[i]).addClass("selected");
-          }
-
-          if (onStar > 0) {
-            const payload = new FormData();
-            const id = localStorage.getItem("user_id");
-            payload.append("id", res.data.id);
-            payload.append("user", id);
-            payload.append("product", this.$route.params.id);
-            payload.append("ratings", onStar);
-
-            this.$store.dispatch("updateRatings", payload).then(res => {
-              this.allProductRatings();
-            });
-          }
-        })
-        .catch(err => {
-          if (err.response.status === 404) {
+      postUserRating: function(id) {
+        this.$store
+          .dispatch("getUserRatings", localStorage.getItem("user_id"))
+          .then(res => {
             let i;
 
             var onStar = parseInt($("#" + id).val(), 10);
@@ -637,93 +599,128 @@ export default {
             if (onStar > 0) {
               const payload = new FormData();
               const id = localStorage.getItem("user_id");
+              payload.append("id", res.data.id);
               payload.append("user", id);
               payload.append("product", this.$route.params.id);
               payload.append("ratings", onStar);
 
-              this.$store.dispatch("postRating", payload);
+              this.$store.dispatch("updateRatings", payload).then(res => {
+                this.allProductRatings();
+              });
             }
-          }
-        });
-    },
+          })
+          .catch(err => {
+            if (err.response.status === 404) {
+              let i;
 
-    submitReview: function() {
-      this.$store
-        .dispatch("getUserRatings", localStorage.getItem("user_id"))
-        .then(res => {
-          const payL = new FormData();
-          payL.append("id", res.data.id);
-          payL.append("ratings", res.data.ratings);
-          payL.append("reviews", this.review_content);
-          payL.append("user", res.data.user);
-          payL.append("product", res.data.product);
-          this.$store.dispatch("updateRatings", payL).then(res => {
-            alert("Your review is submitted");
+              var onStar = parseInt($("#" + id).val(), 10);
+
+              var stars = $("#stars li")
+                .parent()
+                .children("li.star");
+
+              for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass("selected");
+              }
+
+              for (i = 0; i < onStar; i++) {
+                $(stars[i]).addClass("selected");
+              }
+
+              if (onStar > 0) {
+                const payload = new FormData();
+                const id = localStorage.getItem("user_id");
+                payload.append("user", id);
+                payload.append("product", this.$route.params.id);
+                payload.append("ratings", onStar);
+
+                this.$store.dispatch("postRating", payload);
+              }
+            }
           });
+      },
+
+      submitReview: function() {
+        this.$store
+          .dispatch("getUserRatings", localStorage.getItem("user_id"))
+          .then(res => {
+            const payL = new FormData();
+            payL.append("id", res.data.id);
+            payL.append("ratings", res.data.ratings);
+            payL.append("reviews", this.review_content);
+            payL.append("user", res.data.user);
+            payL.append("product", res.data.product);
+            this.$store.dispatch("updateRatings", payL).then(res => {
+              alert("Your review is submitted");
+            });
+          });
+      },
+
+      showHideBlock: function() {
+        $(".show_hide_box").css("display", "block");
+        $(".qwe").css("display", "none");
+      },
+
+      cancelReview: function() {
+        $(".show_hide_box").css("display", "none");
+        $(".qwe").css("display", "block");
+        this.review_content = this.new_v;
+      },
+
+      allProductRatings: function() {
+        this.review1 = [];
+        this.review2 = [];
+        this.review3 = [];
+        this.review4 = [];
+        this.review5 = [];
+        this.$store.dispatch("allProductRatings").then(res => {
+          this.raitngswithreviews = [];
+          res.data.reverse().map(item => {
+            if (item.reviews != "") {
+              console.log("sex")
+              this.raitngswithreviews.push(item);
+            }
+            else {
+              console.log("no sex")
+            }
+          });
+
+          this.totalVotes = res.data.length;
+          res.data.map(item => {
+            if (item.ratings === 1) {
+              this.review1.push(item);
+            } else if (item.ratings === 2) {
+              this.review2.push(item);
+            } else if (item.ratings === 3) {
+              this.review3.push(item);
+            } else if (item.ratings === 4) {
+              this.review4.push(item);
+            } else if (item.ratings === 5) {
+              this.review5.push(item);
+            }
+          });
+
+          let p1 = this.review1.length;
+          let p2 = this.review2.length;
+          let p3 = this.review3.length;
+          let p4 = this.review4.length;
+          let p5 = this.review5.length;
+          let ptotal = p1 + p2 + p3 + p4 + p5;
+          this.width1 = (p1 / ptotal) * 100;
+          this.width2 = (p2 / ptotal) * 100;
+          this.width3 = (p3 / ptotal) * 100;
+          this.width4 = (p4 / ptotal) * 100;
+          this.width5 = (p5 / ptotal) * 100;
+
+          let avg =
+            (p1 * 1 + p2 * 2 + p3 * 3 + p4 * 4 + p5 * 5) /
+            (p1 + p2 + p3 + p4 + p5);
+          this.averageRating = avg.toFixed(2);
+          this.avgPercent = (this.averageRating / 5) * 100;
         });
-    },
-
-    showHideBlock: function() {
-      $(".show_hide_box").css("display", "block");
-      $(".qwe").css("display", "none");
-    },
-
-    cancelReview: function() {
-      $(".show_hide_box").css("display", "none");
-      $(".qwe").css("display", "block");
-      this.review_content = this.new_v;
-    },
-
-    allProductRatings: function() {
-      this.review1 = [];
-      this.review2 = [];
-      this.review3 = [];
-      this.review4 = [];
-      this.review5 = [];
-      this.$store.dispatch("allProductRatings").then(res => {
-        this.raitngswithreviews = [];
-        res.data.map(item => {
-          if (item.reviews !== "") {
-            this.raitngswithreviews.push(item);
-          }
-        });
-
-        this.totalVotes = res.data.length;
-        res.data.map(item => {
-          if (item.ratings === 1) {
-            this.review1.push(item);
-          } else if (item.ratings === 2) {
-            this.review2.push(item);
-          } else if (item.ratings === 3) {
-            this.review3.push(item);
-          } else if (item.ratings === 4) {
-            this.review4.push(item);
-          } else if (item.ratings === 5) {
-            this.review5.push(item);
-          }
-        });
-
-        let p1 = this.review1.length;
-        let p2 = this.review2.length;
-        let p3 = this.review3.length;
-        let p4 = this.review4.length;
-        let p5 = this.review5.length;
-        let ptotal = p1 + p2 + p3 + p4 + p5;
-        this.width1 = (p1 / ptotal) * 100;
-        this.width2 = (p2 / ptotal) * 100;
-        this.width3 = (p3 / ptotal) * 100;
-        this.width4 = (p4 / ptotal) * 100;
-        this.width5 = (p5 / ptotal) * 100;
-
-        let avg =
-          (p1 * 1 + p2 * 2 + p3 * 3 + p4 * 4 + p5 * 5) /
-          (p1 + p2 + p3 + p4 + p5);
-        this.averageRating = avg.toFixed(2);
-        this.avgPercent = (this.averageRating / 5) * 100;
-      });
+      }
     }
-  }
-};
+  };
 </script>
 
 <style>
