@@ -495,6 +495,11 @@
   import Logo from "~/components/Logo.vue";
   import axios from "axios";
   import Cookies from "js-cookie";
+  let Swal;
+
+  if (process.browser) {
+    Swal = require("sweetalert2");
+  }
 
   export default {
     data() {
@@ -590,7 +595,11 @@
             this.$store.commit("token", token);
 
             $("#closeLogin").click();
-            alert("Welcome " + res.data.username);
+            Swal.fire({
+              text: "Welcome " + res.data.username,
+              icon: "success",
+              confirmButtonText: "OK"
+            });
             this.$router.push("/startup/listing");
           })
           .catch(err => {
@@ -612,11 +621,6 @@
           payload.append("password", this.password1);
           this.$store.dispatch("registerUser", payload).then(res => {
             $("#closeSignUp").click();
-            alert(
-              "User with username " +
-                payload.get("username") +
-                " created successfully"
-            );
             var payload1 = new FormData();
             payload1.append("email", this.email);
             payload1.append("password", this.password);
@@ -643,7 +647,11 @@
                 this.$store.commit("token", token);
 
                 $("#closeLogin").click();
-                alert("Welcome " + res.data.username);
+                Swal.fire({
+                  text: "Welcome " + res.data.username,
+                  icon: "success",
+                  confirmButtonText: "OK"
+                });
                 this.$router.push("/startup/listing");
               })
               .catch(err => {

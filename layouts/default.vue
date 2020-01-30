@@ -165,4 +165,13 @@ body {
 #breadcrum-inner-block {
   padding: 25px 0px;
 }
+
+.swal2-header,
+.swal2-html-container {
+  font-size: 16px;
+}
+
+.swal2-styled.swal2-confirm {
+  font-size: 16px;
+}
 </style>

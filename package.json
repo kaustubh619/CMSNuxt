@@ -16,7 +16,9 @@
     "cookie": "^0.4.0",
     "formBuilder": "^3.2.5",
     "js-cookie": "^2.2.1",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "sweetalert2": "^9.7.1",
+    "vue-simple-alert": "^1.1.1"
   },
   "devDependencies": {
     "@editorjs/editorjs": "^2.16.1",

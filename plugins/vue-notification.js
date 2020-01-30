@@ -1,4 +1,4 @@
 import Vue from "vue";
-import Notifications from "vue-notification";
+import VueSimpleAlert from "vue-simple-alert";
 
-Vue.use(Notifications);
+Vue.use(VueSimpleAlert);
