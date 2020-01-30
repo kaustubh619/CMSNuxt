@@ -1220,6 +1220,13 @@
   padding: 0;
   margin-top: -30px;
 }
+
+@media(max-width: 37.5em)  {
+  .star-ratings {
+    font-size: 56px
+  }
+}
+
 .star-ratings .fill-ratings {
   color: #009e74;
   padding: 0;
