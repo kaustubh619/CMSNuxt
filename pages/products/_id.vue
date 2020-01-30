@@ -1223,7 +1223,7 @@
 
 @media(max-width: 37.5em)  {
   .star-ratings {
-    font-size: 56px
+    font-size: 60px
   }
 }
 
