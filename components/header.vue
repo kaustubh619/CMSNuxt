@@ -79,27 +79,29 @@
                     </li>
                     <li class="btn_item" v-if="!authentication">
                       <ul>
-                        <li class="qwe-btn">
+                        <li id="qwe-btn1">
                           <button
                             class="btn_login"
                             data-toggle="modal"
                             data-target="#login"
+                            @click="removeNav"
                           >
                             Login
                           </button>
                         </li>
-                        <li class="qwe-btn">
+                        <li id="qwe-btn2">
                           <button
                             class="btn_register"
                             data-toggle="modal"
                             data-target="#register"
+                            @click="removeNav"
                           >
                             Register
                           </button>
                         </li>
                       </ul>
                     </li>
-                    <li class="btn_item" v-else>
+                    <li class="btn_item" v-else id="qwe-btn3">
                       <ul>
                         <li>
                           <button class="btn_register" @click="logOutUser">
@@ -121,6 +123,11 @@
 
 <script>
   import Cookies from "js-cookie";
+  let Swal;
+
+  if (process.browser) {
+    Swal = require("sweetalert2");
+  }
   export default {
     computed: {
       authentication: {
@@ -156,12 +163,19 @@
       $(".st-list").click(function() {
         $(".navbar-collapse").removeClass("in");
       });
-      $(".qwe-btn").click(function() {
+      $("#qwe-btn1").click(function() {
+        $(".navbar-collapse").removeClass("in");
+      });
+      $("#qwe-btn2").click(function() {
         $(".navbar-collapse").removeClass("in");
       });
     },
 
     methods: {
+      removeNav: function() {
+        $(".navbar-collapse").removeClass("in");
+      },
+
       activeHome: function() {
         $("#home")
           .addClass("active")
@@ -202,7 +216,12 @@
         var payload = new FormData();
         payload.append("login_status", "false");
         this.$store.dispatch("logOutUser", payload).then(res => {
-          alert("User logged out successfully");
+          $(".navbar-collapse").removeClass("in");
+          Swal.fire({
+            text: "Successfully logged out",
+            icon: "success",
+            confirmButtonText: "OK"
+          });
         });
         localStorage.clear();
         Cookies.remove("x-access-token");
