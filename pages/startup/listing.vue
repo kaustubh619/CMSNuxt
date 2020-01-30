@@ -106,7 +106,6 @@
                     >
                       <div class="tg-list">
                         <div class="tg-listbox" data-title="title">
-                          <!-- <span class="list_user_thu"> <img src="images/img-01.jpg" alt="image description"> </span> -->
                           <div class="tg-listdata">
                             <h4>
                               <nuxt-link
@@ -169,15 +168,6 @@
                         </div>
                       </div>
                     </div>
-                    <!-- <div class="vfx-person-block">
-                  <ul class="vfx-pagination">
-                    <li><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                  </ul>
-                    </div>-->
                   </div>
                   <div v-else>
                     <h3 style="text-align: left">
@@ -251,10 +241,6 @@
           });
         else return false;
       }
-
-      // getProducts: function() {
-      //   this.$store.dispatch('getProducts', )
-      // }
     }
   };
 </script>

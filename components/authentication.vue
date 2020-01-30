@@ -27,13 +27,13 @@
             <div class="listing-login-form">
               <div>
                 <div class="listing-form-field">
-                  <i class="fa fa-user blue-1"></i>
+                  <i class="fa fa-envelope blue-1"></i>
                   <input
                     class="form-field bgwhite"
                     type="text"
                     name="user_name"
-                    placeholder="Username"
-                    v-model="username"
+                    placeholder="Email"
+                    v-model="email"
                   />
                 </div>
                 <div class="listing-form-field">
@@ -49,9 +49,6 @@
                 <div
                   class="listing-form-field clearfix margin-top-20 margin-bottom-20"
                 >
-                  <!-- <input type="checkbox" id="checkbox-1-1" class="regular-checkbox" />
-              <label for="checkbox-1-1"></label>
-                  <label class="checkbox-lable">Remember Me</label>-->
                   <a href="#" style="display: block; text-align: left"
                     >Forgot Password?</a
                   >
@@ -74,9 +71,6 @@
                   </button>
                 </div>
               </div>
-              <!-- <div class="bottom-links">
-            <p>Not a Member?<a href="#" data-dismiss="modal" data-toggle="modal" data-target="#register">Create Account</a></p>
-              </div>-->
             </div>
           </div>
         </div>
@@ -147,10 +141,6 @@
                   v-model="password2"
                 />
               </div>
-              <!-- <div class="listing-form-field clearfix margin-top-20 margin-bottom-20 login_form_text_center">
-              <input type="checkbox" id="checkbox-1-2" class="regular-checkbox" />
-              <label for="checkbox-1-2"></label>
-                <label class="checkbox-lable">i agree with</label> &nbsp; <a href="#">Terms & Conditions</a> </div>-->
               <div class="listing-form-field">
                 <input
                   type="submit"
@@ -191,7 +181,7 @@
     methods: {
       logInUser: function() {
         var payload = new FormData();
-        payload.append("username", this.username);
+        payload.append("email", this.email);
         payload.append("password", this.password);
         axios({
           method: "POST",
@@ -208,14 +198,15 @@
 
             localStorage.setItem("user_id", user_id);
 
+            localStorage.setItem("username", res.data.username);
+
             axios.defaults.headers.common["Authorization"] = token;
 
             this.$store.commit("authentication", true);
             this.$store.commit("token", token);
 
             $("#closeLogin").click();
-            alert("User logged in successfully");
-
+            alert("Welcome " + res.data.username);
             this.$router.push("/startup/listing");
           })
           .catch(err => {
@@ -242,7 +233,39 @@
                 payload.get("username") +
                 " created successfully"
             );
-            this.$router.push("/");
+            
+            var payload1 = new FormData();
+            payload1.append("email", this.email);
+            payload1.append("password", this.password);
+            axios({
+              method: "POST",
+              url: this.$store.state.api.logInUser,
+              data: payload
+            })
+              .then(res => {
+                const token = res.data.token;
+                Cookies.set("x-access-token", res.data.token);
+
+                const user_id = res.data.id;
+
+                localStorage.setItem("bearer", "token " + token);
+
+                localStorage.setItem("user_id", user_id);
+
+                localStorage.setItem("username", res.data.username);
+
+                axios.defaults.headers.common["Authorization"] = token;
+
+                this.$store.commit("authentication", true);
+                this.$store.commit("token", token);
+
+                $("#closeLogin").click();
+                alert("Welcome " + res.data.username);
+                this.$router.push("/startup/listing");
+              })
+              .catch(err => {
+                alert("Invalid user credentials!");
+              });
           });
         } else {
           alert("Invalid form!");

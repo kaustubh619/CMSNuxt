@@ -128,6 +128,10 @@
       }
     },
 
+    data() {
+      return {};
+    },
+
     mounted() {
       this.userState();
 

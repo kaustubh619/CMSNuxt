@@ -72,15 +72,16 @@
                   <form class="form-alt">
                     <div class="row">
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Startup Name :-</label>
+                        <label>Startup Name</label>
                         <input
                           class="form-control"
                           type="text"
                           v-model="startupname"
+                          disabled
                         />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Stage :-</label>
+                        <label>Stage</label>
                         <input
                           class="form-control"
                           type="number"
@@ -88,7 +89,7 @@
                         />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Product Name :-</label>
+                        <label>Product Name</label>
                         <input
                           class="form-control"
                           type="text"
@@ -96,7 +97,7 @@
                         />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Application Link :-</label>
+                        <label>Application Link</label>
                         <input
                           class="form-control"
                           type="text"
@@ -104,7 +105,7 @@
                         />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Number of active users :-</label>
+                        <label>Number of active users</label>
                         <input
                           class="form-control"
                           type="number"
@@ -112,15 +113,12 @@
                         />
                       </div>
                       <div class="form-group col-xs-12">
-                        <label>Description :-</label>
-                        <!-- <div
-                          id="editorjs"
-                          style="border: 1px solid #e9e6e0; border-radius: 4px; background-color: #fff; padding: 20px"
-                        ></div>-->
+                        <label>Description</label>
+
                         <div id="editor-container"></div>
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Product Video :-</label>
+                        <label>Product Video</label>
                         <p style="display: inline; float: left">Currently -</p>
                         <a
                           :href="video_url"

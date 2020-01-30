@@ -73,11 +73,11 @@
                   <form class="form-alt">
                     <div class="row">
                       <div class="form-group col-xs-12">
-                        <label>Update :-</label>
+                        <label>Update</label>
                         <div id="editor-container"></div>
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Update Video :-</label>
+                        <label>Update Video</label>
                         <p style="display: inline; float: left">Currently -</p>
                         <a
                           :href="video_url"

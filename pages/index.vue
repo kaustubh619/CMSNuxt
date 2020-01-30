@@ -1,5 +1,5 @@
 <template>
-<div v-if="loading_bool">
+  <div v-if="loading_bool">
     <div class="sk-cube-grid">
       <div class="sk-cube sk-cube1"></div>
       <div class="sk-cube sk-cube2"></div>
@@ -16,215 +16,152 @@
     </div>
   </div>
   <div v-else>
-      <div
-        id="slider-banner-section"
-        :style="{
-          background: `linear-gradient( to right bottom, rgba(0, 0, 0, 0.801), rgba(128, 128, 128, 0.601) ), url(${header_img}) top center no-repeat`
-        }"
-      >
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 text-center">
-              <div id="home-slider-item">
-                <span class="helpyou_item">{{ line1 }}</span>
-                <h1>{{ line2 }}</h1>
-                <!-- <p>Discover innovative startups and the people behind them</p> -->
-              </div>
-              <div id="search-categorie-item-block">
-                <form id="categorie-search-form">
-                  <h1>Search any Startup Listing</h1>
-                  <div class="col-sm-9 col-md-10 nopadding">
-                    <div id="search-input">
-                      <div class="col-sm-3 nopadding">
-                        <select
-                          id="location-search-list"
+    <div
+      id="slider-banner-section"
+      :style="{
+        background: `linear-gradient( to right bottom, rgba(0, 0, 0, 0.801), rgba(128, 128, 128, 0.601) ), url(${header_img}) top center no-repeat`
+      }"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <div id="home-slider-item">
+              <span class="helpyou_item">{{ line1 }}</span>
+              <h1>{{ line2 }}</h1>
+              <!-- <p>Discover innovative startups and the people behind them</p> -->
+            </div>
+            <div id="search-categorie-item-block">
+              <form id="categorie-search-form">
+                <h1>Search any Startup Listing</h1>
+                <div class="col-sm-9 col-md-10 nopadding">
+                  <div id="search-input">
+                    <div class="col-sm-3 nopadding">
+                      <select
+                        id="location-search-list"
+                        class="form-control"
+                      ></select>
+                    </div>
+                    <div class="col-sm-9 nopadding">
+                      <div class="form-group">
+                        <input
+                          id="location-search-data-store"
                           class="form-control"
-                        ></select>
-                      </div>
-                      <div class="col-sm-9 nopadding">
-                        <div class="form-group">
-                          <input
-                            id="location-search-data-store"
-                            class="form-control"
-                            name="search"
-                            placeholder="Enter Keyword"
-                            required
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-3 col-md-2 text-right nopadding-right">
-                    <div id="location-search-btn">
-                      <button type="submit" id="search-btn">
-                        <i class="fa fa-search"></i>Search
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- <div id="location_slider_item_block">
-          <button id="map_mark"><i class="fa fa-map-marker"></i></button>
-            </div>-->
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="recent-product-item-listing">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 text-center">
-              <div class="col-md-12 recent-item-listing-heading bt_heading_3">
-                <h1>
-                  Featured
-                  <span>Listing</span>
-                </h1>
-                <div class="blind line_1"></div>
-                <div class="flipInX-1 blind icon">
-                  <span class="icon">
-                    <i class="fa fa-stop"></i>&nbsp;&nbsp;
-                    <i class="fa fa-stop"></i>
-                  </span>
-                </div>
-                <div class="blind line_2"></div>
-              </div>
-              <div class="row">
-                <div
-                  class="col-md-6 col-sm-6 col-xs-12"
-                  v-for="(x, y) in featuredList"
-                  :key="y"
-                >
-                  <div class="recent-listing-box-container-item">
-                    <div class="col-md-6 col-sm-12 nopadding">
-                      <div class="recent-listing-box-image">
-                        <h1>{{ x.category.category }}</h1>
-                        <img :src="x.thumbnail" alt="img1" class="thumb-img" />
-                      </div>
-                      <div class="hover-overlay">
-                        <div class="hover-overlay-inner">
-                          <ul class="listing-links">
-                            <li>
-                              <a href="#">
-                                <i class="fa fa-heart green-1"></i>
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#">
-                                <i class="fa fa-map-marker blue-1"></i>
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#">
-                                <i class="fa fa-share yallow-1"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6 col-sm-12 nopadding">
-                      <div class="recent-listing-box-item">
-                        <div class="listing-boxes-text">
-                          <nuxt-link
-                            :to="{
-                              name: 'startup-details-id',
-                              params: { id: x.id }
-                            }"
-                          >
-                            <h3>{{ x.name }}</h3>
-                          </nuxt-link>
-                          <a>
-                            <i class="fa fa-calendar"></i>
-                            {{ x.date_of_launch }}
-                          </a>
-                          <p style="min-height: 88px">
-                            {{ x.description.slice(0, 100) }}.....
-                          </p>
-                        </div>
-                        <div class="recent-feature-item-rating">
-                          <h2>
-                            <i class="fa fa-map-marker"></i>
-                            {{ x.country }}
-                          </h2>
-                          <span>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                          </span>
-                        </div>
+                          name="search"
+                          placeholder="Enter Keyword"
+                          required
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+                <div class="col-sm-3 col-md-2 text-right nopadding-right">
+                  <div id="location-search-btn">
+                    <button type="submit" id="search-btn">
+                      <i class="fa fa-search"></i>Search
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- <div class="vfx-counter-block">
-        <div
-          class="vfx-item-container-slope vfx-item-bottom-slope vfx-item-left-slope"
-        ></div>
-        <div class="container">
-          <div class="vfx-item-counter-up">
+    <div id="recent-product-item-listing">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <div class="col-md-12 recent-item-listing-heading bt_heading_3">
+              <h1>
+                Featured
+                <span>Listing</span>
+              </h1>
+              <div class="blind line_1"></div>
+              <div class="flipInX-1 blind icon">
+                <span class="icon">
+                  <i class="fa fa-stop"></i>&nbsp;&nbsp;
+                  <i class="fa fa-stop"></i>
+                </span>
+              </div>
+              <div class="blind line_2"></div>
+            </div>
             <div class="row">
-              <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="vfx-item-countup">
-                  <div class="vfx-item-black-top-arrow">
-                    <i class="fa fa-file"></i>
+              <div
+                class="col-md-6 col-sm-6 col-xs-12"
+                v-for="(x, y) in featuredList"
+                :key="y"
+              >
+                <div class="recent-listing-box-container-item">
+                  <div class="col-md-6 col-sm-12 nopadding">
+                    <div class="recent-listing-box-image">
+                      <h1>{{ x.category.category }}</h1>
+                      <img :src="x.thumbnail" alt="img1" class="thumb-img" />
+                    </div>
+                    <div class="hover-overlay">
+                      <div class="hover-overlay-inner">
+                        <ul class="listing-links">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-heart green-1"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-map-marker blue-1"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-share yallow-1"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    id="count-1"
-                    class="vfx-coutter-item count_number vfx-item-count-up"
-                  >
-                    {{ startup_count }}
+                  <div class="col-md-6 col-sm-12 nopadding">
+                    <div class="recent-listing-box-item">
+                      <div class="listing-boxes-text">
+                        <nuxt-link
+                          :to="{
+                            name: 'startup-details-id',
+                            params: { id: x.id }
+                          }"
+                        >
+                          <h3>{{ x.name }}</h3>
+                        </nuxt-link>
+                        <a>
+                          <i class="fa fa-calendar"></i>
+                          {{ x.date_of_launch }}
+                        </a>
+                        <p style="min-height: 88px">
+                          {{ x.description.slice(0, 100) }}.....
+                        </p>
+                      </div>
+                      <div class="recent-feature-item-rating">
+                        <h2>
+                          <i class="fa fa-map-marker"></i>
+                          {{ x.country }}
+                        </h2>
+                        <span>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="counter_text">Listings</div>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-4 col-xs-12">
-                <div
-                  class="vfx-item-countup"
-                  style="display:block; margin-left:auto; margin-right: auto"
-                >
-                  <div class="vfx-item-black-top-arrow">
-                    <i class="fa fa-users"></i>
-                  </div>
-                  <div
-                    id="count-2"
-                    class="vfx-coutter-item count_number vfx-item-count-up"
-                  >
-                    {{ user_count }}
-                  </div>
-                  <div class="counter_text">Users</div>
-                </div>
-              </div>
-              <div class="col-md-4 col-sm-4 col-xs-12">
-                <div
-                  class="vfx-item-countup"
-                  style="display: block; margin-left:auto"
-                >
-                  <div class="vfx-item-black-top-arrow">
-                    <i class="fa fa-th"></i>
-                  </div>
-                  <div
-                    id="count-3"
-                    class="vfx-coutter-item count_number vfx-item-count-up"
-                  >
-                    {{ category_length }}
-                  </div>
-                  <div class="counter_text">Categories</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div> -->
-      <div
+      </div>
+    </div>
+    <div
       id="search-categorie-item"
       :style="{
         background: `linear-gradient( to right bottom, rgba(0, 0, 0, 0.801), rgba(128, 128, 128, 0.601) ), url(${header_img}) top center no-repeat`
@@ -248,8 +185,16 @@
                 </div>
                 <div class="blind line_2"></div>
               </div>
-              <div class="col-md-3 col-sm-6 col-xs-12" v-for="(x, y) in categoryList" :key="y">
-                <div class="categorie_item" v-bind:id="x.id" @click="getListing(x.id)">
+              <div
+                class="col-md-3 col-sm-6 col-xs-12"
+                v-for="(x, y) in categoryList"
+                :key="y"
+              >
+                <div
+                  class="categorie_item"
+                  v-bind:id="x.id"
+                  @click="getListing(x.id)"
+                >
                   <div class="cate_item_block hi-icon-effect-8">
                     <h1>
                       <a href="#">{{ x.category }}</a>
@@ -262,90 +207,89 @@
         </div>
       </div>
     </div>
-      <div id="recent-product-item-listing">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-12 text-center">
-              <div class="col-md-12 recent-item-listing-heading bt_heading_3">
-                <h1>
-                  Recent
-                  <span>Listing</span>
-                </h1>
-                <div class="blind line_1"></div>
-                <div class="flipInX-1 blind icon">
-                  <span class="icon">
-                    <i class="fa fa-stop"></i>&nbsp;&nbsp;
-                    <i class="fa fa-stop"></i>
-                  </span>
-                </div>
-                <div class="blind line_2"></div>
+    <div id="recent-product-item-listing">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <div class="col-md-12 recent-item-listing-heading bt_heading_3">
+              <h1>
+                Recent
+                <span>Listing</span>
+              </h1>
+              <div class="blind line_1"></div>
+              <div class="flipInX-1 blind icon">
+                <span class="icon">
+                  <i class="fa fa-stop"></i>&nbsp;&nbsp;
+                  <i class="fa fa-stop"></i>
+                </span>
               </div>
-              <div class="row">
-                <div
-                  class="col-md-6 col-sm-6 col-xs-12"
-                  v-for="(x, y) in startupList"
-                  :key="y"
-                >
-                  <div class="recent-listing-box-container-item">
-                    <div class="col-md-6 col-sm-12 nopadding">
-                      <div class="recent-listing-box-image">
-                        <h1>{{ x.category.category }}</h1>
-                        <img :src="x.thumbnail" alt="img1" class="thumb-img" />
-                      </div>
-                      <div class="hover-overlay">
-                        <div class="hover-overlay-inner">
-                          <ul class="listing-links">
-                            <li>
-                              <a href="#">
-                                <i class="fa fa-heart green-1"></i>
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#">
-                                <i class="fa fa-map-marker blue-1"></i>
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#">
-                                <i class="fa fa-share yallow-1"></i>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
+              <div class="blind line_2"></div>
+            </div>
+            <div class="row">
+              <div
+                class="col-md-6 col-sm-6 col-xs-12"
+                v-for="(x, y) in startupList"
+                :key="y"
+              >
+                <div class="recent-listing-box-container-item">
+                  <div class="col-md-6 col-sm-12 nopadding">
+                    <div class="recent-listing-box-image">
+                      <h1>{{ x.category.category }}</h1>
+                      <img :src="x.thumbnail" alt="img1" class="thumb-img" />
+                    </div>
+                    <div class="hover-overlay">
+                      <div class="hover-overlay-inner">
+                        <ul class="listing-links">
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-heart green-1"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-map-marker blue-1"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#">
+                              <i class="fa fa-share yallow-1"></i>
+                            </a>
+                          </li>
+                        </ul>
                       </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 nopadding">
-                      <div class="recent-listing-box-item">
-                        <div class="listing-boxes-text">
-                          <nuxt-link
-                            :to="{
-                              name: 'startup-details-id',
-                              params: { id: x.id }
-                            }"
-                          >
-                            <h3>{{ x.name }}</h3>
-                          </nuxt-link>
-                          <a>
-                            <i class="fa fa-calendar"></i>
-                            {{ x.date_of_launch }}
-                          </a>
-                          <p style="min-height: 88px">
-                            {{ x.description.slice(0, 100) }}.....
-                          </p>
-                        </div>
-                        <div class="recent-feature-item-rating">
-                          <h2>
-                            <i class="fa fa-map-marker"></i>
-                            {{ x.country }}
-                          </h2>
-                          <span>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-o"></i>
-                          </span>
-                        </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 nopadding">
+                    <div class="recent-listing-box-item">
+                      <div class="listing-boxes-text">
+                        <nuxt-link
+                          :to="{
+                            name: 'startup-details-id',
+                            params: { id: x.id }
+                          }"
+                        >
+                          <h3>{{ x.name }}</h3>
+                        </nuxt-link>
+                        <a>
+                          <i class="fa fa-calendar"></i>
+                          {{ x.date_of_launch }}
+                        </a>
+                        <p style="min-height: 88px">
+                          {{ x.description.slice(0, 100) }}.....
+                        </p>
+                      </div>
+                      <div class="recent-feature-item-rating">
+                        <h2>
+                          <i class="fa fa-map-marker"></i>
+                          {{ x.country }}
+                        </h2>
+                        <span>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -355,162 +299,71 @@
           </div>
         </div>
       </div>
-      <div class="container-fluid st-sb-back">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <span class="banner-text-1">"Whether you think you can,</span>
-              <span class="banner-text-2" style="display: block"
-                >or think you can't--you're right."</span
-              >
-              <br />
-              <span class="banner-text-3">
-                Starting your own business is like riding a roller coaster.
-                There are highs and lows and every turn you take is another
-                twist. The lows are really low, but the highs can be really
-                high. You have to be strong, keep your stomach tight, and ride
-                along with the roller coaster that you started.
-              </span>
-              <br />
-              <button class="st-bt-11" @click="register_startup">
-                Register Your Startup
-                <i
-                  class="fa fa-angle-right"
-                  aria-hidden="true"
-                  style="background-color: #ffbe2e; border-radius: 50%; padding: 6px 13px"
-                ></i>
-              </button>
-            </div>
+    </div>
+    <div class="container-fluid st-sb-back">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <span class="banner-text-1">"Whether you think you can,</span>
+            <span class="banner-text-2" style="display: block"
+              >or think you can't--you're right."</span
+            >
+            <br />
+            <span class="banner-text-3">
+              Starting your own business is like riding a roller coaster. There
+              are highs and lows and every turn you take is another twist. The
+              lows are really low, but the highs can be really high. You have to
+              be strong, keep your stomach tight, and ride along with the roller
+              coaster that you started.
+            </span>
+            <br />
+            <button class="st-bt-11" @click="register_startup">
+              Register Your Startup
+              <i
+                class="fa fa-angle-right"
+                aria-hidden="true"
+                style="background-color: #ffbe2e; border-radius: 50%; padding: 6px 13px"
+              ></i>
+            </button>
           </div>
         </div>
       </div>
-      <!--================================ Login and Register Forms ===========================================-->
+    </div>
+    <!--================================ Login and Register Forms ===========================================-->
 
-      <!-- login form -->
-      <div
-        class="modal fade"
-        id="login"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel"
-        aria-hidden="true"
-        style="z-index: 10000"
-      >
-        <div class="listing-modal-1 modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-hidden="true"
-                id="closeLogin"
-              >
-                &times;
-              </button>
-              <h4 class="modal-title" id="myModalLabel">Login</h4>
-            </div>
-            <div class="modal-body">
-              <div class="listing-login-form">
-                <div>
-                  <div class="listing-form-field">
-                    <i class="fa fa-user blue-1"></i>
-                    <input
-                      class="form-field bgwhite"
-                      type="text"
-                      name="user_name"
-                      placeholder="Username"
-                      v-model="username"
-                    />
-                  </div>
-                  <div class="listing-form-field">
-                    <i class="fa fa-lock blue-1"></i>
-                    <input
-                      class="form-field bgwhite"
-                      type="password"
-                      name="user_pass"
-                      placeholder="Password"
-                      v-model="password"
-                    />
-                  </div>
-                  <div
-                    class="listing-form-field clearfix margin-top-20 margin-bottom-20"
-                  >
-                    <!-- <input type="checkbox" id="checkbox-1-1" class="regular-checkbox" />
-              <label for="checkbox-1-1"></label>
-                  <label class="checkbox-lable">Remember Me</label>-->
-                    <a href="#" style="display: block; text-align: left"
-                      >Forgot Password?</a
-                    >
-                  </div>
-                  <div class="listing-form-field">
-                    <input
-                      type="submit"
-                      class="submit"
-                      value="login"
-                      @click="logInUser"
-                      style="cursor: pointer"
-                    />
-                  </div>
-                  <div class="divider">
-                    <span>OR</span>
-                  </div>
-                  <div style="display: flex; justify-content: center">
-                    <button class="mybtn2" @click="google">
-                      <i class="fa fa-google mybtn1"></i>Continue with Google
-                    </button>
-                  </div>
-                </div>
-                <!-- <div class="bottom-links">
-            <p>Not a Member?<a href="#" data-dismiss="modal" data-toggle="modal" data-target="#register">Create Account</a></p>
-              </div>-->
-              </div>
-            </div>
+    <!-- login form -->
+    <div
+      class="modal fade"
+      id="login"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+      style="z-index: 10000"
+    >
+      <div class="listing-modal-1 modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+              id="closeLogin"
+            >
+              &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Login</h4>
           </div>
-        </div>
-      </div>
-      <div
-        class="modal fade"
-        id="register"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel"
-        aria-hidden="true"
-        style="z-index: 10000"
-      >
-        <div class="listing-modal-1 modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-hidden="true"
-                id="closeSignUp"
-              >
-                &times;
-              </button>
-              <h4 class="modal-title" id="myModalLabel2">Registration</h4>
-            </div>
-            <div class="modal-body">
-              <div class="listing-register-form">
-                <!-- <form> -->
-                <div class="listing-form-field">
-                  <i class="fa fa-user blue-1"></i>
-                  <input
-                    class="form-field bgwhite"
-                    type="text"
-                    name="user_name"
-                    placeholder="Userame"
-                    v-model="username"
-                  />
-                </div>
+          <div class="modal-body">
+            <div class="listing-login-form">
+              <div>
                 <div class="listing-form-field">
                   <i class="fa fa-envelope blue-1"></i>
                   <input
                     class="form-field bgwhite"
-                    type="email"
-                    name="user_email"
+                    type="text"
+                    name="user_name"
                     placeholder="Email"
                     v-model="email"
                   />
@@ -520,31 +373,115 @@
                   <input
                     class="form-field bgwhite"
                     type="password"
-                    name="user_password"
+                    name="user_pass"
                     placeholder="Password"
-                    v-model="password1"
+                    v-model="password"
                   />
                 </div>
-                <div class="listing-form-field">
-                  <i class="fa fa-lock blue-1"></i>
-                  <input
-                    class="form-field bgwhite"
-                    type="password"
-                    name="user_confirm_password"
-                    placeholder="Confirm Password"
-                    v-model="password2"
-                  />
+                <div
+                  class="listing-form-field clearfix margin-top-20 margin-bottom-20"
+                >
+                  <a href="#" style="display: block; text-align: left"
+                    >Forgot Password?</a
+                  >
                 </div>
-
                 <div class="listing-form-field">
                   <input
                     type="submit"
                     class="submit"
-                    value="create account"
-                    @click="registerUser"
+                    value="login"
+                    @click="logInUser"
                     style="cursor: pointer"
                   />
                 </div>
+                <div class="divider">
+                  <span>OR</span>
+                </div>
+                <div style="display: flex; justify-content: center">
+                  <button class="mybtn2" @click="google">
+                    <i class="fa fa-google mybtn1"></i>Continue with Google
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="register"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+      style="z-index: 10000"
+    >
+      <div class="listing-modal-1 modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+              id="closeSignUp"
+            >
+              &times;
+            </button>
+            <h4 class="modal-title" id="myModalLabel2">Registration</h4>
+          </div>
+          <div class="modal-body">
+            <div class="listing-register-form">
+              <!-- <form> -->
+              <div class="listing-form-field">
+                <i class="fa fa-user blue-1"></i>
+                <input
+                  class="form-field bgwhite"
+                  type="text"
+                  name="user_name"
+                  placeholder="Userame"
+                  v-model="username"
+                />
+              </div>
+              <div class="listing-form-field">
+                <i class="fa fa-envelope blue-1"></i>
+                <input
+                  class="form-field bgwhite"
+                  type="email"
+                  name="user_email"
+                  placeholder="Email"
+                  v-model="email"
+                />
+              </div>
+              <div class="listing-form-field">
+                <i class="fa fa-lock blue-1"></i>
+                <input
+                  class="form-field bgwhite"
+                  type="password"
+                  name="user_password"
+                  placeholder="Password"
+                  v-model="password1"
+                />
+              </div>
+              <div class="listing-form-field">
+                <i class="fa fa-lock blue-1"></i>
+                <input
+                  class="form-field bgwhite"
+                  type="password"
+                  name="user_confirm_password"
+                  placeholder="Confirm Password"
+                  v-model="password2"
+                />
+              </div>
+              <div class="listing-form-field">
+                <input
+                  type="submit"
+                  class="submit"
+                  value="create account"
+                  @click="registerUser"
+                  style="cursor: pointer"
+                />
               </div>
             </div>
           </div>
@@ -568,7 +505,6 @@
         password1: "",
         password2: "",
         category_length: "",
-        username: "",
         password: "",
         email: "",
         password1: "",
@@ -629,7 +565,7 @@
 
       logInUser: function() {
         var payload = new FormData();
-        payload.append("username", this.username);
+        payload.append("email", this.email);
         payload.append("password", this.password);
         axios({
           method: "POST",
@@ -646,13 +582,15 @@
 
             localStorage.setItem("user_id", user_id);
 
+            localStorage.setItem("username", res.data.username);
+
             axios.defaults.headers.common["Authorization"] = token;
 
             this.$store.commit("authentication", true);
             this.$store.commit("token", token);
 
             $("#closeLogin").click();
-            alert("User logged in successfully");
+            alert("Welcome " + res.data.username);
             this.$router.push("/startup/listing");
           })
           .catch(err => {
@@ -679,7 +617,38 @@
                 payload.get("username") +
                 " created successfully"
             );
-            this.$router.push("/");
+            var payload1 = new FormData();
+            payload1.append("email", this.email);
+            payload1.append("password", this.password);
+            axios({
+              method: "POST",
+              url: this.$store.state.api.logInUser,
+              data: payload
+            })
+              .then(res => {
+                const token = res.data.token;
+                Cookies.set("x-access-token", res.data.token);
+
+                const user_id = res.data.id;
+
+                localStorage.setItem("bearer", "token " + token);
+
+                localStorage.setItem("user_id", user_id);
+
+                localStorage.setItem("username", res.data.username);
+
+                axios.defaults.headers.common["Authorization"] = token;
+
+                this.$store.commit("authentication", true);
+                this.$store.commit("token", token);
+
+                $("#closeLogin").click();
+                alert("Welcome " + res.data.username);
+                this.$router.push("/startup/listing");
+              })
+              .catch(err => {
+                alert("Invalid user credentials!");
+              });
           });
         } else {
           alert("Invalid form!");
@@ -723,9 +692,7 @@
 
       async google() {
         $("#closeLogin").click();
-        await this.$auth.loginWith("google").catch(e => {
-          // this.$toast.show("Error", { icon: "fingerprint" });
-        });
+        await this.$auth.loginWith("google").catch(e => {});
       },
 
       googleLogIn: function() {

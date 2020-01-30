@@ -157,7 +157,7 @@
                   <form class="form-alt">
                     <div class="row">
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Facebook :-</label>
+                        <label>Facebook</label>
                         <input
                           class="form-control"
                           value="http://facebook.com/"
@@ -166,7 +166,7 @@
                         />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Twitter :-</label>
+                        <label>Twitter</label>
                         <input
                           class="form-control"
                           value="http://twitter.com/"
@@ -175,11 +175,15 @@
                         />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Linkedin :-</label>
-                        <input class="form-control" type="text" v-model="l_link" />
+                        <label>Linkedin</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          v-model="l_link"
+                        />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Instagram :-</label>
+                        <label>Instagram</label>
                         <input
                           class="form-control"
                           value="http://insatgram.com/"
@@ -195,11 +199,16 @@
                   <form class="form-alt">
                     <div class="row">
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Country :-</label>
-                        <input class="form-control" value="New York" type="text" v-model="country" />
+                        <label>Country</label>
+                        <input
+                          class="form-control"
+                          value="New York"
+                          type="text"
+                          v-model="country"
+                        />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>City :-</label>
+                        <label>City</label>
                         <input
                           class="form-control"
                           value="New York City"
@@ -208,7 +217,7 @@
                         />
                       </div>
                       <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                        <label>Street :-</label>
+                        <label>Street</label>
                         <input
                           class="form-control"
                           value="Everton Eve"
@@ -217,12 +226,22 @@
                         />
                       </div>
                       <div class="form-group col-md-3 col-sm-12 col-xs-12">
-                        <label>House Number :-</label>
-                        <input class="form-control" value="12345" type="text" v-model="house_no" />
+                        <label>House Number</label>
+                        <input
+                          class="form-control"
+                          value="12345"
+                          type="text"
+                          v-model="house_no"
+                        />
                       </div>
                       <div class="form-group col-md-3 col-sm-12 col-xs-12">
-                        <label>Zip :-</label>
-                        <input class="form-control" value="121211" type="text" v-model="zip" />
+                        <label>Zip</label>
+                        <input
+                          class="form-control"
+                          value="121211"
+                          type="text"
+                          v-model="zip"
+                        />
                       </div>
                     </div>
                   </form>
@@ -245,7 +264,9 @@
                 </div>
                 <div class="from-list-lt">
                   <div class="form-group">
-                    <button class="btn" type="submit" @click="updateUser">Update</button>
+                    <button class="btn" type="submit" @click="updateUser">
+                      Update
+                    </button>
                   </div>
                 </div>
               </div>
@@ -258,133 +279,133 @@
 </template>
 
 <script>
-import Cookies from "js-cookie";
-export default {
-  middleware: "token-auth",
-  data() {
-    return {
-      username: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      phone: "",
-      fb_link: "",
-      twitter_link: "",
-      l_link: "",
-      insta_link: "",
-      country: "",
-      city: "",
-      street: "",
-      house_no: "",
-      zip: "",
-      dp_url: "",
-      file: ""
-    };
-  },
-
-  mounted() {
-    this.getUser();
-    this.getUserAdditionalDetails();
-    $("#user_profile")
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
-  },
-
-  methods: {
-    handleFileUpload: function() {
-      this.file = this.$refs.file.files[0];
+  import Cookies from "js-cookie";
+  export default {
+    middleware: "token-auth",
+    data() {
+      return {
+        username: "",
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        fb_link: "",
+        twitter_link: "",
+        l_link: "",
+        insta_link: "",
+        country: "",
+        city: "",
+        street: "",
+        house_no: "",
+        zip: "",
+        dp_url: "",
+        file: ""
+      };
     },
 
-    getUser: function() {
-      const id = localStorage.getItem("user_id");
-      this.$store.dispatch("getUser", id).then(res => {
-        this.username = res.data.username;
-        this.first_name = res.data.first_name;
-        this.last_name = res.data.last_name;
-        this.email = res.data.email;
-      });
+    mounted() {
+      this.getUser();
+      this.getUserAdditionalDetails();
+      $("#user_profile")
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
     },
 
-    getUserAdditionalDetails: function() {
-      const id = localStorage.getItem("user_id");
-      this.$store.dispatch("getUserAdditionalDetails", id).then(res => {
-        this.phone = res.data.phone;
-        this.fb_link = res.data.fb_link;
-        this.twitter_link = res.data.twitter_link;
-        this.l_link = res.data.linkedin_link;
-        this.insta_link = res.data.insta_link;
-        this.country = res.data.country;
-        this.city = res.data.city;
-        this.street = res.data.street;
-        this.house_no = res.data.house_no;
-        this.zip = res.data.zip;
-        this.dp_url = res.data.display_pic;
-      });
-    },
+    methods: {
+      handleFileUpload: function() {
+        this.file = this.$refs.file.files[0];
+      },
 
-    updateUser: function() {
-      var payload = new FormData();
-      payload.append("username", this.username);
-      payload.append("first_name", this.first_name);
-      payload.append("last_name", this.last_name);
-      payload.append("email", this.email);
-      // this.$store.dispatch("updateUser", payload);
+      getUser: function() {
+        const id = localStorage.getItem("user_id");
+        this.$store.dispatch("getUser", id).then(res => {
+          this.username = res.data.username;
+          this.first_name = res.data.first_name;
+          this.last_name = res.data.last_name;
+          this.email = res.data.email;
+        });
+      },
 
-      var payload2 = new FormData();
-      payload2.append("user", localStorage.getItem("user_id"));
-      if (this.phone !== null) {
-        payload2.append("phone", this.phone);
-      }
-      if (this.fb_link !== null) {
-        payload2.append("fb_link", this.fb_link);
-      }
-      if (this.twitter_link !== null) {
-        payload2.append("twitter_link", this.twitter_link);
-      }
-      if (this.l_link !== null) {
-        payload2.append("linkedin_link", this.l_link);
-      }
-      if (this.insta_link !== null) {
-        payload2.append("insta_link", this.insta_link);
-      }
-      if (this.city !== null) {
-        payload2.append("city", this.city);
-      }
-      if (this.country !== null) {
-        payload2.append("country", this.country);
-      }
-      if (this.street !== null) {
-        payload2.append("street", this.street);
-      }
-      if (this.house_no !== null) {
-        payload2.append("house_no", this.house_no);
-      }
-      if (this.zip !== null) {
-        payload2.append("zip", this.zip);
-      }
-      if (this.file) {
-        payload2.append("display_pic", this.file);
-      }
-      this.$store.dispatch("updateUserExt", payload2).then(res => {
-        this.dp_url = res.data.display_pic;
-        alert("User details updated!");
-      });
-    },
+      getUserAdditionalDetails: function() {
+        const id = localStorage.getItem("user_id");
+        this.$store.dispatch("getUserAdditionalDetails", id).then(res => {
+          this.phone = res.data.phone;
+          this.fb_link = res.data.fb_link;
+          this.twitter_link = res.data.twitter_link;
+          this.l_link = res.data.linkedin_link;
+          this.insta_link = res.data.insta_link;
+          this.country = res.data.country;
+          this.city = res.data.city;
+          this.street = res.data.street;
+          this.house_no = res.data.house_no;
+          this.zip = res.data.zip;
+          this.dp_url = res.data.display_pic;
+        });
+      },
 
-    logOutUser: function() {
-      var payload = new FormData();
-      payload.append("login_status", "false");
-      this.$store.dispatch("logOutUser", payload).then(res => {
-        console.log(res);
-      });
-      localStorage.clear();
-      Cookies.remove("x-access-token");
-      this.$store.commit("authentication", false);
-      this.$router.push("/");
+      updateUser: function() {
+        var payload = new FormData();
+        payload.append("username", this.username);
+        payload.append("first_name", this.first_name);
+        payload.append("last_name", this.last_name);
+        payload.append("email", this.email);
+        // this.$store.dispatch("updateUser", payload);
+
+        var payload2 = new FormData();
+        payload2.append("user", localStorage.getItem("user_id"));
+        if (this.phone !== null) {
+          payload2.append("phone", this.phone);
+        }
+        if (this.fb_link !== null) {
+          payload2.append("fb_link", this.fb_link);
+        }
+        if (this.twitter_link !== null) {
+          payload2.append("twitter_link", this.twitter_link);
+        }
+        if (this.l_link !== null) {
+          payload2.append("linkedin_link", this.l_link);
+        }
+        if (this.insta_link !== null) {
+          payload2.append("insta_link", this.insta_link);
+        }
+        if (this.city !== null) {
+          payload2.append("city", this.city);
+        }
+        if (this.country !== null) {
+          payload2.append("country", this.country);
+        }
+        if (this.street !== null) {
+          payload2.append("street", this.street);
+        }
+        if (this.house_no !== null) {
+          payload2.append("house_no", this.house_no);
+        }
+        if (this.zip !== null) {
+          payload2.append("zip", this.zip);
+        }
+        if (this.file) {
+          payload2.append("display_pic", this.file);
+        }
+        this.$store.dispatch("updateUserExt", payload2).then(res => {
+          this.dp_url = res.data.display_pic;
+          alert("User details updated!");
+        });
+      },
+
+      logOutUser: function() {
+        var payload = new FormData();
+        payload.append("login_status", "false");
+        this.$store.dispatch("logOutUser", payload).then(res => {
+          console.log(res);
+        });
+        localStorage.clear();
+        Cookies.remove("x-access-token");
+        this.$store.commit("authentication", false);
+        this.$router.push("/");
+      }
     }
-  }
-};
+  };
 </script>
 
 <style>
