@@ -51,14 +51,16 @@
                     <li id="user_profile">
                       <a href="#">Listing <i class="fa fa-caret-down"></i></a>
                       <ul class="dropdown">
-                        <li @click="activeUserProfile" id="st-list">
+                        <li @click="activeUserProfile" class="st-list">
                           <nuxt-link to="/startup/all_startups"
                             ><i class="fa fa-angle-double-right"></i> Startup
                             Listing</nuxt-link
                           >
                         </li>
                         <li>
-                          <nuxt-link to="/startup/featured_startups"
+                          <nuxt-link
+                            to="/startup/featured_startups"
+                            class="st-list"
                             ><i class="fa fa-angle-double-right"></i> Featured
                             Listing</nuxt-link
                           >
@@ -77,7 +79,7 @@
                     </li>
                     <li class="btn_item" v-if="!authentication">
                       <ul>
-                        <li>
+                        <li class="qwe-btn">
                           <button
                             class="btn_login"
                             data-toggle="modal"
@@ -86,7 +88,7 @@
                             Login
                           </button>
                         </li>
-                        <li>
+                        <li class="qwe-btn">
                           <button
                             class="btn_register"
                             data-toggle="modal"
@@ -151,7 +153,10 @@
         $(".navbar-collapse").removeClass("in");
       });
 
-      $("#st-list").click(function() {
+      $(".st-list").click(function() {
+        $(".navbar-collapse").removeClass("in");
+      });
+      $(".qwe-btn").click(function() {
         $(".navbar-collapse").removeClass("in");
       });
     },
