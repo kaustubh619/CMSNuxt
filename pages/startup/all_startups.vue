@@ -192,7 +192,8 @@ export default {
       length: "",
       cat_bool: false,
       category_name: "",
-      loading_bool: true
+      loading_bool: true,
+      search_url: ""
     };
   },
 
@@ -216,7 +217,29 @@ export default {
       if (this.$store.state.category !== 0) {
         this.getStartupByCategory(this.$store.state.category);
       } else {
-        this.getStartups();
+        this.search_url = window.location.href.split("?")[1];
+        this.search_url = this.search_url.split(",")[0];
+        if (this.search_url) {
+          this.loading_bool = false;
+          this.$store
+            .dispatch("getFilteredStartups", this.search_url)
+            .then(res => {
+              this.startupList = res.data;
+              this.length = res.data.length;
+            });
+        } else {
+          this.$store.dispatch("getStartups").then(res => {
+            this.startupList = res.data;
+            this.length = res.data.length;
+            this.loading_bool = false;
+          });
+          this.getCategories();
+          $("#allStartUp")
+            .addClass("active")
+            .siblings()
+            .removeClass("active");
+          this.cat_bool = false;
+        }
       }
     },
 
@@ -232,19 +255,7 @@ export default {
         });
       });
     },
-    getStartups: function() {
-      this.$store.dispatch("getStartups").then(res => {
-        this.startupList = res.data;
-        this.length = res.data.length;
-        this.loading_bool = false;
-      });
-      this.getCategories();
-      $("#allStartUp")
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
-      this.cat_bool = false;
-    },
+    getStartups: function() {},
 
     showAllCat: function() {
       this.$store.dispatch("getCategories").then(res => {

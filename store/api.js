@@ -87,5 +87,7 @@ export const state = () => ({
 
   user_ratings_update: url + "/user_update_ratings/",
 
-  allProductRatings: url + "/all_ratings"
+  allProductRatings: url + "/all_ratings",
+
+  getFilteredStartups: url + "/startup_search?search="
 });

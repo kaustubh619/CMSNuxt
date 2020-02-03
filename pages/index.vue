@@ -31,37 +31,37 @@
               <!-- <p>Discover innovative startups and the people behind them</p> -->
             </div>
             <div id="search-categorie-item-block">
-              <form id="categorie-search-form">
-                <h1>Search any Startup Listing</h1>
-                <div class="col-sm-9 col-md-10 nopadding">
-                  <div id="search-input">
-                    <div class="col-sm-3 nopadding">
-                      <select
-                        id="location-search-list"
+              <!-- <form id="categorie-search-form"> -->
+              <h1>Search any Startup Listing</h1>
+              <div class="col-sm-7 col-md-6 nopadding col-md-offset-2 col-sm-offset-1">
+                <div id="search-input">
+                  <!-- <div class="col-sm-3 nopadding">
+                    <select id="location-search-list" class="form-control">
+                      <option value="0">Select Category</option>
+                    </select>
+                  </div>-->
+                  <div class="col-sm-12 nopadding">
+                    <div class="form-group">
+                      <input
+                        id="location-search-data-store"
                         class="form-control"
-                      ></select>
-                    </div>
-                    <div class="col-sm-9 nopadding">
-                      <div class="form-group">
-                        <input
-                          id="location-search-data-store"
-                          class="form-control"
-                          name="search"
-                          placeholder="Enter Keyword"
-                          required
-                        />
-                      </div>
+                        name="search"
+                        placeholder="Enter Keyword"
+                        v-model="searchValue"
+                        required
+                      />
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-3 col-md-2 text-right nopadding-right">
-                  <div id="location-search-btn">
-                    <button type="submit" id="search-btn">
-                      <i class="fa fa-search"></i>Search
-                    </button>
-                  </div>
+              </div>
+              <div class="col-sm-3 col-md-2 text-right nopadding-right">
+                <div id="location-search-btn">
+                  <button type="submit" id="search-btn" @click="SearchFilter">
+                    <i class="fa fa-search"></i>Search
+                  </button>
                 </div>
-              </form>
+              </div>
+              <!-- </form> -->
             </div>
           </div>
         </div>
@@ -87,11 +87,7 @@
               <div class="blind line_2"></div>
             </div>
             <div class="row">
-              <div
-                class="col-md-6 col-sm-6 col-xs-12"
-                v-for="(x, y) in featuredList"
-                :key="y"
-              >
+              <div class="col-md-6 col-sm-6 col-xs-12" v-for="(x, y) in featuredList" :key="y">
                 <div class="recent-listing-box-container-item">
                   <div class="col-md-6 col-sm-12 nopadding">
                     <div class="recent-listing-box-image">
@@ -135,9 +131,7 @@
                           <i class="fa fa-calendar"></i>
                           {{ x.date_of_launch }}
                         </a>
-                        <p style="min-height: 88px">
-                          {{ x.description.slice(0, 100) }}.....
-                        </p>
+                        <p style="min-height: 88px">{{ x.description.slice(0, 100) }}.....</p>
                       </div>
                       <div class="recent-feature-item-rating">
                         <h2>
@@ -185,16 +179,8 @@
                 </div>
                 <div class="blind line_2"></div>
               </div>
-              <div
-                class="col-md-3 col-sm-6 col-xs-12"
-                v-for="(x, y) in categoryList"
-                :key="y"
-              >
-                <div
-                  class="categorie_item"
-                  v-bind:id="x.id"
-                  @click="getListing(x.id)"
-                >
+              <div class="col-md-3 col-sm-6 col-xs-12" v-for="(x, y) in categoryList" :key="y">
+                <div class="categorie_item" v-bind:id="x.id" @click="getListing(x.id)">
                   <div class="cate_item_block hi-icon-effect-8">
                     <h1>
                       <a href="#">{{ x.category }}</a>
@@ -226,11 +212,7 @@
               <div class="blind line_2"></div>
             </div>
             <div class="row">
-              <div
-                class="col-md-6 col-sm-6 col-xs-12"
-                v-for="(x, y) in startupList"
-                :key="y"
-              >
+              <div class="col-md-6 col-sm-6 col-xs-12" v-for="(x, y) in startupList" :key="y">
                 <div class="recent-listing-box-container-item">
                   <div class="col-md-6 col-sm-12 nopadding">
                     <div class="recent-listing-box-image">
@@ -274,9 +256,7 @@
                           <i class="fa fa-calendar"></i>
                           {{ x.date_of_launch }}
                         </a>
-                        <p style="min-height: 88px">
-                          {{ x.description.slice(0, 100) }}.....
-                        </p>
+                        <p style="min-height: 88px">{{ x.description.slice(0, 100) }}.....</p>
                       </div>
                       <div class="recent-feature-item-rating">
                         <h2>
@@ -305,9 +285,7 @@
         <div class="row">
           <div class="col-12">
             <span class="banner-text-1">"Whether you think you can,</span>
-            <span class="banner-text-2" style="display: block"
-              >or think you can't--you're right."</span
-            >
+            <span class="banner-text-2" style="display: block">or think you can't--you're right."</span>
             <br />
             <span class="banner-text-3">
               Starting your own business is like riding a roller coaster. There
@@ -350,9 +328,7 @@
               data-dismiss="modal"
               aria-hidden="true"
               id="closeLogin"
-            >
-              &times;
-            </button>
+            >&times;</button>
             <h4 class="modal-title" id="myModalLabel">Login</h4>
           </div>
           <div class="modal-body">
@@ -378,12 +354,8 @@
                     v-model="password"
                   />
                 </div>
-                <div
-                  class="listing-form-field clearfix margin-top-20 margin-bottom-20"
-                >
-                  <a href="#" style="display: block; text-align: left"
-                    >Forgot Password?</a
-                  >
+                <div class="listing-form-field clearfix margin-top-20 margin-bottom-20">
+                  <a href="#" style="display: block; text-align: left">Forgot Password?</a>
                 </div>
                 <div class="listing-form-field">
                   <input
@@ -426,9 +398,7 @@
               data-dismiss="modal"
               aria-hidden="true"
               id="closeSignUp"
-            >
-              &times;
-            </button>
+            >&times;</button>
             <h4 class="modal-title" id="myModalLabel2">Registration</h4>
           </div>
           <div class="modal-body">
@@ -492,265 +462,272 @@
 </template>
 
 <script>
-  import Logo from "~/components/Logo.vue";
-  import axios from "axios";
-  import Cookies from "js-cookie";
-  let Swal;
+import Logo from "~/components/Logo.vue";
+import axios from "axios";
+import Cookies from "js-cookie";
+let Swal;
 
-  if (process.browser) {
-    Swal = require("sweetalert2");
-  }
+if (process.browser) {
+  Swal = require("sweetalert2");
+}
 
-  export default {
-    data() {
-      return {
-        username: "",
-        password: "",
-        email: "",
-        password1: "",
-        password2: "",
-        category_length: "",
-        password: "",
-        email: "",
-        password1: "",
-        password2: "",
-        header_img: "",
-        line1: "",
-        line2: "",
-        startupList: [],
-        startup_count: "",
-        user_count: "",
-        featuredList: [],
-        loading_bool: true,
-        categoryList: []
-      };
-    },
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      email: "",
+      password1: "",
+      password2: "",
+      category_length: "",
+      password: "",
+      email: "",
+      password1: "",
+      password2: "",
+      header_img: "",
+      line1: "",
+      line2: "",
+      startupList: [],
+      startup_count: "",
+      user_count: "",
+      featuredList: [],
+      loading_bool: true,
+      categoryList: [],
+      searchValue: ""
+    };
+  },
 
-    components: {
-      Logo
-    },
+  components: {
+    Logo
+  },
 
-    mounted() {
+  mounted() {
+    this.getCategories();
+    this.getStartups();
+    this.getUserCount();
+    this.getHomeCMS();
+    this.getFeaturedStartups();
+    if (window.location.href.includes("access_token")) {
+      this.googleLogIn();
+    }
+    $("#home")
+      .addClass("active")
+      .siblings()
+      .removeClass("active");
+  },
+
+  methods: {
+    getStartups: function() {
+      this.$store.dispatch("getStartups").then(res => {
+        this.startup_count = res.data.length;
+        this.startupList = res.data.reverse().splice(0, 6);
+      });
       this.getCategories();
-      this.getStartups();
-      this.getUserCount();
-      this.getHomeCMS();
-      this.getFeaturedStartups();
-      if (window.location.href.includes("access_token")) {
-        this.googleLogIn();
-      }
-      $("#home")
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
     },
 
-    methods: {
-      getStartups: function() {
-        this.$store.dispatch("getStartups").then(res => {
-          this.startup_count = res.data.length;
-          this.startupList = res.data.reverse().splice(0, 6);
-        });
-        this.getCategories();
-      },
+    getFeaturedStartups: function() {
+      this.$store.dispatch("getFeaturedStartups").then(res => {
+        this.featuredList = res.data.reverse().splice(0, 6);
+        this.loading_bool = false;
+      });
+      this.getCategories();
+    },
 
-      getFeaturedStartups: function() {
-        this.$store.dispatch("getFeaturedStartups").then(res => {
-          this.featuredList = res.data.reverse().splice(0, 6);
-          this.loading_bool = false;
-        });
-        this.getCategories();
-      },
+    getUserCount: function() {
+      this.$store.dispatch("getUserCount").then(res => {
+        this.user_count = res.data.length;
+      });
+    },
 
-      getUserCount: function() {
-        this.$store.dispatch("getUserCount").then(res => {
-          this.user_count = res.data.length;
-        });
-      },
+    logInUser: function() {
+      var payload = new FormData();
+      payload.append("email", this.email);
+      payload.append("password", this.password);
+      axios({
+        method: "POST",
+        url: this.$store.state.api.logInUser,
+        data: payload
+      })
+        .then(res => {
+          const token = res.data.token;
+          Cookies.set("x-access-token", res.data.token);
 
-      logInUser: function() {
-        var payload = new FormData();
-        payload.append("email", this.email);
-        payload.append("password", this.password);
-        axios({
-          method: "POST",
-          url: this.$store.state.api.logInUser,
-          data: payload
+          const user_id = res.data.id;
+
+          localStorage.setItem("bearer", "token " + token);
+
+          localStorage.setItem("user_id", user_id);
+
+          localStorage.setItem("username", res.data.username);
+
+          axios.defaults.headers.common["Authorization"] = token;
+
+          this.$store.commit("authentication", true);
+          this.$store.commit("token", token);
+
+          $("#closeLogin").click();
+          Swal.fire({
+            text: "Welcome " + res.data.username,
+            icon: "success",
+            confirmButtonText: "OK"
+          });
+          this.$router.push("/startup/listing");
         })
-          .then(res => {
-            const token = res.data.token;
-            Cookies.set("x-access-token", res.data.token);
+        .catch(err => {
+          alert("Invalid user credentials!");
+        });
+    },
 
-            const user_id = res.data.id;
-
-            localStorage.setItem("bearer", "token " + token);
-
-            localStorage.setItem("user_id", user_id);
-
-            localStorage.setItem("username", res.data.username);
-
-            axios.defaults.headers.common["Authorization"] = token;
-
-            this.$store.commit("authentication", true);
-            this.$store.commit("token", token);
-
-            $("#closeLogin").click();
-            Swal.fire({
-              text: "Welcome " + res.data.username,
-              icon: "success",
-              confirmButtonText: "OK"
-            });
-            this.$router.push("/startup/listing");
+    registerUser: function() {
+      var payload = new FormData();
+      payload.append("username", this.username);
+      payload.append("email", this.email);
+      if (
+        this.password1 === this.password2 &&
+        this.username !== "" &&
+        this.email !== "" &&
+        this.password1 !== "" &&
+        this.password2 !== ""
+      ) {
+        payload.append("password", this.password1);
+        this.$store.dispatch("registerUser", payload).then(res => {
+          $("#closeSignUp").click();
+          var payload1 = new FormData();
+          payload1.append("email", this.email);
+          payload1.append("password", this.password);
+          axios({
+            method: "POST",
+            url: this.$store.state.api.logInUser,
+            data: payload
           })
-          .catch(err => {
-            alert("Invalid user credentials!");
-          });
-      },
+            .then(res => {
+              const token = res.data.token;
+              Cookies.set("x-access-token", res.data.token);
 
-      registerUser: function() {
-        var payload = new FormData();
-        payload.append("username", this.username);
-        payload.append("email", this.email);
-        if (
-          this.password1 === this.password2 &&
-          this.username !== "" &&
-          this.email !== "" &&
-          this.password1 !== "" &&
-          this.password2 !== ""
-        ) {
-          payload.append("password", this.password1);
-          this.$store.dispatch("registerUser", payload).then(res => {
-            $("#closeSignUp").click();
-            var payload1 = new FormData();
-            payload1.append("email", this.email);
-            payload1.append("password", this.password);
-            axios({
-              method: "POST",
-              url: this.$store.state.api.logInUser,
-              data: payload
-            })
-              .then(res => {
-                const token = res.data.token;
-                Cookies.set("x-access-token", res.data.token);
+              const user_id = res.data.id;
 
-                const user_id = res.data.id;
+              localStorage.setItem("bearer", "token " + token);
 
-                localStorage.setItem("bearer", "token " + token);
+              localStorage.setItem("user_id", user_id);
 
-                localStorage.setItem("user_id", user_id);
+              localStorage.setItem("username", res.data.username);
 
-                localStorage.setItem("username", res.data.username);
+              axios.defaults.headers.common["Authorization"] = token;
 
-                axios.defaults.headers.common["Authorization"] = token;
+              this.$store.commit("authentication", true);
+              this.$store.commit("token", token);
 
-                this.$store.commit("authentication", true);
-                this.$store.commit("token", token);
-
-                $("#closeLogin").click();
-                Swal.fire({
-                  text: "Welcome " + res.data.username,
-                  icon: "success",
-                  confirmButtonText: "OK"
-                });
-                this.$router.push("/startup/listing");
-              })
-              .catch(err => {
-                alert("Invalid user credentials!");
+              $("#closeLogin").click();
+              Swal.fire({
+                text: "Welcome " + res.data.username,
+                icon: "success",
+                confirmButtonText: "OK"
               });
-          });
-        } else {
-          alert("Invalid form!");
-        }
-      },
-      getCategories: function() {
-        this.$store.dispatch("getCategories").then(res => {
-          this.category_length = res.data.length;
-          this.categoryList = res.data;
-
-          const categoryObj = {};
-
-          res.data.map(item => {
-            categoryObj[item.id] = { category: item.category };
-          });
-
-          setTimeout(function() {
-            var select = document.getElementById("location-search-list");
-            for (this.i in categoryObj) {
-              select.options[select.options.length] = new Option(
-                categoryObj[this.i].category,
-                this.i
-              );
-            }
-          }, 300);
-        });
-      },
-
-      getHomeCMS: function() {
-        this.$store.dispatch("getHomeCMS").then(res => {
-          res.data
-            .reverse()
-            .splice(0, 1)
-            .map(item => {
-              this.header_img = item.header_img;
-              this.line1 = item.header_text_1;
-              this.line2 = item.header_text_2;
+              this.$router.push("/startup/listing");
+            })
+            .catch(err => {
+              alert("Invalid user credentials!");
             });
         });
-      },
+      } else {
+        alert("Invalid form!");
+      }
+    },
+    getCategories: function() {
+      this.$store.dispatch("getCategories").then(res => {
+        this.category_length = res.data.length;
+        this.categoryList = res.data;
 
-      async google() {
-        $("#closeLogin").click();
-        await this.$auth.loginWith("google").catch(e => {});
-      },
+        const categoryObj = {};
 
-      googleLogIn: function() {
-        this.$store.commit("bearer");
-        var payload = new FormData();
-        var provider = "goole-oauth-2";
-        payload.append("provider", "google-oauth2");
-        this.token = window.location.href
-          .split("#")[1]
-          .split("=")[2]
-          .split("&")[0];
-        payload.append("access_token", this.token);
-        this.$store.dispatch("googleLogIn", payload).then(res => {
-          localStorage.setItem("user_id", res.data.id);
-          var new_payload = new FormData();
-          new_payload.append("grant_type", "convert_token");
-          new_payload.append("token", this.token);
-          new_payload.append("backend", "google-oauth2");
-          new_payload.append(
-            "client_id",
-            "oyBLYzEeUfq1xwNYUscD0oF9rH8Gdm0FgYr8unCH"
-          );
-          new_payload.append(
-            "client_secret",
-            "1zxuIPtXtsHlzaAEfUNUo7Oqt1OOykvGaX8CLVRqtuCN1KYvRDgdPtEH0p1adprhzX6hH0K9Xd2duN8rdx7184JzFM91tpWT0SqPTu6GEt2hi7M7Ms1QqA9DkF9MlrSk"
-          );
-          payload.append("oauth", true);
-          this.$store.dispatch("getBearerToken", new_payload).then(res => {
-            localStorage.setItem("bearer", "Bearer " + res.data.access_token);
-            this.$store.commit("bearer", res.data.access_token);
-            this.$store.commit("authentication", true);
-            this.$router.push("/startup/listing");
-          });
+        res.data.map(item => {
+          categoryObj[item.id] = { category: item.category };
         });
-      },
 
-      register_startup: function() {
-        if (localStorage.getItem("bearer") !== null) {
-          this.$router.push("/startup/submit_listing");
-        } else {
-          $(".btn_login").click();
-        }
-      },
+        setTimeout(function() {
+          var select = document.getElementById("location-search-list");
+          for (this.i in categoryObj) {
+            select.options[select.options.length] = new Option(
+              categoryObj[this.i].category,
+              this.i
+            );
+          }
+        }, 300);
+      });
+    },
 
-      getListing: function(id) {
-        this.$store.commit("category", id);
-        this.$router.push("/startup/all_startups");
+    getHomeCMS: function() {
+      this.$store.dispatch("getHomeCMS").then(res => {
+        res.data
+          .reverse()
+          .splice(0, 1)
+          .map(item => {
+            this.header_img = item.header_img;
+            this.line1 = item.header_text_1;
+            this.line2 = item.header_text_2;
+          });
+      });
+    },
+
+    async google() {
+      $("#closeLogin").click();
+      await this.$auth.loginWith("google").catch(e => {});
+    },
+
+    googleLogIn: function() {
+      this.$store.commit("bearer");
+      var payload = new FormData();
+      var provider = "goole-oauth-2";
+      payload.append("provider", "google-oauth2");
+      this.token = window.location.href
+        .split("#")[1]
+        .split("=")[2]
+        .split("&")[0];
+      payload.append("access_token", this.token);
+      this.$store.dispatch("googleLogIn", payload).then(res => {
+        localStorage.setItem("user_id", res.data.id);
+        var new_payload = new FormData();
+        new_payload.append("grant_type", "convert_token");
+        new_payload.append("token", this.token);
+        new_payload.append("backend", "google-oauth2");
+        new_payload.append(
+          "client_id",
+          "oyBLYzEeUfq1xwNYUscD0oF9rH8Gdm0FgYr8unCH"
+        );
+        new_payload.append(
+          "client_secret",
+          "1zxuIPtXtsHlzaAEfUNUo7Oqt1OOykvGaX8CLVRqtuCN1KYvRDgdPtEH0p1adprhzX6hH0K9Xd2duN8rdx7184JzFM91tpWT0SqPTu6GEt2hi7M7Ms1QqA9DkF9MlrSk"
+        );
+        payload.append("oauth", true);
+        this.$store.dispatch("getBearerToken", new_payload).then(res => {
+          localStorage.setItem("bearer", "Bearer " + res.data.access_token);
+          this.$store.commit("bearer", res.data.access_token);
+          this.$store.commit("authentication", true);
+          this.$router.push("/startup/listing");
+        });
+      });
+    },
+
+    register_startup: function() {
+      if (localStorage.getItem("bearer") !== null) {
+        this.$router.push("/startup/submit_listing");
+      } else {
+        $(".btn_login").click();
+      }
+    },
+
+    getListing: function(id) {
+      this.$store.commit("category", id);
+      this.$router.push("/startup/all_startups");
+    },
+
+    SearchFilter: function() {
+      if (this.searchValue != "") {
+        this.$router.push("/startup/all_startups?" + this.searchValue);
       }
     }
-  };
+  }
+};
 </script>
 
 <style>
@@ -759,7 +736,7 @@
 }
 
 #search-input input.form-control {
-  border-radius: 0px 3px 3px 0px;
+  border-radius: 30px;
 }
 
 .listing-form-field a {

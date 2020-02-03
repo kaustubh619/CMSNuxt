@@ -26,9 +26,7 @@
     >
       <div class="container">
         <div class="row">
-          <div
-            class="col-md-12 vfx-search-categorie-title text-center bt_heading_3"
-          >
+          <div class="col-md-12 vfx-search-categorie-title text-center bt_heading_3">
             <h1 style="color:white; font-weight: 400">
               Search Any Startup
               <span>Listing</span>
@@ -43,35 +41,36 @@
             <div class="blind line_2"></div>
           </div>
           <div class="col-md-12">
-            <form id="search-form">
-              <div class="col-sm-9 col-md-10 nopadding">
-                <div id="vfx-search-box">
-                  <div class="col-sm-3 nopadding">
+            <!-- <form id="search-form"> -->
+            <div class="col-sm-7 col-md-6 nopadding col-md-offset-2 col-sm-offset-1">
+              <div id="vfx-search-box">
+                <!-- <div class="col-sm-3 nopadding">
                     <select id="search-location" class="form-control">
                       <option value="0">Select Category</option>
                     </select>
-                  </div>
-                  <div class="col-sm-9 nopadding">
-                    <div class="form-group">
-                      <input
-                        id="search-data"
-                        class="form-control"
-                        name="search"
-                        placeholder="Enter Keyword"
-                        required
-                      />
-                    </div>
+                </div>-->
+                <div class="col-sm-12 nopadding">
+                  <div class="form-group">
+                    <input
+                      id="search-data"
+                      class="form-control"
+                      name="search"
+                      placeholder="Enter Keyword"
+                      required
+                      v-model="searchValue"
+                    />
                   </div>
                 </div>
               </div>
-              <div class="col-sm-3 col-md-2 text-right nopadding-right">
-                <div id="vfx-search-btn">
-                  <button type="submit" id="search">
-                    <i class="fa fa-search"></i>Search
-                  </button>
-                </div>
+            </div>
+            <div class="col-sm-3 col-md-2 text-right nopadding-right">
+              <div id="vfx-search-btn">
+                <button type="submit" id="search" @click="SearchFilter">
+                  <i class="fa fa-search"></i>Search
+                </button>
               </div>
-            </form>
+            </div>
+            <!-- </form> -->
           </div>
         </div>
       </div>
@@ -100,16 +99,8 @@
                 </div>
                 <div class="blind line_2"></div>
               </div>
-              <div
-                class="col-md-3 col-sm-6 col-xs-12"
-                v-for="(x, y) in categoryList"
-                :key="y"
-              >
-                <div
-                  class="categorie_item"
-                  v-bind:id="x.id"
-                  @click="getListing(x.id)"
-                >
+              <div class="col-md-3 col-sm-6 col-xs-12" v-for="(x, y) in categoryList" :key="y">
+                <div class="categorie_item" v-bind:id="x.id" @click="getListing(x.id)">
                   <div class="cate_item_block hi-icon-effect-8">
                     <h1>
                       <a href="#">{{ x.category }}</a>
@@ -127,67 +118,74 @@
 </template>
 
 <script>
-  import Auth from "~/components/authentication.vue";
-  export default {
-    components: {
-      Auth
+import Auth from "~/components/authentication.vue";
+export default {
+  components: {
+    Auth
+  },
+
+  data() {
+    return {
+      categoryList: [],
+      header_img: "",
+      searchValue: ""
+    };
+  },
+
+  mounted() {
+    this.getCategories();
+    this.getCategoryCMS();
+    $("#category")
+      .addClass("active")
+      .siblings()
+      .removeClass("active");
+  },
+
+  methods: {
+    getCategories: function() {
+      this.$store.dispatch("getCategories").then(res => {
+        this.categoryList = res.data;
+
+        var select = document.getElementById("search-location");
+
+        const categoryObj = {};
+
+        res.data.map(item => {
+          categoryObj[item.id] = { category: item.category };
+        });
+
+        for (this.i in categoryObj) {
+          select.options[select.options.length] = new Option(
+            categoryObj[this.i].category,
+            this.i
+          );
+        }
+      });
     },
 
-    data() {
-      return {
-        categoryList: [],
-        header_img: ""
-      };
+    getListing: function(id) {
+      this.$store.commit("category", id);
+      this.$router.push("/startup/all_startups");
     },
 
-    mounted() {
-      this.getCategories();
-      this.getCategoryCMS();
-      $("#category")
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
-    },
-
-    methods: {
-      getCategories: function() {
-        this.$store.dispatch("getCategories").then(res => {
-          this.categoryList = res.data;
-
-          var select = document.getElementById("search-location");
-
-          const categoryObj = {};
-
-          res.data.map(item => {
-            categoryObj[item.id] = { category: item.category };
+    getCategoryCMS: function() {
+      this.$store.dispatch("getCategoryCMS").then(res => {
+        res.data
+          .reverse()
+          .splice(0, 1)
+          .map(item => {
+            this.header_img = item.background_image;
           });
+      });
+    },
 
-          for (this.i in categoryObj) {
-            select.options[select.options.length] = new Option(
-              categoryObj[this.i].category,
-              this.i
-            );
-          }
-        });
-      },
-
-      getListing: function(id) {
-        this.$store.commit("category", id);
-        this.$router.push("/startup/all_startups");
-      },
-
-      getCategoryCMS: function() {
-        this.$store.dispatch("getCategoryCMS").then(res => {
-          res.data
-            .reverse()
-            .splice(0, 1)
-            .map(item => {
-              this.header_img = item.background_image;
-            });
-        });
+    SearchFilter: function() {
+      if (this.searchValue != "") {
+        this.$router.push("/startup/all_startups?" + this.searchValue);
       }
     }
-  };
+  }
+};
 </script>
 
 <style>

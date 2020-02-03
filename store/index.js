@@ -828,5 +828,21 @@ export const actions = {
           console.log(err);
         });
     });
+  },
+
+  getFilteredStartups({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.getFilteredStartups + payload,
+        contentType: "application/json"
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
   }
 };
