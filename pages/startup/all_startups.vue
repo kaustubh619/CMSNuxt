@@ -218,7 +218,6 @@ export default {
         this.getStartupByCategory(this.$store.state.category);
       } else {
         this.search_url = window.location.href.split("?")[1];
-        this.search_url = this.search_url.split(",")[0];
         if (this.search_url) {
           this.loading_bool = false;
           this.$store
