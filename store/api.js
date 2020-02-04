@@ -89,5 +89,5 @@ export const state = () => ({
 
   allProductRatings: url + "/all_ratings",
 
-  getFilteredStartups: url + "/searchST/"
+  getFilteredStartups: url + "/startup_search?search="
 });
