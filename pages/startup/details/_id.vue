@@ -106,8 +106,8 @@
                 id="product"
                 @click="openbtn('description')"
               >Products</button>
-              <button class="tablinks" id="faq" @click="openbtn('reviews')">FAQ</button>
-              <button class="tablinks" id="com" @click="openbtn('community')">Community</button>
+              <!-- <button class="tablinks" id="faq" @click="openbtn('reviews')">FAQ</button>
+              <button class="tablinks" id="com" @click="openbtn('community')">Community</button> -->
             </div>
 
             <div id="description" class="tabcontent">
