@@ -145,7 +145,7 @@
                         <div class="tg-listbox" data-action="products">
                           <nuxt-link
                             :to="{
-                              name: 'products',
+                              name: 'products-startup-id',
                               params: { id: x.id, startup: x.name }
                             }"
                           >
