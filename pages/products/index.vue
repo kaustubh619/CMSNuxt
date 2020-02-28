@@ -85,16 +85,19 @@
                   <div class="tg-listing" v-if="bool">
                     <div class="tg-listing-head">
                       <div class="tg-titlebox">
-                        <h3>Title</h3>
+                        <h5>Title</h5>
                       </div>
                       <div class="tg-titlebox">
-                        <h3>Action</h3>
+                        <h5>Action</h5>
                       </div>
                       <div class="tg-titlebox">
-                        <h3>Updates</h3>
+                        <h5>Updates</h5>
                       </div>
                       <div class="tg-titlebox">
-                        <h3>Add Update</h3>
+                        <h5>Add Update</h5>
+                      </div>
+                      <div class="tg-titlebox">
+                        <h5>Add Testimonials</h5>
                       </div>
                     </div>
                     <div
@@ -113,7 +116,9 @@
                               }"
                               class="product-link"
                             >
-                              <h4>{{ x.product_name }}</h4>
+                              <h4>
+                                {{ x.product_name }}
+                              </h4>
                             </nuxt-link>
                           </div>
                         </div>
@@ -151,6 +156,17 @@
                             class="tg-btn-list"
                             :to="{
                               name: 'products-add_update',
+                              params: { id: x.id, product: x.product_name }
+                            }"
+                          >
+                            <i class="fa fa-plus"></i>
+                          </nuxt-link>
+                        </div>
+                        <div class="tg-listbox" data-action="addTestimonials">
+                          <nuxt-link
+                            class="tg-btn-list"
+                            :to="{
+                              name: 'products-add_testimonials-id',
                               params: { id: x.id, product: x.product_name }
                             }"
                           >
@@ -246,11 +262,19 @@
   };
 </script>
 
-<style>
+<style scoped>
 .product-link {
   color: #4e4e4e;
 }
 .product-link:hover {
   color: #ffce10;
+}
+
+.tg-listing-head .tg-titlebox {
+  width: 20% !important;
+}
+
+.tg-list .tg-listbox {
+  width: 20% !important;
 }
 </style>

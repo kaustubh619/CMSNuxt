@@ -254,7 +254,13 @@ export default {
         });
       });
     },
-    getStartups: function() {},
+    getStartups: function() {
+      this.$store.dispatch("getStartups").then(res => {
+        this.startupList = res.data;
+        this.length = res.data.length;
+        this.loading_bool = false;
+      });
+    },
 
     showAllCat: function() {
       this.$store.dispatch("getCategories").then(res => {

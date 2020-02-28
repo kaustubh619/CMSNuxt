@@ -60,13 +60,21 @@
 
                     <p class="st-text-2">{{ stage }}</p>
                     <p class="st-sub-text-2">
-                      <i class="fa fa-angle-double-right" aria-hidden="true" style="color: #009e74"></i>
+                      <i
+                        class="fa fa-angle-double-right"
+                        aria-hidden="true"
+                        style="color: #009e74"
+                      ></i>
                       stage
                     </p>
 
                     <p class="st-text-3">{{ product_name }}</p>
                     <p class="st-sub-text-3">
-                      <i class="fa fa-product-hunt" aria-hidden="true" style="color: #009e74"></i>
+                      <i
+                        class="fa fa-product-hunt"
+                        aria-hidden="true"
+                        style="color: #009e74"
+                      ></i>
                       product name
                     </p>
 
@@ -84,7 +92,11 @@
 
                     <p class="st-text-2">{{ date_added }}</p>
                     <p class="st-sub-text-2">
-                      <i class="fa fa-calendar" aria-hidden="true" style="color: #009e74"></i>
+                      <i
+                        class="fa fa-calendar"
+                        aria-hidden="true"
+                        style="color: #009e74"
+                      ></i>
                       date added
                     </p>
 
@@ -100,23 +112,42 @@
                 <div class="row">
                   <div class="col-12 hide-lg-product">
                     <div class="tab">
-                      <button class="tablinks" id="product" @click="openbtn('description')">Details</button>
-                      <button class="tablinks" id="faq" @click="openbtn('reviews')">Updates</button>
+                      <button
+                        class="tablinks"
+                        id="product"
+                        @click="openbtn('description')"
+                      >
+                        Details
+                      </button>
+                      <button
+                        class="tablinks"
+                        id="faq"
+                        @click="openbtn('reviews')"
+                      >
+                        Updates
+                      </button>
                       <button
                         class="tablinks"
                         id="test"
                         @click="openbtn('testimonials')"
-                      >Testimonials</button>
+                      >
+                        Testimonials
+                      </button>
                       <button
                         class="tablinks"
                         id="rate"
                         @click="openbtn('rankings')"
-                      >Rankings/Ratings</button>
+                      >
+                        Rankings/Ratings
+                      </button>
                     </div>
 
                     <div id="description" class="tabcontent">
                       <div class="submit_listing_box">
-                        <div id="editor-container" style="background-color: white"></div>
+                        <div
+                          id="editor-container"
+                          style="background-color: white"
+                        ></div>
                       </div>
                     </div>
 
@@ -125,15 +156,24 @@
                         <p class="faq-11">No product updates available</p>
                       </div>
                       <div class="submit_listing_box">
-                        <div v-for="(l, m) in update_list" :key="m" class="my-style">
+                        <div
+                          v-for="(l, m) in update_list"
+                          :key="m"
+                          class="my-style"
+                        >
                           <h1 style="border: none">
                             <span
                               style="color: #009e74; text-shadow: 2px 3px #e7e7e7; display: block"
-                            >Product Update</span>
-                            <i class="fa fa-calendar" style="color: #009e74"></i>
+                              >Product Update</span
+                            >
+                            <i
+                              class="fa fa-calendar"
+                              style="color: #009e74"
+                            ></i>
                             <span
                               style="color: #009e74; text-shadow: 2px 2px #e7e7e7"
-                            >Added Date: {{ l.added_date }}</span>
+                              >Added Date: {{ l.added_date }}</span
+                            >
                           </h1>
                           <div class="row">
                             <div class="col-12 col-md-6">
@@ -144,8 +184,14 @@
                                 controls
                                 style="margin-top: 20px; display: block; margin-left: auto; margin-right: auto; width: 100%"
                               >
-                                <source :src="l.update_video" type="video/mp4" />
-                                <source :src="l.update_video" type="video/webm" />
+                                <source
+                                  :src="l.update_video"
+                                  type="video/mp4"
+                                />
+                                <source
+                                  :src="l.update_video"
+                                  type="video/webm"
+                                />
                               </video>
                             </div>
                             <div class="col-12 col-md-6">
@@ -157,8 +203,87 @@
                     </div>
 
                     <div id="testimonials" class="tabcontent">
-                      <div class="submit_listing_box">
-                        <p class="faq-11">Section to be added soon</p>
+                      <div class="submit_listing_box" v-if="testimonial_bool">
+                        <!-- <p class="faq-11"></p> -->
+                        <div
+                          id="myCarousel"
+                          class="carousel slide"
+                          data-ride="carousel"
+                        >
+                          <!-- Indicators -->
+                          <!-- <ol class="carousel-indicators">
+                            <li
+                              data-target="#myCarousel"
+                              data-slide-to="0"
+                              class="active"
+                            ></li>
+                            <li
+                              data-target="#myCarousel"
+                              data-slide-to="1"
+                            ></li>
+                            <li
+                              data-target="#myCarousel"
+                              data-slide-to="2"
+                            ></li>
+                          </ol> -->
+
+                          <!-- Wrapper for slides -->
+                          <div class="carousel-inner">
+                            <!-- <div class="item active"> -->
+                            <div
+                              v-for="(item, i) in product_testimonials"
+                              :key="i"
+                              class="item"
+                              :class="i === 0 ? 'active' : ''"
+                            >
+                              <img
+                                :src="item.userImage"
+                                class="testimonial_img"
+                              />
+                              <p
+                                class="faq-11"
+                                style="text-align: center !important"
+                              >
+                                {{ item.userName }}
+                              </p>
+                              <br />
+                              <p style="text-align: center">
+                                {{ item.testimonial }}
+                              </p>
+                            </div>
+                            <!-- </div> -->
+
+                            <!-- <div class="item">
+                              <img src="chicago.jpg" alt="Chicago" />
+                            </div>
+
+                            <div class="item">
+                              <img src="ny.jpg" alt="New York" />
+                            </div> -->
+                          </div>
+
+                          <!-- Left and right controls -->
+                          <a
+                            class="left carousel-control"
+                            href="#myCarousel"
+                            data-slide="prev"
+                          >
+                            <span
+                              class="glyphicon glyphicon-chevron-left"
+                            ></span>
+                            <span class="sr-only">Previous</span>
+                          </a>
+                          <a
+                            class="right carousel-control"
+                            href="#myCarousel"
+                            data-slide="next"
+                          >
+                            <span
+                              class="glyphicon glyphicon-chevron-right"
+                            ></span>
+                            <span class="sr-only">Next</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
 
@@ -180,9 +305,16 @@
                             </div>
                             <div>
                               <div style="display: block">
-                                <p style="padding-left: 10px; padding-top: 10px">{{ username }}</p>
+                                <p
+                                  style="padding-left: 10px; padding-top: 10px"
+                                >
+                                  {{ username }}
+                                </p>
                               </div>
-                              <div class="rating-stars text-center" style="display: block">
+                              <div
+                                class="rating-stars text-center"
+                                style="display: block"
+                              >
                                 <ul id="stars">
                                   <li
                                     class="star"
@@ -200,7 +332,9 @@
                             </div>
                           </div>
                           <div class="row">
-                            <p class="pHover" v-if="review_bool">Write a review</p>
+                            <p class="pHover" v-if="review_bool">
+                              Write a review
+                            </p>
                           </div>
                           <div class="row" id="review_box" v-if="review_bool">
                             <form>
@@ -212,16 +346,25 @@
                                 rows="10"
                                 v-model="review_content"
                               ></textarea>
-                              <button class="review_button" @click="submitReview">Submit</button>
+                              <button
+                                class="review_button"
+                                @click="submitReview"
+                              >
+                                Submit
+                              </button>
                             </form>
                           </div>
                           <div v-else>
                             <div class="row">
-                              <p style="padding-left: 10px" class="qwe">{{ review_content }}</p>
+                              <p style="padding-left: 10px" class="qwe">
+                                {{ review_content }}
+                              </p>
                               <button
                                 class="review_button qwe"
                                 @click="showHideBlock"
-                              >Edit Your Review</button>
+                              >
+                                Edit Your Review
+                              </button>
                             </div>
                             <div class="row show_hide_box">
                               <form style="display: inline">
@@ -233,36 +376,55 @@
                                   rows="10"
                                   v-model="review_content"
                                 ></textarea>
-                                <button class="review_button" @click="submitReview">Submit</button>
+                                <button
+                                  class="review_button"
+                                  @click="submitReview"
+                                >
+                                  Submit
+                                </button>
                               </form>
 
                               <button
                                 class="review_button"
                                 @click="cancelReview"
                                 style="background-color: #a45a52"
-                              >Cancel</button>
+                              >
+                                Cancel
+                              </button>
                             </div>
                           </div>
                           <div style="margin-top: 20px" class="myDiv2">
                             <div class="myDiv">
                               <p
                                 style="font-size: 40px; text-align: center; margin-top: 30px"
-                              >{{ averageRating }}</p>
+                              >
+                                {{ averageRating }}
+                              </p>
                               <div class="star-ratings">
-                                <div class="fill-ratings" :style="{ width: `${avgPercent}%` }">
+                                <div
+                                  class="fill-ratings"
+                                  :style="{ width: `${avgPercent}%` }"
+                                >
                                   <span>★★★★★</span>
                                 </div>
                                 <div class="empty-ratings">
                                   <span>★★★★★</span>
                                 </div>
                               </div>
-                              <p style="font-size: 24px; text-align: center; margin-top: 0px">
+                              <p
+                                style="font-size: 24px; text-align: center; margin-top: 0px"
+                              >
                                 <i class="fa fa-user"></i>
-                                <span style="margin-left: 10px">{{ totalVotes }} Total</span>
+                                <span style="margin-left: 10px"
+                                  >{{ totalVotes }} Total</span
+                                >
                               </p>
                             </div>
                             <div>
-                              <div class="container-fluid" style="display: flex">
+                              <div
+                                class="container-fluid"
+                                style="display: flex"
+                              >
                                 <p style="margin-right: 10px">5</p>
                                 <div class="progress">
                                   <div
@@ -274,7 +436,10 @@
                                   ></div>
                                 </div>
                               </div>
-                              <div class="container-fluid" style="display: flex">
+                              <div
+                                class="container-fluid"
+                                style="display: flex"
+                              >
                                 <p style="margin-right: 10px">4</p>
                                 <div class="progress">
                                   <div
@@ -286,7 +451,10 @@
                                   ></div>
                                 </div>
                               </div>
-                              <div class="container-fluid" style="display: flex">
+                              <div
+                                class="container-fluid"
+                                style="display: flex"
+                              >
                                 <p style="margin-right: 10px">3</p>
                                 <div class="progress">
                                   <div
@@ -298,7 +466,10 @@
                                   ></div>
                                 </div>
                               </div>
-                              <div class="container-fluid" style="display: flex">
+                              <div
+                                class="container-fluid"
+                                style="display: flex"
+                              >
                                 <p style="margin-right: 10px">2</p>
                                 <div class="progress">
                                   <div
@@ -310,7 +481,10 @@
                                   ></div>
                                 </div>
                               </div>
-                              <div class="container-fluid" style="display: flex">
+                              <div
+                                class="container-fluid"
+                                style="display: flex"
+                              >
                                 <p style="margin-right: 15px">1</p>
                                 <div class="progress">
                                   <div
@@ -327,22 +501,40 @@
                           <div class="row" style="margin-top: 30px">
                             <div
                               class="col-xs-12"
-                              v-for="(j,k) in raitngswithreviews"
+                              v-for="(j, k) in raitngswithreviews"
                               :key="k"
                               style="padding: 10px"
                             >
-                              <p style="font-weight: 600">{{j.user.username}}</p>
+                              <p style="font-weight: 600">
+                                {{ j.user.username }}
+                              </p>
                               <div>
-                                <div style="position: absolute" >
-                                  <i class="fa fa-star" aria-hidden="true" v-for="(o,p) in 5" :key="p" style="color: grey"></i>
+                                <div style="position: absolute">
+                                  <i
+                                    class="fa fa-star"
+                                    aria-hidden="true"
+                                    v-for="(o, p) in 5"
+                                    :key="p"
+                                    style="color: grey"
+                                  ></i>
                                 </div>
-                                <div style="position: absolute" >
-                                  <i class="fa fa-star" aria-hidden="true" v-for="(o,p) in j.ratings" :key="p" style="color: #009e74"></i>
+                                <div style="position: absolute">
+                                  <i
+                                    class="fa fa-star"
+                                    aria-hidden="true"
+                                    v-for="(o, p) in j.ratings"
+                                    :key="p"
+                                    style="color: #009e74"
+                                  ></i>
                                 </div>
-                                
-                                <p style="color: grey; position: relative; margin-left: 80px">{{j.added_date}}</p>
+
+                                <p
+                                  style="color: grey; position: relative; margin-left: 80px"
+                                >
+                                  {{ j.added_date }}
+                                </p>
                               </div>
-                              <p>{{j.reviews}}</p>
+                              <p>{{ j.reviews }}</p>
                             </div>
                           </div>
                         </div>
@@ -409,7 +601,9 @@
         averageRating: "",
         avgPercent: "",
         totalVotes: "",
-        raitngswithreviews: []
+        raitngswithreviews: [],
+        testimonial_bool: false,
+        product_testimonials: []
       };
     },
     computed: {
@@ -425,14 +619,12 @@
         this.auth_bool = false;
       }
       this.getUserRatings();
-      // $("#review_box").css("display", "none");
       this.getUser();
       this.getUserAdditionalDetails();
       $("#stars li")
         .on("mouseover", function() {
           var onStar = parseInt($(this).data("value"), 10); // The star currently mouse on
 
-          // Now highlight all the stars that's not after the current hovered star
           $(this)
             .parent()
             .children("li.star")
@@ -470,6 +662,7 @@
           .removeClass("btn-activated");
       });
       document.getElementById("product").click();
+      this.productTestimonials();
     },
     methods: {
       logOutUser: function() {
@@ -677,10 +870,8 @@
           this.raitngswithreviews = [];
           res.data.reverse().map(item => {
             if (item.reviews != "") {
-              
               this.raitngswithreviews.push(item);
             }
-            
           });
 
           this.totalVotes = res.data.length;
@@ -716,6 +907,19 @@
           this.averageRating = avg.toFixed(2);
           this.avgPercent = (this.averageRating / 5) * 100;
         });
+      },
+
+      productTestimonials: function() {
+        this.$store
+          .dispatch("productTestimonials", this.$route.params.id)
+          .then(res => {
+            this.product_testimonials = res.data;
+            if (res.data.length == 0) {
+              this.testimonial_bool = false;
+            } else {
+              this.testimonial_bool = true;
+            }
+          });
       }
     }
   };
@@ -1221,9 +1425,9 @@
   margin-top: -30px;
 }
 
-@media(max-width: 37.5em)  {
+@media (max-width: 37.5em) {
   .star-ratings {
-    font-size: 57px
+    font-size: 57px;
   }
 }
 
@@ -1276,5 +1480,12 @@
 
 .pbar5 {
   background-color: #ff6f31;
+}
+
+.testimonial_img {
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

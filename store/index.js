@@ -37,6 +37,24 @@ export const mutations = {
 };
 
 export const actions = {
+  getActiveComponents({ commit, state }) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.getActiveComponents + 2,
+        contentType: "application/json"
+        // headers: {
+        //   Authorization: "Token " + localStorage.getItem("token")
+        // }
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log("Error In HTTP Request - ", err);
+        });
+    });
+  },
   registerUser({ commit, state }, payload) {
     return new Promise((resolve, reject) => {
       axios({
@@ -836,6 +854,42 @@ export const actions = {
         method: "GET",
         url: state.api.getFilteredStartups + payload,
         contentType: "application/json"
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
+  },
+
+  productTestimonials({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: state.api.productTestimonials + payload,
+        contentType: "application/json"
+      })
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    });
+  },
+
+  addTestimonial({ commit, state }, payload) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "POST",
+        data: payload,
+        url: state.api.addTestimonial,
+        contentType: "application/json",
+        headers: {
+          Authorization: state.bearer
+        }
       })
         .then(res => {
           resolve(res);

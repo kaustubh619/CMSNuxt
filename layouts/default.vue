@@ -6,14 +6,14 @@
   </div>
 </template>
 <script>
-  import Header from "@/components/header.vue";
-  import Footer from "@/components/footer.vue";
-  export default {
-    components: {
-      Header,
-      Footer
-    }
-  };
+import Header from "@/components/header.vue";
+import Footer from "@/components/footer.vue";
+export default {
+  components: {
+    Header,
+    Footer
+  }
+};
 </script>
 <style>
 /* html {
@@ -173,5 +173,9 @@ body {
 
 .swal2-styled.swal2-confirm {
   font-size: 16px;
+}
+
+button:active {
+  outline: none;
 }
 </style>

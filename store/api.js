@@ -7,6 +7,10 @@ if (process.env.NODE_ENV == "development") {
 export const state = () => ({
   logInUser: url + "/signin",
 
+  getComponentData: url + "/create_component/",
+
+  getActiveComponents: url + "/get_active_home_components/",
+
   registerUser: url + "/register",
 
   getCategories: url + "/category",
@@ -89,5 +93,9 @@ export const state = () => ({
 
   allProductRatings: url + "/all_ratings",
 
-  getFilteredStartups: url + "/startup_search?search="
+  getFilteredStartups: url + "/startup_search?search=",
+
+  productTestimonials: url + "/product_testimonials/",
+
+  addTestimonial: url + "/testimonial_post"
 });
